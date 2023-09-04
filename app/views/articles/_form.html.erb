@@ -2,7 +2,7 @@
   <div class="flex justify-between gap-1 w-full">
     <div class="flex flex-col gap-1 w-6/12 items-start">
       <%= form.label :name, 'Nombre del articulo:', class: 'font-bold mb-1' %>
-      <%= form.text_field :name, class: "shadow rounded border border-gray-200 px-3 py-2 w-full text-sm font-semibold" %>
+      <%= form.text_field :name, class: "input-tailwindcss #{ error_input_border(article.errors.include?(:name)) }" %>
       <% if article.errors.include?(:name) %>
         <% article.errors.full_messages_for(:name).each do |message| %>
           <span class="text-sm font-semibold text-danger"><%= message %></span>
@@ -12,7 +12,7 @@
 
     <div class="flex flex-col gap-1 w-6/12 items-start">
       <%= form.label :price, 'Precio:', class: 'font-bold mb-1' %>
-      <%= form.text_field :price, class: "shadow rounded border border-gray-200 px-3 py-2 w-full text-sm font-semibold" %>
+      <%= form.text_field :price, class: "input-tailwindcss #{ error_input_border(article.errors.include?(:price)) }" %>
       <% if article.errors.include?(:price) %>
         <% article.errors.full_messages_for(:price).each do |message| %>
           <span class="text-sm font-semibold text-danger"><%= message %></span>
@@ -23,7 +23,7 @@
 
   <div class="flex flex-col gap-1 w-full items-start">
     <%= form.label :in_stock, 'Almacén:', class: 'font-bold mb-1' %>
-    <%= form.text_field :in_stock, class: "shadow rounded border border-gray-200 px-3 py-2 w-full text-sm font-semibold" %>
+    <%= form.text_field :in_stock, class: "input-tailwindcss #{ error_input_border(article.errors.include?(:in_stock)) }" %>
     <% if article.errors.include?(:in_stock) %>
       <% article.errors.full_messages_for(:in_stock).each do |message| %>
         <span class="text-sm font-semibold text-danger"><%= message %></span>
@@ -33,7 +33,7 @@
 
   <div class="flex flex-col gap-1 w-full items-start">
     <%= form.label :description, 'Descripción del artículo:', class: 'font-bold mb-1' %>
-    <%= form.rich_text_area :description, class: "shadow rounded border border-gray-200 px-3 py-2 w-full text-sm font-semibold h-40 overflow-y-auto" %>
+    <%= form.rich_text_area :description, class: "input-tailwindcss #{ error_input_border(article.errors.include?(:description)) } h-40 overflow-y-auto" %>
     <% if article.errors.include?(:description) %>
       <% article.errors.full_messages_for(:description).each do |message| %>
         <span class="text-sm font-semibold text-danger"><%= message %></span>
@@ -46,7 +46,7 @@
       <%= form.submit btn_title, class: "rounded py-2 px-4 bg-green-500 text-white font-semibold cursor-pointer" %>
     </div>
 
-    <%= link_to cancel_path, class: "flex text-sm font-semibold rounded bg-primary px-4 py-2 text-white items-center gap-1" do %>
+    <%= link_to cancel_path, class: "flex text-sm font-semibold rounded bg-danger px-4 py-2 text-white items-center gap-1" do %>
       <span>Regresar</span>
     <% end %>
   </div>

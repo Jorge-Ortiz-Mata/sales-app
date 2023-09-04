@@ -1,0 +1,19 @@
+<%= form_with(model: category, class: 'flex gap-2', id: 'category_form') do |form| %>
+  <div class="flex flex-col w-80">
+    <%= form.text_field :name, placeholder: 'Deportes', class: 'input-tailwindcss' %>
+    <% if category.errors.include?(:name) %>
+      <% category.errors.full_messages_for(:name).each do |message| %>
+        <span class="text-sm font-semibold text-danger relative"> <%= message %></span>
+      <% end %>
+    <% end %>
+  </div>
+
+  <div class="flex gap-2 items-start">
+    <div class="flex items-center bg-success rounded">
+      <%= form.submit text_btn, class: 'text-white text-sm font-bold cursor-pointer px-4 py-2' %>
+    </div>
+    <%= link_to categories_path, class: "flex text-sm font-bold rounded bg-danger px-4 py-2 text-white gap-2" do %>
+      <span>Cancelar</span>
+    <% end %>
+  </div>
+<% end %>

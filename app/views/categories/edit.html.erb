@@ -1,0 +1,3 @@
+<%= turbo_frame_tag "category_#{@category.id}", class: 'flex' do %>
+  <%= render 'form', { category: @category, text_btn: 'Guardar' } %>
+<% end %>

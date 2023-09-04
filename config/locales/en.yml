@@ -39,7 +39,10 @@ en:
         description: La descripción
         price: El precio
         in_stock: El almacén
+      category:
+        name: El nombre
 
     errors:
       messages:
         blank: 'no debe estar en blanco'
+        taken: 'ya ha sido registrado'
