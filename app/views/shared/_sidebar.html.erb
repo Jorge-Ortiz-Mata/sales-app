@@ -8,15 +8,19 @@
       <% end %>
     </li>
 
-    <%# <li class="flex gap-2 items-center text-sidebarTextColor font-semibold duration-300">
-      <i class="fa-solid fa-warehouse"></i>
-      <span>Mis productos</span>
+    <li class="flex items-center w-full">
+      <%= link_to articles_path, class: style_to_sidebar_link(articles_path) do %>
+        <i class="fa-solid fa-warehouse"></i>
+        <span>Mis articulos</span>
+      <% end %>
     </li>
 
+    <%#
     <li class="flex gap-2 items-center text-sidebarTextColor font-semibold duration-300">
       <i class="fa-solid fa-shapes"></i>
       <span>Categorias</span>
-    </li> %>
+    </li>
+    %>
 
     <li class="flex items-center">
       <%= link_to settings_path, class: style_to_sidebar_link(settings_path) do %>

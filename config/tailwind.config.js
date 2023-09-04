@@ -14,6 +14,9 @@ module.exports = {
       },
       colors: {
         sidebarTextColor: '#61677A',
+        primary: '#06b6d4',
+        success: '#22c55e',
+        danger: '#ef4444',
       }
     },
   },

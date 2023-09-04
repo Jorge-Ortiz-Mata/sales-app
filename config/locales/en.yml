@@ -30,4 +30,16 @@
 # available at https://guides.rubyonrails.org/i18n.html.
 
 en:
-  hello: "Hello world"
+  activerecord:
+    models:
+      article:
+    attributes:
+      article:
+        name: El nombre
+        description: La descripción
+        price: El precio
+        in_stock: El almacén
+
+    errors:
+      messages:
+        blank: 'no debe estar en blanco'

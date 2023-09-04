@@ -1,0 +1,31 @@
+<div class="flex flex-col h-full w-full">
+  <div class="flex flex-col overflow-y-auto p-5 gap-5">
+    <div class="flex justify-between items-center">
+      <h1 class="font-bold text-2xl text-sidebarTextColor">Mis articulos</h1>
+      <%= link_to new_article_path, class: "flex text-sm font-bold rounded bg-success px-4 py-2 text-white items-center gap-2" do %>
+        <span>Añadir articulo</span>
+        <i class="fa-solid fa-plus text-base"></i>
+      <% end %>
+    </div>
+
+    <div class="flex flex-col w-full rounded border shadow p-5 gap-2">
+      <div class="flex w-full bg-gray-100 rounded">
+        <div class="w-6/12 p-1 font-bold text-sidebarTextColor">Nombre</div>
+        <div class="w-2/12 p-1 font-bold text-sidebarTextColor">ID</div>
+        <div class="w-2/12 p-1 font-bold text-sidebarTextColor">Almacen</div>
+        <div class="w-2/12 p-1 font-bold text-sidebarTextColor">Precio</div>
+      </div>
+
+      <div class="flex flex-col w-full">
+        <% @articles.each do |article| %>
+          <%= link_to article_path(article), class: 'flex w-full hover:bg-gray-100 p-1 duration-300 border-b' do %>
+            <div class="font-semibold text-sidebarTextColor p-1 w-6/12"><%= article.name %></div>
+            <div class="font-semibold text-sidebarTextColor p-1 w-2/12"><%= article.id %></div>
+            <div class="font-semibold text-sidebarTextColor p-1 w-2/12"><%= article.in_stock %></div>
+            <div class="font-semibold text-sidebarTextColor p-1 w-2/12"><%= article.price %></div>
+          <% end %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
