@@ -1,24 +1,13 @@
-# README
+# Sales App.
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## Technologies.
 
-Things you may want to cover:
+- Ruby 3.0.4
+- Ruby on Rails 7.0.7.2
+- PSQL
+- Docker
 
-* Ruby version
 
-* System dependencies
+## Launch PSQL Docker Container - Local Development
 
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+1. Create a postgresql docker container: `docker run -p 5432:5432 --rm -e POSTGRES_PASSWORD=postgres -v pgdata:/var/lib/postgresql/data postgres`

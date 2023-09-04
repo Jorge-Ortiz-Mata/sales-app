@@ -19,14 +19,15 @@ default: &default
   encoding: unicode
   # For details on connection pooling, see Rails configuration guide
   # https://guides.rubyonrails.org/configuring.html#database-pooling
+  username: postgres
+  password: postgres
+  port: 5432
+  host: localhost
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
 
 development:
   <<: *default
   database: sales_app_development
-  username: ENV['PSQL_USERNAME']
-  password: ENV['PSQL_PASSWORD']
-  url: <%= ENV['PSQL_URI'] %>
 
   # The specified database role being used to connect to postgres.
   # To create additional roles in postgres see `$ createuser --help`.
@@ -85,5 +86,6 @@ test:
 production:
   <<: *default
   database: sales_app_production
-  username: sales_app
-  password: <%= ENV["SALES_APP_DATABASE_PASSWORD"] %>
+  username: ENV['PSQL_USERNAME']
+  password: ENV['PSQL_PASSWORD']
+  url: <%= ENV['PSQL_URI'] %>
