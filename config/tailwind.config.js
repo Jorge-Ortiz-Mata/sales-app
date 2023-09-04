@@ -12,6 +12,9 @@ module.exports = {
       fontFamily: {
         sans: ['Inter var', ...defaultTheme.fontFamily.sans],
       },
+      colors: {
+        sidebarTextColor: '#61677A',
+      }
     },
   },
   plugins: [
