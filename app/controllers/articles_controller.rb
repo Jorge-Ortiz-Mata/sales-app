@@ -1,5 +1,5 @@
 class ArticlesController < ApplicationController
-  before_action :set_article, only: %i[show edit update destroy]
+  before_action :set_article, only: %i[show edit update destroy add_categories save_categories]
 
   def index
     @articles = Article.all.order(:created_at)
@@ -18,7 +18,7 @@ class ArticlesController < ApplicationController
 
     respond_to do |format|
       if @article.save
-        format.html { redirect_to article_url(@article), notice: 'Article was successfully created.' }
+        format.html { redirect_to article_url(@article), notice: 'El articulo ha sido creado exitosamente' }
       else
         format.html { render :new, status: :unprocessable_entity }
       end
@@ -28,7 +28,7 @@ class ArticlesController < ApplicationController
   def update
     respond_to do |format|
       if @article.update(article_params)
-        format.html { redirect_to article_url(@article), notice: 'Article was successfully updated.' }
+        format.html { redirect_to article_url(@article), notice: 'El articulo ha sido actualizado exitosamente' }
       else
         format.html { render :edit, status: :unprocessable_entity }
       end
@@ -39,8 +39,20 @@ class ArticlesController < ApplicationController
     @article.destroy
 
     respond_to do |format|
-      format.html { redirect_to articles_url, notice: 'Article was successfully destroyed.' }
+      format.html { redirect_to articles_url, notice: 'El articulo ha sido eliminado exitosamente.' }
     end
+  end
+
+  def add_categories; end
+
+  def save_categories
+    @article.categories.clear
+
+    category_ids.each do |id|
+      @article.categories << Category.find(id)
+    end
+
+    redirect_to article_path(@article), notice: 'Las categorias han sido actualizadas correctamente'
   end
 
   private
@@ -51,5 +63,9 @@ class ArticlesController < ApplicationController
 
   def article_params
     params.require(:article).permit(:name, :description, :price, :in_stock)
+  end
+
+  def category_ids
+    params[:categories][:ids].reject { |c| c.empty? }
   end
 end

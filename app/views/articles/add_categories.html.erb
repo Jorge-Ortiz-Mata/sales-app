@@ -1,0 +1,44 @@
+<%= turbo_frame_tag 'add_categories_modal', class: 'flex flex-col w-full' do %>
+  <%= render 'shared/modal', { title: 'Asignar categorias' } do %>
+    <% if Category.all.count > 0 %>
+      <div class="flex flex-col w-full gap-5">
+        <p class="font-bold text-sidebarTextColor text-center text-lg">
+          Categorias disponibles
+        </p>
+        <p class="text-center text-sidebarTextColor">
+          Estas son las categorias disponibles
+        </p>
+
+        <%= form_with(url: save_categories_article_path(@article), class: 'flex flex-col w-full gap-5', data: { turbo: false }) do |form| %>
+          <div class="flex flex-col w-full gap-2 h-60 overflow-y-auto">
+            <%= collection_check_boxes(:categories, :ids, Category.all, :id, :name) do |b| %>
+              <div class="flex items-center">
+                <% if @article.categories.ids.include?(b.object.id) %>
+                  <%= b.check_box checked: true, class: 'hidden peer' %>
+                <% else %>
+                  <%= b.check_box class: 'hidden peer' %>
+                <% end %>
+                <%= b.label class: 'py-1.5 px-3 font-semibold text-sm text-primary w-full border border-gray-300 rounded cursor-pointer peer-checked:border-cyan-500 peer-checked:bg-cyan-50 hover:bg-cyan-50' %>
+              </div>
+            <% end %>
+          </div>
+
+          <div class="flex items-center justify-end">
+            <%= form.submit 'Añadir categorias', class: 'rounded py-2 px-4 bg-green-500 text-white font-semibold cursor-pointer' %>
+          </div>
+        <% end %>
+      </div>
+    <% else %>
+      <div class="flex flex-col w-full gap-2">
+        <p class="font-bold text-sidebarTextColor text-center text-lg">
+          Actualmente no existen categorias
+        </p>
+
+        <p class="text-center text-sidebarTextColor">
+          Puedes añadir categorias seleccionando la opción <strong>Categorías</strong>
+          que se ubica en el sidebar del lado izquierdo.
+        </p>
+      </div>
+    <% end %>
+  <% end %>
+<% end %>

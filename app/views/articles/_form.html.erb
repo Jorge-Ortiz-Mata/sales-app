@@ -12,7 +12,7 @@
 
     <div class="flex flex-col gap-1 w-6/12 items-start">
       <%= form.label :price, 'Precio:', class: 'font-bold mb-1' %>
-      <%= form.text_field :price, class: "input-tailwindcss #{ error_input_border(article.errors.include?(:price)) }" %>
+      <%= form.number_field :price, class: "input-tailwindcss #{ error_input_border(article.errors.include?(:price)) }" %>
       <% if article.errors.include?(:price) %>
         <% article.errors.full_messages_for(:price).each do |message| %>
           <span class="text-sm font-semibold text-danger"><%= message %></span>
@@ -22,8 +22,8 @@
   </div>
 
   <div class="flex flex-col gap-1 w-full items-start">
-    <%= form.label :in_stock, 'Almacén:', class: 'font-bold mb-1' %>
-    <%= form.text_field :in_stock, class: "input-tailwindcss #{ error_input_border(article.errors.include?(:in_stock)) }" %>
+    <%= form.label :in_stock, 'Cantidad:', class: 'font-bold mb-1' %>
+    <%= form.number_field :in_stock, class: "input-tailwindcss #{ error_input_border(article.errors.include?(:in_stock)) }" %>
     <% if article.errors.include?(:in_stock) %>
       <% article.errors.full_messages_for(:in_stock).each do |message| %>
         <span class="text-sm font-semibold text-danger"><%= message %></span>

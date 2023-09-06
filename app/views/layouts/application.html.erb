@@ -18,6 +18,7 @@
         <%= render 'shared/sidebar' %>
       </aside>
       <section class="w-10/12 flex flex-col">
+        <%= render 'shared/notice' if notice %>
         <%= yield %>
       </section>
     </main>

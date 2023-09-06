@@ -10,17 +10,23 @@
 
     <div class="flex flex-col w-full rounded border shadow p-5 gap-2">
       <div class="flex w-full bg-gray-100 rounded">
-        <div class="w-6/12 p-1 font-bold text-sidebarTextColor">Nombre</div>
-        <div class="w-2/12 p-1 font-bold text-sidebarTextColor">ID</div>
-        <div class="w-2/12 p-1 font-bold text-sidebarTextColor">Almacen</div>
+        <div class="w-1/12 p-1 font-bold text-sidebarTextColor">ID</div>
+        <div class="w-5/12 p-1 font-bold text-sidebarTextColor">Nombre</div>
+        <div class="w-2/12 p-1 font-bold text-sidebarTextColor">Categorias</div>
+        <div class="w-2/12 p-1 font-bold text-sidebarTextColor">Cantidad</div>
         <div class="w-2/12 p-1 font-bold text-sidebarTextColor">Precio</div>
       </div>
 
       <div class="flex flex-col w-full">
         <% @articles.each do |article| %>
-          <%= link_to article_path(article), class: 'flex w-full hover:bg-gray-100 p-1 duration-300 border-b' do %>
-            <div class="font-semibold text-sidebarTextColor p-1 w-6/12"><%= article.name %></div>
-            <div class="font-semibold text-sidebarTextColor p-1 w-2/12"><%= article.id %></div>
+          <%= link_to article_path(article), class: 'flex items-center w-full hover:bg-gray-100 p-1 duration-300 border-b' do %>
+            <div class="font-semibold text-sidebarTextColor p-1 w-1/12"><%= article.id %></div>
+            <div class="font-semibold text-sidebarTextColor p-1 w-5/12"><%= article.name %></div>
+            <div class="font-semibold text-sidebarTextColor p-1 w-2/12">
+              <% article.categories.order(:created_at).each do |category| %>
+                <span class="text-xs border border-gray-700 px-1.5 py-0.5 rounded"><%= category.name %></span>
+              <% end %>
+            </div>
             <div class="font-semibold text-sidebarTextColor p-1 w-2/12"><%= article.in_stock %></div>
             <div class="font-semibold text-sidebarTextColor p-1 w-2/12"><%= article.price %></div>
           <% end %>

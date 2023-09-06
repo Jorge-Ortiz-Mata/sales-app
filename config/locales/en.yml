@@ -30,15 +30,31 @@
 # available at https://guides.rubyonrails.org/i18n.html.
 
 en:
+  # activemodel:
+  #   attributes:
+  #     article_form:
+  #       name: El nombre
+  #       description: La descripción
+  #       price: El precio
+  #       in_stock: El almacén
+  #       categories: Las categorias
+
+    # errors:
+    #   models:
+    #     article_form:
+    #       empty_values: 'están en blanco'
+    #   messages:
+    #     blank: 'no debe estar en blanco'
+    #     taken: 'ya ha sido registrado'
+
   activerecord:
-    models:
-      article:
     attributes:
       article:
         name: El nombre
         description: La descripción
         price: El precio
-        in_stock: El almacén
+        in_stock: La cantidad
+        categories: Las categorias
       category:
         name: El nombre
 

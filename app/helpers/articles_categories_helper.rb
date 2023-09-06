@@ -1,0 +1,2 @@
+module ArticlesCategoriesHelper
+end
