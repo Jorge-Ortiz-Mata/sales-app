@@ -11,7 +11,7 @@
     </div>
 
     <div class="flex flex-col gap-1 w-6/12 items-start">
-      <%= form.label :price, 'Precio:', class: 'font-bold mb-1' %>
+      <%= form.label :price, 'Precio (MXN):', class: 'font-bold mb-1' %>
       <%= form.number_field :price, class: "input-tailwindcss #{ error_input_border(article.errors.include?(:price)) }" %>
       <% if article.errors.include?(:price) %>
         <% article.errors.full_messages_for(:price).each do |message| %>
@@ -22,7 +22,7 @@
   </div>
 
   <div class="flex flex-col gap-1 w-full items-start">
-    <%= form.label :in_stock, 'Cantidad:', class: 'font-bold mb-1' %>
+    <%= form.label :in_stock, 'Cantidad disponibles en almacén:', class: 'font-bold mb-1' %>
     <%= form.number_field :in_stock, class: "input-tailwindcss #{ error_input_border(article.errors.include?(:in_stock)) }" %>
     <% if article.errors.include?(:in_stock) %>
       <% article.errors.full_messages_for(:in_stock).each do |message| %>
@@ -39,6 +39,24 @@
         <span class="text-sm font-semibold text-danger"><%= message %></span>
       <% end %>
     <% end %>
+  </div>
+
+  <div class="flex flex-col gap-1 w-full items-start" data-controller="article">
+    <%= form.label :avatar, 'Imagen principal del articulo:', class: 'font-bold mb-1' %>
+    <%= form.file_field :avatar, class: "hidden", accept: "image/png,image/gif,image/jpeg,image/jpg", multiple: false %>
+    <div data-action="click->article#addAvatar" class="flex items-center cursor-pointer border rounded-lg shadow w-full">
+      <span class="bg-slate-400 py-1.5 px-3 font-semibold text-white w-3/12 text-sm rounded-l-lg">Seleccionar imagen</span>
+      <span class="py-1.5 px-3 bg-slate-700 text-white font-semibold w-full text-sm rounded-r-lg" id="avatar_name">Ningún archivo seleccionado</span>
+    </div>
+  </div>
+
+  <div class="flex flex-col gap-1 w-full items-start" data-controller="article">
+    <%= form.label :images, 'Añadir más imagenes:', class: 'font-bold mb-1' %>
+    <%= form.file_field :images, class: 'hidden', accept: "image/png,image/gif,image/jpeg,image/jpg", multiple: true %>
+    <div data-action="click->article#addImages" class="flex items-center cursor-pointer border rounded-lg shadow w-full">
+      <span class="bg-slate-400 py-1.5 px-3 font-semibold text-white w-3/12 text-sm rounded-l-lg">Seleccionar imagenes</span>
+      <span class="py-1.5 px-3 bg-slate-700 text-white font-semibold w-full text-sm rounded-r-lg" id="images_name">Ningún archivo seleccionado</span>
+    </div>
   </div>
 
   <div class="flex items-center justify-end gap-3">

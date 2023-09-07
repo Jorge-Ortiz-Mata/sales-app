@@ -24,6 +24,8 @@ en:
         price: El precio
         in_stock: La cantidad
         categories: Las categorias
+        avatar: Imagen principal
+        images: Imagenes
       category:
         name: El nombre
       sell:
@@ -37,3 +39,4 @@ en:
       messages:
         blank: 'no debe estar en blanco'
         taken: 'ya ha sido registrado'
+        greater_than: 'debe ser mayor a %{value}'

@@ -22,13 +22,13 @@
       <div class="flex flex-col w-full">
         <% @sells.each do |sell| %>
           <%= link_to sell_path(sell), class: 'flex items-center w-full hover:bg-gray-100 p-1 duration-300 border-b' do %>
-            <div class="font-semibold text-sidebarTextColor p-1 w-1/12"><%= sell.id %></div>
-            <div class="font-semibold text-sidebarTextColor p-1 w-3/12"><%= sell.article.name[0..25] %>...</div>
-            <div class="font-semibold text-sidebarTextColor p-1 w-1/12"><%= sell.day.humanize %></div>
-            <div class="font-semibold text-sidebarTextColor p-1 w-2/12"><%= sell.date_of_sell.strftime('%a %d %b %Y')  %></div>
-            <div class="font-semibold text-sidebarTextColor p-1 w-1/12"><%= sell.quantity %></div>
-            <div class="font-semibold text-sidebarTextColor p-1 w-2/12">$ <%= number_with_delimiter(sell.article.price, :delimiter => ',') %> MXN</div>
-            <div class="font-semibold text-sidebarTextColor p-1 w-2/12">$ <%= number_with_delimiter(sell.total_revenue, :delimiter => ',') %> MXN</div>
+            <div class="font-semibold text-sm text-sidebarTextColor p-1 w-1/12"><%= sell.id %></div>
+            <div class="font-semibold text-sm text-sidebarTextColor p-1 w-3/12"><%= sell.article.name[0..25] %>...</div>
+            <div class="font-semibold text-sm text-sidebarTextColor p-1 w-1/12"><%= sell.day.humanize %></div>
+            <div class="font-semibold text-sm text-sidebarTextColor p-1 w-2/12"><%= I18n.l(sell.date_of_sell.to_time, format: :long) %></div>
+            <div class="font-semibold text-sm text-sidebarTextColor p-1 w-1/12"><%= sell.quantity %></div>
+            <div class="font-semibold text-sm text-sidebarTextColor p-1 w-2/12">$ <%= number_with_delimiter(sell.article.price, :delimiter => ',') %> MXN</div>
+            <div class="font-semibold text-sm text-sidebarTextColor p-1 w-2/12">$ <%= number_with_delimiter(sell.total_revenue, :delimiter => ',') %> MXN</div>
           <% end %>
         <% end %>
       </div>

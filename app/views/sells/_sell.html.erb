@@ -1,4 +1,4 @@
-<div class="flex flex-col w-full gap-3 bg-slate-50 border shadow rounded p-5">
+<div class="flex flex-col w-full gap-5 bg-slate-50 border shadow rounded p-5">
   <div class="flex gap-2 items-center full">
     <span class="font-regular text-sidebarTextColor">Nombre del articulo:</span>
     <%= link_to article_path(sell.article) do %>
@@ -20,36 +20,41 @@
     <div class="flex gap-2 items-center w-3/12">
       <span class="font-regular text-sidebarTextColor">Categoria(s):</span>
       <% sell.article.categories.each do |category| %>
-        <span class="text-xs border border-gray-700 px-1.5 py-0.5 rounded"><%= category.name %></span>
+        <span class="text-xs text-white py-2 px-3 rounded bg-yellow-600"><%= category.name %></span>
       <% end %>
     </div>
   </div>
 
-  <div class="flex items-center gap-1">
-    <div class="flex gap-2 items-center w-3/12">
+  <div class="flex items-center gap-10">
+    <div class="flex gap-2 items-center">
       <span class="font-regular text-sidebarTextColor">ID de la venta:</span>
       <span class="font-semibold"><%= sell.id %></span>
     </div>
 
-    <div class="flex gap-2 items-center w-3/12">
+    <div class="flex gap-2 items-center">
       <span class="font-regular text-sidebarTextColor">Cantidad de articulos vendidos:</span>
-      <span class="font-semibold"><%= sell.quantity %></span>
+      <span class="font-semibold"><%= sell.quantity %> (pz)</span>
     </div>
 
-    <div class="flex gap-2 items-center w-3/12">
+    <div class="flex gap-2 items-center">
       <span class="font-regular text-sidebarTextColor">Dia de la venta:</span>
       <span class="font-semibold"><%= sell.day.humanize %></span>
     </div>
-
-    <div class="flex gap-2 items-center w-3/12">
-      <span class="font-regular text-sidebarTextColor">Fecha de la venta:</span>
-      <span class="font-semibold"><%= sell.date_of_sell %></span>
-    </div>
   </div>
 
+  <div class="flex gap-2 items-center w-full">
+    <span class="font-regular text-sidebarTextColor">Fecha de la venta:</span>
+    <span class="font-semibold"><%= I18n.l(sell.date_of_sell.to_time, format: :long) %></span>
+  </div>
 
   <div class="flex flex-col">
     <span class="font-regular text-sidebarTextColor">Comentario de la venta (opcional):</span>
-    <span class="font-semibold"><%= sell.comment %></span>
+    <span class="font-semibold">
+      <% if sell.comment.blank? %>
+        Sin comentarios
+      <% else %>
+        <%= sell.comment %>
+      <% end %>
+    </span>
   </div>
 </div>

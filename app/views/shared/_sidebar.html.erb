@@ -1,5 +1,12 @@
-<div class="flex flex-col gap-3 w-full">
-  <h3 class="font-medium text-lg text-sidebarTextColor">General</h3>
+<div class="flex flex-col justify-between gap-10 h-full px-5 py-10 fixed w-2/12 shadow border">
+  <%= link_to root_path, class: 'flex items-center gap-5' do %>
+    <%= image_tag('yorch-black.png', class: 'w-10 h-10') %>
+    <div class="flex flex-col gap-0">
+      <h2 class="font-semibold text-sidebarTextColor text-xl">Sales App</h2>
+      <p class="text-xs font-medium text-sidebarTextColor">Yorch Dev's</p>
+    </div>
+  <% end %>
+
   <ul class="flex flex-col w-full">
     <li class="flex items-center w-full">
       <%= link_to root_path, class: style_to_sidebar_link(root_path) do %>
@@ -9,16 +16,16 @@
     </li>
 
     <li class="flex items-center w-full">
-      <%= link_to sells_path, class: style_to_sidebar_link(sells_path) do %>
-        <i class="fa-solid fa-sack-dollar"></i>
-        <span>Ventas</span>
+      <%= link_to articles_path, class: style_to_sidebar_link(articles_path) do %>
+        <i class="fa-solid fa-warehouse"></i>
+        <span>Articulos</span>
       <% end %>
     </li>
 
     <li class="flex items-center w-full">
-      <%= link_to articles_path, class: style_to_sidebar_link(articles_path) do %>
-        <i class="fa-solid fa-warehouse"></i>
-        <span>Articulos</span>
+      <%= link_to sells_path, class: style_to_sidebar_link(sells_path) do %>
+        <i class="fa-solid fa-sack-dollar"></i>
+        <span>Ventas</span>
       <% end %>
     </li>
 
@@ -36,9 +43,10 @@
       <% end %>
     </li>
   </ul>
+
+  <div class="flex flex-col">
+    <h6 class="font-bold">José López</h6>
+    <p class="font-medium text-sm">jose.lopez@gmail.com</p>
+  </div>
 </div>
 
-<div class="flex flex-col">
-  <h6 class="font-bold">José López</h6>
-  <p class="font-medium text-sm">jose.lopez@gmail.com</p>
-</div>

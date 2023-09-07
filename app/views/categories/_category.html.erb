@@ -1,7 +1,7 @@
 <%= turbo_frame_tag "category_#{category.id}", class: 'flex w-full hover:bg-gray-100 duration-300 border-b py-1' do %>
-  <div class="font-semibold text-sidebarTextColor p-1 w-4/12"><%= category.name %></div>
-  <div class="font-semibold text-sidebarTextColor p-1 w-2/12"><%= category.id %></div>
-  <div class="font-semibold text-sidebarTextColor p-1 w-4/12"><%= time_ago_in_words(category.created_at) %></div>
+  <div class="font-semibold text-sm text-sidebarTextColor p-1 w-2/12"><%= category.id %></div>
+  <div class="font-semibold text-sm text-sidebarTextColor p-1 w-4/12"><%= category.name %></div>
+  <div class="font-semibold text-sm text-sidebarTextColor p-1 w-4/12"><%= I18n.l(category.created_at.to_time, format: :long) %></div>
 
   <div class="flex items-center w-1/12">
     <%= link_to edit_category_path(category) do %>
