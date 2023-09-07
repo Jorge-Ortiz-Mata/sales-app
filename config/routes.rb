@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :sells
   resources :categories
   resources :articles do
     get '/add_categories', to: 'articles#add_categories', on: :member

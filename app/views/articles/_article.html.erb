@@ -17,7 +17,7 @@
 
       <div class="flex gap-1 w-3/12">
         <h4 class="font-medium mb-1">Precio:</h4>
-        $<%= article.price %> MXN
+        $ <%= number_with_delimiter(article.price, :delimiter => ',') %> MXN
       </div>
 
       <div class="flex gap-1 w-3/12">
@@ -27,12 +27,12 @@
     </div>
 
     <div class="flex flex-col w-full">
-        <h4 class="font-medium mb-1">Categorias:</h4>
-        <div class="flex gap-2">
-          <% article.categories.each do |category| %>
-            <span class="text-xs border border-gray-700 px-1.5 py-0.5 rounded"><%= category.name %></span>
-          <% end %>
-        </div>
+      <h4 class="font-medium mb-1">Categorias:</h4>
+      <div class="flex gap-2">
+        <% article.categories.each do |category| %>
+          <span class="text-xs border border-gray-700 px-1.5 py-0.5 rounded"><%= category.name %></span>
+        <% end %>
+      </div>
     </div>
 
     <div class="flex flex-col">

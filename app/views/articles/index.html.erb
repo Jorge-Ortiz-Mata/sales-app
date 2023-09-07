@@ -28,7 +28,7 @@
               <% end %>
             </div>
             <div class="font-semibold text-sidebarTextColor p-1 w-2/12"><%= article.in_stock %></div>
-            <div class="font-semibold text-sidebarTextColor p-1 w-2/12"><%= article.price %></div>
+            <div class="font-semibold text-sidebarTextColor p-1 w-2/12">$ <%= number_with_delimiter(article.price, :delimiter => ',') %> MXN</div>
           <% end %>
         <% end %>
       </div>

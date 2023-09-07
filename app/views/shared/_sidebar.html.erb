@@ -9,6 +9,13 @@
     </li>
 
     <li class="flex items-center w-full">
+      <%= link_to sells_path, class: style_to_sidebar_link(sells_path) do %>
+        <i class="fa-solid fa-sack-dollar"></i>
+        <span>Ventas</span>
+      <% end %>
+    </li>
+
+    <li class="flex items-center w-full">
       <%= link_to articles_path, class: style_to_sidebar_link(articles_path) do %>
         <i class="fa-solid fa-warehouse"></i>
         <span>Articulos</span>
