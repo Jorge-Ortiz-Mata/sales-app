@@ -1,4 +1,4 @@
-es:
+en:
   date:
     day_names:
       - Domingo
@@ -26,7 +26,6 @@ es:
     formats:
       long: '%A, %B %d, %Y'
       short: '%b %d, %Y'
-
   # activemodel:
   #   attributes:
   #     article_form:
@@ -67,4 +66,4 @@ es:
       messages:
         blank: 'no debe estar en blanco'
         taken: 'ya ha sido registrado'
-        greater_than: 'debe ser mayor a %{value}'
+        greater_than: 'debe ser mayor a %{count}'

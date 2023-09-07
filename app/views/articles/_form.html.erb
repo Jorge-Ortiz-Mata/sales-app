@@ -4,9 +4,9 @@
       <%= form.label :name, 'Nombre del articulo:', class: 'font-bold mb-1' %>
       <%= form.text_field :name, class: "input-tailwindcss #{ error_input_border(article.errors.include?(:name)) }" %>
       <% if article.errors.include?(:name) %>
-        <% article.errors.full_messages_for(:name).each do |message| %>
-          <span class="text-sm font-semibold text-danger"><%= message %></span>
-        <% end %>
+        <span class="text-sm font-semibold text-danger">
+          <%= article.errors.full_messages_for(:name).first %>
+        </span>
       <% end %>
     </div>
 
@@ -14,9 +14,9 @@
       <%= form.label :price, 'Precio (MXN):', class: 'font-bold mb-1' %>
       <%= form.number_field :price, class: "input-tailwindcss #{ error_input_border(article.errors.include?(:price)) }" %>
       <% if article.errors.include?(:price) %>
-        <% article.errors.full_messages_for(:price).each do |message| %>
-          <span class="text-sm font-semibold text-danger"><%= message %></span>
-        <% end %>
+        <span class="text-sm font-semibold text-danger">
+          <%= article.errors.full_messages_for(:price).first %>
+        </span>
       <% end %>
     </div>
   </div>
@@ -25,9 +25,9 @@
     <%= form.label :in_stock, 'Cantidad disponibles en almacén:', class: 'font-bold mb-1' %>
     <%= form.number_field :in_stock, class: "input-tailwindcss #{ error_input_border(article.errors.include?(:in_stock)) }" %>
     <% if article.errors.include?(:in_stock) %>
-      <% article.errors.full_messages_for(:in_stock).each do |message| %>
-        <span class="text-sm font-semibold text-danger"><%= message %></span>
-      <% end %>
+      <span class="text-sm font-semibold text-danger">
+        <%= article.errors.full_messages_for(:in_stock).first %>
+      </span>
     <% end %>
   </div>
 
@@ -35,9 +35,9 @@
     <%= form.label :description, 'Descripción del artículo:', class: 'font-bold mb-1' %>
     <%= form.rich_text_area :description, class: "input-tailwindcss #{ error_input_border(article.errors.include?(:description)) } h-40 overflow-y-auto" %>
     <% if article.errors.include?(:description) %>
-      <% article.errors.full_messages_for(:description).each do |message| %>
-        <span class="text-sm font-semibold text-danger"><%= message %></span>
-      <% end %>
+      <span class="text-sm font-semibold text-danger">
+        <%= article.errors.full_messages_for(:description).first %>
+      </span>
     <% end %>
   </div>
 
