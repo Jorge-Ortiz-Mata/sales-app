@@ -16,7 +16,7 @@ class CategoriesController < ApplicationController
 
     respond_to do |format|
       if @category.save
-        format.turbo_stream { render turbo_stream: turbo_stream.append('categories', partial: 'categories/category', locals: { category: @category })}
+        format.turbo_stream { render turbo_stream: turbo_stream.replace('categories', partial: 'categories/categories', locals: { categories: Category.all })}
       else
         format.turbo_stream { render turbo_stream: turbo_stream.replace('new_category_form', partial: 'categories/form', locals: { category: @category, text_btn: 'Guardar', form_id: 'new_category_form' })}
       end
@@ -37,7 +37,7 @@ class CategoriesController < ApplicationController
     @category.destroy
 
     respond_to do |format|
-      format.turbo_stream { render turbo_stream: turbo_stream.remove("category_#{@category.id}") }
+      format.turbo_stream { render turbo_stream: turbo_stream.replace('categories', partial: 'categories/categories', locals: { categories: Category.all })}
     end
   end
 

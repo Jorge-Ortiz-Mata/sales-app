@@ -11,20 +11,8 @@
       <% end %>
     </div>
 
-    <div class="flex flex-col w-full rounded border shadow p-5 gap-2">
-      <div class="flex w-full bg-gray-100 rounded">
-        <div class="w-2/12 p-1 font-bold text-sidebarTextColor">ID</div>
-        <div class="w-4/12 p-1 font-bold text-sidebarTextColor">Nombre</div>
-        <div class="w-4/12 p-1 font-bold text-sidebarTextColor">Fecha de creación</div>
-        <div class="w-1/12 p-1 font-bold text-sidebarTextColor ">Editar</div>
-        <div class="w-1/12 p-1 font-bold text-sidebarTextColor ">Eliminar</div>
-      </div>
-
-      <div class="flex flex-col w-full" id="categories">
-        <% @categories.each do |category| %>
-          <%= render category %>
-        <% end %>
-      </div>
+    <div class="rounded border shadow p-5 flex flex-col w-full">
+      <%= render 'categories', categories: @categories %>
     </div>
   </div>
 </div>

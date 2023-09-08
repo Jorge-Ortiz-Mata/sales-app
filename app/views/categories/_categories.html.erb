@@ -1,0 +1,21 @@
+<% if categories.any? %>
+  <div class="flex flex-col w-full gap-2" id="categories">
+    <div class="flex w-full bg-gray-100 rounded">
+      <div class="w-1/12 p-1 font-bold text-sidebarTextColor">ID</div>
+      <div class="w-5/12 p-1 font-bold text-sidebarTextColor">Nombre</div>
+      <div class="w-4/12 p-1 font-bold text-sidebarTextColor">Fecha de creación</div>
+      <div class="w-1/12 p-1 font-bold text-sidebarTextColor ">Editar</div>
+      <div class="w-1/12 p-1 font-bold text-sidebarTextColor ">Eliminar</div>
+    </div>
+
+    <div class="flex flex-col w-full">
+      <% categories.each do |category| %>
+        <%= render category %>
+      <% end %>
+    </div>
+  </div>
+<% else %>
+  <div class="flex items-center w-full" id="categories">
+    <p class="font-semibold">No hay ninguna categoria creada por el momento.</p>
+  </div>
+<% end %>
