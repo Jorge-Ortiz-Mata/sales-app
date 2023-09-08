@@ -4,19 +4,15 @@
       <%= form.label :name, 'Nombre del articulo:', class: 'font-bold mb-1' %>
       <%= form.text_field :name, class: "input-tailwindcss #{ error_input_border(article.errors.include?(:name)) }" %>
       <% if article.errors.include?(:name) %>
-        <span class="text-sm font-semibold text-danger">
-          <%= article.errors.full_messages_for(:name).first %>
-        </span>
+        <%= render 'shared/input_error_msg', { object: article, attribute: :name } %>
       <% end %>
     </div>
 
     <div class="flex flex-col gap-1 w-6/12 items-start">
       <%= form.label :price, 'Precio (MXN):', class: 'font-bold mb-1' %>
-      <%= form.number_field :price, class: "input-tailwindcss #{ error_input_border(article.errors.include?(:price)) }" %>
+      <%= form.number_field :price, step: :any, class: "input-tailwindcss #{ error_input_border(article.errors.include?(:price)) }" %>
       <% if article.errors.include?(:price) %>
-        <span class="text-sm font-semibold text-danger">
-          <%= article.errors.full_messages_for(:price).first %>
-        </span>
+        <%= render 'shared/input_error_msg', { object: article, attribute: :price } %>
       <% end %>
     </div>
   </div>
@@ -25,9 +21,7 @@
     <%= form.label :in_stock, 'Cantidad disponibles en almacén:', class: 'font-bold mb-1' %>
     <%= form.number_field :in_stock, class: "input-tailwindcss #{ error_input_border(article.errors.include?(:in_stock)) }" %>
     <% if article.errors.include?(:in_stock) %>
-      <span class="text-sm font-semibold text-danger">
-        <%= article.errors.full_messages_for(:in_stock).first %>
-      </span>
+      <%= render 'shared/input_error_msg', { object: article, attribute: :in_stock } %>
     <% end %>
   </div>
 
@@ -35,9 +29,7 @@
     <%= form.label :description, 'Descripción del artículo:', class: 'font-bold mb-1' %>
     <%= form.rich_text_area :description, class: "input-tailwindcss #{ error_input_border(article.errors.include?(:description)) } h-40 overflow-y-auto" %>
     <% if article.errors.include?(:description) %>
-      <span class="text-sm font-semibold text-danger">
-        <%= article.errors.full_messages_for(:description).first %>
-      </span>
+      <%= render 'shared/input_error_msg', { object: article, attribute: :description } %>
     <% end %>
   </div>
 

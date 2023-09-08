@@ -32,9 +32,9 @@
                   <% end %>
                 </div>
                 <div class="font-semibold text-sm text-sidebarTextColor p-1 w-4/12"><%= article.name %></div>
-                <div class="font-semibold text-sm text-sidebarTextColor p-1 w-2/12">
+                <div class="font-semibold text-sm text-sidebarTextColor p-1 w-2/12 gap-1 grid">
                   <% article.categories.order(:created_at).each do |category| %>
-                    <span class="text-xs border border-gray-700 px-1.5 py-0.5 rounded"><%= category.name %></span>
+                    <span class="text-xs border border-gray-700 px-1.5 py-0.5 rounded ml-0 mr-auto"><%= category.name %></span>
                   <% end %>
                 </div>
                 <div class="font-semibold text-sm text-sidebarTextColor p-1 w-2/12"><%= article.in_stock %></div>

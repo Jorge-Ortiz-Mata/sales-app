@@ -2,9 +2,7 @@
   <div class="flex flex-col w-80">
     <%= form.text_field :name, placeholder: 'Deportes', class: "input-tailwindcss #{ error_input_border(category.errors.include?(:name)) }" %>
     <% if category.errors.include?(:name) %>
-      <% category.errors.full_messages_for(:name).each do |message| %>
-        <span class="text-sm font-semibold text-danger relative"> <%= message %></span>
-      <% end %>
+      <%= render 'shared/input_error_msg', { object: category, attribute: :name } %>
     <% end %>
   </div>
 

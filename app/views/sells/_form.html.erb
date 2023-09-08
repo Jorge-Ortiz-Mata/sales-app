@@ -7,19 +7,15 @@
           { class: "input-tailwindcss #{ error_input_border(sell.errors.include?(:article)) }", id: 'select_name'
         }) %>
       <% if sell.errors.include?(:article) %>
-        <% sell.errors.full_messages_for(:article).each do |message| %>
-          <span class="text-sm font-semibold text-danger"><%= message %></span>
-        <% end %>
+        <%= render 'shared/input_error_msg', { object: sell, attribute: :article } %>
       <% end %>
     </div>
 
     <div class="flex flex-col gap-1 w-6/12 items-start">
-      <%= form.label :quantity, 'Cantidad:', class: 'font-bold mb-1' %>
+      <%= form.label :quantity, 'Total de piezas a vender:', class: 'font-bold mb-1' %>
       <%= form.number_field :quantity, class: "input-tailwindcss #{ error_input_border(sell.errors.include?(:quantity)) }" %>
       <% if sell.errors.include?(:quantity) %>
-        <% sell.errors.full_messages_for(:quantity).each do |message| %>
-          <span class="text-sm font-semibold text-danger"><%= message %></span>
-        <% end %>
+        <%= render 'shared/input_error_msg', { object: sell, attribute: :quantity } %>
       <% end %>
     </div>
   </div>
@@ -32,9 +28,7 @@
           { class: "input-tailwindcss #{ error_input_border(sell.errors.include?(:day)) }", id: 'select_name'
         }) %>
       <% if sell.errors.include?(:day) %>
-        <% sell.errors.full_messages_for(:day).each do |message| %>
-          <span class="text-sm font-semibold text-danger"><%= message %></span>
-        <% end %>
+        <%= render 'shared/input_error_msg', { object: sell, attribute: :day } %>
       <% end %>
     </div>
 
@@ -42,9 +36,7 @@
       <%= form.label :date_of_sell, 'Fecha de venta:', class: 'font-bold mb-1' %>
       <%= form.date_field :date_of_sell, class: "input-tailwindcss #{ error_input_border(sell.errors.include?(:date_of_sell)) }" %>
       <% if sell.errors.include?(:date_of_sell) %>
-        <% sell.errors.full_messages_for(:date_of_sell).each do |message| %>
-          <span class="text-sm font-semibold text-danger"><%= message %></span>
-        <% end %>
+        <%= render 'shared/input_error_msg', { object: sell, attribute: :date_of_sell } %>
       <% end %>
     </div>
   </div>
@@ -53,9 +45,7 @@
     <%= form.label :comment, 'Comentario (opcional):', class: 'font-bold mb-1' %>
     <%= form.text_field :comment, class: "input-tailwindcss #{ error_input_border(sell.errors.include?(:comment)) }" %>
     <% if sell.errors.include?(:comment) %>
-      <% sell.errors.full_messages_for(:comment).each do |message| %>
-        <span class="text-sm font-semibold text-danger"><%= message %></span>
-      <% end %>
+      <%= render 'shared/input_error_msg', { object: sell, attribute: :comment } %>
     <% end %>
   </div>
 

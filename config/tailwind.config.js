@@ -17,6 +17,7 @@ module.exports = {
         primary: '#06b6d4',
         success: '#22c55e',
         danger: '#ef4444',
+        warning: '#eab308',
       }
     },
   },

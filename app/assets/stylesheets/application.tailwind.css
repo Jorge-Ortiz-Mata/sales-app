@@ -6,4 +6,19 @@
   .input-tailwindcss {
     @apply shadow rounded border border-gray-200 px-3 py-2 w-full text-sm font-semibold;
   }
+  .btn-without-bg {
+    @apply flex text-sm font-bold rounded px-4 py-2 text-white items-center gap-2
+  }
+  .btn-success {
+    @apply flex text-sm font-bold rounded bg-success px-4 py-2 text-white items-center gap-2
+  }
+  .btn-danger {
+    @apply flex text-sm font-bold rounded bg-danger px-4 py-2 text-white items-center gap-2;
+  }
+  .btn-primary {
+    @apply flex text-sm font-bold rounded bg-primary px-4 py-2 text-white items-center gap-2;
+  }
+  .btn-warning {
+    @apply flex text-sm font-bold rounded bg-warning px-4 py-2 text-white items-center gap-2;
+  }
 }

@@ -1,6 +1,7 @@
 class Article < ApplicationRecord
   validates :name, :description, :price, :in_stock, presence: true
   validates :name, uniqueness: true
+  validates :price, comparison: { greater_than_or_equal_to: 0 }
   validates :in_stock, comparison: { greater_than: 0 }
 
   has_one_attached :avatar
