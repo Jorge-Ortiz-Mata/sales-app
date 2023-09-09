@@ -44,3 +44,17 @@ docker build -t sales-app-production:latest .
 ```bash
 docker run -p 3000:3000 --rm --name sales-app-production --env-file ./.env sales-app-production:latest
 ```
+
+## ElephantSQL
+
+The ElephantSQL service was used to create databases for testing purposes using the API endpoint.
+
+- API Documentation: https://www.elephantsql.com/docs/api.html
+- API Endpoints documentation
+- API Generate API Keys: https://customer.elephantsql.com/apikeys
+
+This is an example of how to get the current instances from this account:
+
+```bash
+curl -u :XXXX-XXXXX-XXXXX-XXXXX https://customer.elephantsql.com/api/instances/
+```
