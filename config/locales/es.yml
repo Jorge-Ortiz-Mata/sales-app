@@ -66,6 +66,7 @@ en:
       models:
         sell:
           invalid_day: 'no coincide con los dias mostrados en la lista'
+          insufficient_articles: 'es mayor a los articulos en stock'
         article:
           content_type_invalid: 'es un formato invalido. Formatos permitidos: %{authorized_types}'
 
