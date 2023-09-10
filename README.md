@@ -24,7 +24,7 @@ docker run -p 5432:5432 --rm -e POSTGRES_PASSWORD=postgres -v pgdata:/var/lib/po
 
 ## Launch the Rails Docker Image - Production environment.
 
-In order to test the production environment of your Rails application app, you will need to build and run the production image.
+In order to test the production environment of your Rails application app in your local computer, you will need to build and run the production image.
 Make sure to have a dummy database created somewhere. Localhost is not been taken for the production environment.
 
 Make sure to have the API Keys within your .env file:
@@ -58,3 +58,16 @@ This is an example of how to get the current instances from this account:
 ```bash
 curl -u :XXXX-XXXXX-XXXXX-XXXXX https://customer.elephantsql.com/api/instances/
 ```
+
+## Render Deployment
+
+Before to get started, the PSQL database is not available through the API service. The staging and the production databases must be created manually.
+For each Pull Request created, the ElephantSQL service will be taken instead.
+
+* Create API Key: https://dashboard.render.com/u/settings#api-keys
+
+Save your API Key in the.env file and in the repository configuration
+
+* Environemt Variables
+
+- RAILS_MASTER_KEY=""
