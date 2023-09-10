@@ -71,3 +71,31 @@ Save your API Key in the.env file and in the repository configuration
 * Environemt Variables
 
 - RAILS_MASTER_KEY=""
+
+## Google Cloud Storage.
+
+In order to store files or images in Google Cloud follow the next steps
+
+- Create a project in GCP and add a payment method.
+
+- Create a service account with the role: Storage Admin - Administrador de almacenamiento.
+
+- Generate the JSON file and copy the value.
+
+- Paste the value in your .env file (use single quotes).
+
+```
+GCP_JSON='{ "type": "service_account", ..., "universe_domain": "googleapis.com"}'
+```
+
+- Update the google configuration at config/storage.yml
+
+```yaml
+google:
+  service: GCS
+  project: sales-app
+  credentials: <%= ENV['GCP_JSON'] %>
+  bucket: sales-app-bucket
+```
+
+- Update the active storage configuration in the config/environments folder.
