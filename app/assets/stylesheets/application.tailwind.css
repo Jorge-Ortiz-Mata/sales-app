@@ -4,7 +4,7 @@
 
 @layer components {
   .input-tailwindcss {
-    @apply shadow rounded border border-gray-200 px-3 py-2 w-full text-sm font-semibold;
+    @apply shadow rounded border border-gray-200 px-3 py-2 w-full text-sm;
   }
   .btn-without-bg {
     @apply flex text-sm font-bold rounded px-4 py-2 text-white items-center gap-2

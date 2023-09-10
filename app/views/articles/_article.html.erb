@@ -31,6 +31,13 @@
       </div>
     </div>
 
+    <% if article.promotional_video.attached? %>
+      <div class="flex flex-col items-center justify-center gap-2">
+        <h4 class="font-medium">Video Promocional</h4>
+        <video src=<%= url_for(article.promotional_video) %> class="w-[600px]" controls></video>
+      </div>
+    <% end %>
+
     <div class="flex flex-col items-center w-full">
       <h4 class="font-medium mb-1">Categorias:</h4>
       <div class="flex gap-2">

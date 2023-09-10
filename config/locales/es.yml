@@ -66,6 +66,9 @@ en:
       models:
         sell:
           invalid_day: 'no coincide con los dias mostrados en la lista'
+        article:
+          content_type_invalid: 'es un formato invalido. Formatos permitidos: %{authorized_types}'
+
       messages:
         blank: 'no debe estar en blanco'
         taken: 'ya ha sido registrado'

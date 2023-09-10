@@ -2,7 +2,7 @@
   <div class="flex justify-between gap-1 w-full">
     <div class="flex flex-col gap-1 w-6/12 items-start">
       <%= form.label :name, 'Nombre del articulo:', class: 'font-bold mb-1' %>
-      <%= form.text_field :name, class: "input-tailwindcss #{ error_input_border(article.errors.include?(:name)) }" %>
+      <%= form.text_field :name, class: "input-tailwindcss font-semibold #{ error_input_border(article.errors.include?(:name)) }" %>
       <% if article.errors.include?(:name) %>
         <%= render 'shared/input_error_msg', { object: article, attribute: :name } %>
       <% end %>
@@ -10,7 +10,7 @@
 
     <div class="flex flex-col gap-1 w-6/12 items-start">
       <%= form.label :price, 'Precio (MXN):', class: 'font-bold mb-1' %>
-      <%= form.number_field :price, step: :any, class: "input-tailwindcss #{ error_input_border(article.errors.include?(:price)) }" %>
+      <%= form.number_field :price, step: :any, class: "input-tailwindcss font-semibold #{ error_input_border(article.errors.include?(:price)) }" %>
       <% if article.errors.include?(:price) %>
         <%= render 'shared/input_error_msg', { object: article, attribute: :price } %>
       <% end %>
@@ -19,7 +19,7 @@
 
   <div class="flex flex-col gap-1 w-full items-start">
     <%= form.label :in_stock, 'Cantidad disponibles en almacén:', class: 'font-bold mb-1' %>
-    <%= form.number_field :in_stock, class: "input-tailwindcss #{ error_input_border(article.errors.include?(:in_stock)) }" %>
+    <%= form.number_field :in_stock, class: "input-tailwindcss font-semibold #{ error_input_border(article.errors.include?(:in_stock)) }" %>
     <% if article.errors.include?(:in_stock) %>
       <%= render 'shared/input_error_msg', { object: article, attribute: :in_stock } %>
     <% end %>
@@ -34,16 +34,31 @@
   </div>
 
   <div class="flex flex-col gap-1 w-full items-start" data-controller="article">
-    <%= form.label :avatar, 'Imagen principal del articulo:', class: 'font-bold mb-1' %>
-    <%= form.file_field :avatar, class: "hidden", accept: "image/png,image/gif,image/jpeg,image/jpg", multiple: false %>
+    <%= form.label :avatar, 'Imagen principal del articulo (opcional):', class: 'font-bold mb-1' %>
+    <%= form.file_field :avatar, class: "hidden", accept: "image/png,image/gif,image/jpeg,image/jpg",  multiple: false %>
     <div data-action="click->article#addAvatar" class="flex items-center cursor-pointer border rounded-lg shadow w-full">
       <span class="bg-slate-400 py-1.5 px-3 font-semibold text-white w-3/12 text-sm rounded-l-lg">Seleccionar imagen</span>
       <span class="py-1.5 px-3 bg-slate-700 text-white font-semibold w-full text-sm rounded-r-lg" id="avatar_name">Ningún archivo seleccionado</span>
     </div>
+    <% if article.errors.include?(:avatar) %>
+      <%= render 'shared/input_error_msg', { object: article, attribute: :avatar } %>
+    <% end %>
   </div>
 
   <div class="flex flex-col gap-1 w-full items-start" data-controller="article">
-    <%= form.label :images, 'Añadir más imagenes:', class: 'font-bold mb-1' %>
+    <%= form.label :promotional_video, 'Video del articulo (opcional):', class: 'font-bold mb-1' %>
+    <%= form.file_field :promotional_video, class: "hidden", accept: 'video/mp4,video/webm', multiple: false %>
+    <div data-action="click->article#addPromotionalVideo" class="flex items-center cursor-pointer border rounded-lg shadow w-full">
+      <span class="bg-slate-400 py-1.5 px-3 font-semibold text-white w-3/12 text-sm rounded-l-lg">Seleccionar imagen</span>
+      <span class="py-1.5 px-3 bg-slate-700 text-white font-semibold w-full text-sm rounded-r-lg" id="promotional_video_name">Ningún archivo seleccionado</span>
+    </div>
+    <% if article.errors.include?(:promotional_video) %>
+      <%= render 'shared/input_error_msg', { object: article, attribute: :promotional_video } %>
+    <% end %>
+  </div>
+
+  <div class="flex flex-col gap-1 w-full items-start" data-controller="article">
+    <%= form.label :images, 'Añadir más imagenes (opcional):', class: 'font-bold mb-1' %>
     <%= form.file_field :images, class: 'hidden', accept: "image/png,image/gif,image/jpeg,image/jpg", multiple: true %>
     <div data-action="click->article#addImages" class="flex items-center cursor-pointer border rounded-lg shadow w-full">
       <span class="bg-slate-400 py-1.5 px-3 font-semibold text-white w-3/12 text-sm rounded-l-lg">Seleccionar imagenes</span>
