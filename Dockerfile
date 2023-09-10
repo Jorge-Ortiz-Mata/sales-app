@@ -35,12 +35,6 @@ RUN bundle install
 # Copy all the project
 COPY . .
 
-# # Test if the rails app loads:
-# RUN SECRET_KEY_BASE=10167c7f7654ed02b3557b05b88ece
-
-# # We compile the assets. When running the rake task, DATABASE_URL is required and we pass a dummy value.
-# RUN bundle exec rails assets:precompile
-
 # Add a script to be executed every time the container starts.
 COPY entrypoint.sh /usr/bin/
 RUN chmod +x /usr/bin/entrypoint.sh

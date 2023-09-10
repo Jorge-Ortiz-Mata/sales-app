@@ -33,5 +33,8 @@
 # Ignore environment variables
 .env
 
+# Ignore the GCP JSON file
+config/gcp-key.json
+
 /app/assets/builds/*
 !/app/assets/builds/.keep
