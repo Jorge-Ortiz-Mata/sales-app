@@ -2,50 +2,17 @@
   <div class="flex flex-col overflow-y-auto p-5 gap-5">
     <div class="flex justify-between items-center">
       <h1 class="font-bold text-2xl text-sidebarTextColor">Articulos</h1>
-      <%= link_to new_article_path, class: "flex text-sm font-bold rounded bg-success px-4 py-2 text-white items-center gap-2" do %>
-        <span>Añadir articulo</span>
-        <i class="fa-solid fa-plus text-base"></i>
-      <% end %>
+
+      <div class="flex items-center gap-2">
+        <%= render 'search_form' %>
+
+        <%= link_to new_article_path, class: "flex text-sm font-bold rounded bg-success px-4 py-2 text-white items-center gap-2" do %>
+          <span>Añadir articulo</span>
+          <i class="fa-solid fa-plus text-base"></i>
+        <% end %>
+      </div>
     </div>
 
-    <div class="rounded border shadow p-5 flex flex-col w-full">
-      <% if @articles.any? %>
-        <div class="flex flex-col w-full gap-2">
-          <div class="flex w-full bg-gray-100 rounded">
-            <div class="w-1/12 p-1 font-bold text-sidebarTextColor">ID</div>
-            <div class="w-1/12 p-1 font-bold text-sidebarTextColor">Imagen</div>
-            <div class="w-4/12 p-1 font-bold text-sidebarTextColor">Nombre</div>
-            <div class="w-2/12 p-1 font-bold text-sidebarTextColor">Categorias</div>
-            <div class="w-2/12 p-1 font-bold text-sidebarTextColor">Cantidad</div>
-            <div class="w-2/12 p-1 font-bold text-sidebarTextColor">Precio</div>
-          </div>
-
-          <div class="flex flex-col w-full">
-            <% @articles.each do |article| %>
-              <%= link_to article_path(article), class: 'flex items-center w-full hover:bg-gray-100 p-1 duration-300 border-b' do %>
-                <div class="font-semibold text-sm text-sidebarTextColor p-1 w-1/12"><%= article.id %></div>
-                <div class="font-semibold text-sm text-sidebarTextColor p-1 w-1/12">
-                  <% if article.avatar.attached? %>
-                    <%= image_tag(article.avatar, class: 'w-10 h-10 rounded-full shadow shadow-slate-400 border object-contain') %>
-                  <% else %>
-                    <div class="w-10 h-10 shadow shadow-slate-400 rounded-full border bg-gradient-to-br from-cyan-300 to-green-300"></div>
-                  <% end %>
-                </div>
-                <div class="font-semibold text-sm text-sidebarTextColor p-1 w-4/12"><%= article.name %></div>
-                <div class="font-semibold text-sm text-sidebarTextColor p-1 w-2/12 gap-1 grid">
-                  <% article.categories.order(:created_at).each do |category| %>
-                    <span class="text-xs border border-gray-700 px-1.5 py-0.5 rounded ml-0 mr-auto"><%= category.name %></span>
-                  <% end %>
-                </div>
-                <div class="font-semibold text-sm text-sidebarTextColor p-1 w-2/12"><%= article.in_stock %></div>
-                <div class="font-semibold text-sm text-sidebarTextColor p-1 w-2/12">$ <%= number_with_delimiter(article.price, :delimiter => ',') %> MXN</div>
-              <% end %>
-            <% end %>
-          </div>
-        </div>
-      <% else %>
-        <p class="font-semibold">No hay ningún articulo por el momento.</p>
-      <% end %>
-    </div>
+    <%= render 'articles', { articles: @articles } %>
   </div>
 </div>

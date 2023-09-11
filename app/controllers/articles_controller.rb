@@ -55,6 +55,20 @@ class ArticlesController < ApplicationController
     redirect_to article_path(@article), notice: 'Las categorias han sido actualizadas correctamente'
   end
 
+  def search
+    return unless params[:name].present?
+
+    category = Category.find_by(name: params[:name])
+
+    respond_to do |format|
+      if category
+        format.turbo_stream { render turbo_stream: turbo_stream.replace('articles', partial: 'articles/articles', locals: { articles: category.articles }) }
+      else
+        format.turbo_stream
+      end
+    end
+  end
+
   private
 
   def set_article

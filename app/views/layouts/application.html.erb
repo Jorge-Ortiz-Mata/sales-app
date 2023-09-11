@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-     <%# <script src="https://cdn.tailwindcss.com"></script> %>
+     <script src="https://cdn.tailwindcss.com"></script>
     <%= stylesheet_link_tag "tailwind", "inter-font", "data-turbo-track": "reload" %>
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
@@ -13,10 +13,10 @@
 
   <body>
     <main class="flex w-full min-h-screen">
-      <aside class="w-2/12 flex flex-col bg-gray-100 justify-between">
+      <aside class="w-2/12 flex flex-col justify-between">
         <%= render 'shared/sidebar' %>
       </aside>
-      <section class="w-10/12 flex flex-col">
+      <section class="w-10/12 flex flex-col bg-slate-100">
         <%= render 'shared/notice' if notice %>
         <%= yield %>
       </section>
