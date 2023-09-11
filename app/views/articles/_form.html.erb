@@ -1,4 +1,4 @@
-<%= form_with(model: article, class: "flex flex-col w-full gap-5") do |form| %>
+<%= form_with(model: article, class: "flex flex-col w-full gap-10") do |form| %>
   <div class="flex justify-between gap-1 w-full">
     <div class="flex flex-col gap-1 w-6/12 items-start">
       <%= form.label :name, 'Nombre del articulo:', class: 'font-bold mb-1' %>
@@ -33,29 +33,32 @@
     <% end %>
   </div>
 
-  <div class="flex flex-col gap-1 w-full items-start" data-controller="article">
-    <%= form.label :avatar, 'Imagen principal del articulo (opcional):', class: 'font-bold mb-1' %>
-    <%= form.file_field :avatar, class: "hidden", accept: "image/png,image/gif,image/jpeg,image/jpg",  multiple: false %>
-    <div data-action="click->article#addAvatar" class="flex items-center cursor-pointer border rounded-lg shadow w-full">
-      <span class="bg-slate-400 py-1.5 px-3 font-semibold text-white w-3/12 text-sm rounded-l-lg">Seleccionar imagen</span>
-      <span class="py-1.5 px-3 bg-slate-700 text-white font-semibold w-full text-sm rounded-r-lg" id="avatar_name">Ningún archivo seleccionado</span>
+  <div class="flex items-center w-full gap-2">
+    <div class="flex flex-col gap-1 w-full items-start" data-controller="article">
+      <%= form.label :avatar, 'Imagen principal del articulo (opcional):', class: 'font-bold mb-1' %>
+      <%= form.file_field :avatar, class: "hidden", accept: "image/png,image/gif,image/jpeg,image/jpg",  multiple: false %>
+      <div data-action="click->article#addAvatar" class="flex items-center cursor-pointer border rounded-lg shadow w-full">
+        <span class="bg-slate-400 py-1.5 px-3 font-semibold text-white w-4/12 text-sm rounded-l-lg">Seleccionar imagen</span>
+        <span class="py-1.5 px-3 bg-slate-700 text-white font-semibold w-full text-sm rounded-r-lg" id="avatar_name">Ningún archivo seleccionado</span>
+      </div>
+      <% if article.errors.include?(:avatar) %>
+        <%= render 'shared/input_error_msg', { object: article, attribute: :avatar } %>
+      <% end %>
     </div>
-    <% if article.errors.include?(:avatar) %>
-      <%= render 'shared/input_error_msg', { object: article, attribute: :avatar } %>
-    <% end %>
+
+    <div class="flex flex-col gap-1 w-full items-start" data-controller="article">
+      <%= form.label :promotional_video, 'Video del articulo (opcional):', class: 'font-bold mb-1' %>
+      <%= form.file_field :promotional_video, class: "hidden", accept: 'video/mp4,video/webm', multiple: false %>
+      <div data-action="click->article#addPromotionalVideo" class="flex items-center cursor-pointer border rounded-lg shadow w-full">
+        <span class="bg-slate-400 py-1.5 px-3 font-semibold text-white w-4/12 text-sm rounded-l-lg">Seleccionar imagen</span>
+        <span class="py-1.5 px-3 bg-slate-700 text-white font-semibold w-full text-sm rounded-r-lg" id="promotional_video_name">Ningún archivo seleccionado</span>
+      </div>
+      <% if article.errors.include?(:promotional_video) %>
+        <%= render 'shared/input_error_msg', { object: article, attribute: :promotional_video } %>
+      <% end %>
+    </div>
   </div>
 
-  <div class="flex flex-col gap-1 w-full items-start" data-controller="article">
-    <%= form.label :promotional_video, 'Video del articulo (opcional):', class: 'font-bold mb-1' %>
-    <%= form.file_field :promotional_video, class: "hidden", accept: 'video/mp4,video/webm', multiple: false %>
-    <div data-action="click->article#addPromotionalVideo" class="flex items-center cursor-pointer border rounded-lg shadow w-full">
-      <span class="bg-slate-400 py-1.5 px-3 font-semibold text-white w-3/12 text-sm rounded-l-lg">Seleccionar imagen</span>
-      <span class="py-1.5 px-3 bg-slate-700 text-white font-semibold w-full text-sm rounded-r-lg" id="promotional_video_name">Ningún archivo seleccionado</span>
-    </div>
-    <% if article.errors.include?(:promotional_video) %>
-      <%= render 'shared/input_error_msg', { object: article, attribute: :promotional_video } %>
-    <% end %>
-  </div>
 
   <div class="flex flex-col gap-1 w-full items-start" data-controller="article">
     <%= form.label :images, 'Añadir más imagenes (opcional):', class: 'font-bold mb-1' %>

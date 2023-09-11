@@ -1,6 +1,6 @@
 <%= turbo_frame_tag 'add_categories_modal' %>
 
-<div class="flex flex-col gap-5 rounded shadow border p-5">
+<div class="flex flex-col gap-5 rounded shadow border p-5 bg-white">
   <div class="flex items-center w-full justify-between">
     <h3 class="text-sidebarTextColor font-bold">Detalles del articulo</h3>
     <%= link_to add_categories_article_path(article), class: 'btn-warning', data: { turbo_frame: 'add_categories_modal' } do %>

@@ -1,8 +1,9 @@
 <div class="flex flex-col h-full w-full">
-  <div class="flex flex-col overflow-y-auto p-5 gap-5">
-    <div class="flex justify-between items-center">
-      <h1 class="font-bold text-2xl text-sidebarTextColor">Añadir venta</h1>
-    </div>
+  <%= render 'shared/navbar' do %>
+    <h1 class="font-bold text-2xl text-sidebarTextColor">Añadir venta</h1>
+  <% end %>
+
+  <div class="flex flex-col overflow-y-auto p-5 gap-5 m-5 bg-white border rounded shadow">
     <%= render "form", { sell: @sell, btn_title: 'Guardar', cancel_path: sells_path } %>
   </div>
 </div>
