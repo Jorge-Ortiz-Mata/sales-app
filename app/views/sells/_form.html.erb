@@ -2,7 +2,7 @@
   <div class="flex items-start gap-2">
     <div class="flex flex-col gap-1 w-6/12 items-start">
       <%= form.label :article_id, 'Seleccionar articulo:', class: 'font-bold mb-1' %>
-      <%= form.select(:article_id, Article.available_in_stock.map { |option| [option.name_with_in_stock, option.id] },
+      <%= form.select(:article_id, articles.map { |option| [option.name_with_in_stock, option.id] },
           { include_blank: true },
           { class: "input-tailwindcss font-semibold #{ error_input_border(sell.errors.include?(:article)) }", id: 'select_name'
         }) %>

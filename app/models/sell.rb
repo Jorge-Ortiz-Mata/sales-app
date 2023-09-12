@@ -3,7 +3,7 @@ class Sell < ApplicationRecord
 
   validates :quantity, :day, :date_of_sell, :article, presence: true
   validate :format_day
-  validate :availability_in_stock
+  validate :availability_in_stock, on: :create
 
   after_create :decrease_in_stock_article
 
