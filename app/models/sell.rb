@@ -2,7 +2,6 @@ class Sell < ApplicationRecord
   belongs_to :article, optional: true
 
   validates :quantity, :date_of_sell, :article, presence: true
-  validate :format_day
   validate :availability_in_stock, on: :create
 
   after_create :decrease_in_stock_article

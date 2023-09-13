@@ -1,5 +1,9 @@
 class PagesController < ApplicationController
-  def dashboard; end
+  def dashboard
+    @revenue = Sell.sum(:total_revenue)
+    @sells = Sell.all
+    @articles = Article.all
+  end
 
   def settings; end
 end
