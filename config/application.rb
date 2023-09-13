@@ -11,6 +11,12 @@ module SalesApp
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 7.0
 
+    config.factory_bot.definition_file_paths = ["spec/factories"]
+
+    config.generators do |g|
+      g.test_framework :rspec
+    end
+
     # config.i18n.default_locale = 'es'
 
     # Configuration for the application, engines, and railties goes here.

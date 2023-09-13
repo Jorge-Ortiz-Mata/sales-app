@@ -61,6 +61,15 @@ group :development, :test do
   gem "debug", platforms: %i[ mri mingw x64_mingw ]
 
   gem 'dotenv-rails'
+
+  # It brings the RSpec testing framework to Ruby on Rails as a drop-in alternative to its default testing framework.
+  gem 'rspec-rails', '~> 6.0.0'
+
+  # factory_bot is a fixtures replacement with a straightforward definition syntax.
+  gem 'factory_bot_rails'
+
+  # Shoulda Matchers provides RSpec- and Minitest-compatible one-liners to test Rails functionality.
+  gem 'shoulda-matchers', '~> 5.0'
 end
 
 group :development do

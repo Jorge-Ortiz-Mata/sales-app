@@ -50,6 +50,6 @@ class SellsController < ApplicationController
   end
 
   def sell_params
-    params.require(:sell).permit(:article_id, :quantity, :day, :date_of_sell, :comment)
+    params.require(:sell).permit(:article_id, :quantity, :date_of_sell, :comment)
   end
 end
