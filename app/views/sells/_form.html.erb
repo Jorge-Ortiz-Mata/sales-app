@@ -22,17 +22,6 @@
 
   <div class="flex items-start gap-2">
     <div class="flex flex-col gap-1 w-6/12 items-start">
-      <%= form.label :day, 'Dia:', class: 'font-bold mb-1' %>
-      <%= form.select(:day, Sell::DAYS.map { |option| [option.humanize, option] },
-          { include_blank: true },
-          { class: "input-tailwindcss font-semibold #{ error_input_border(sell.errors.include?(:day)) }", id: 'select_name'
-        }) %>
-      <% if sell.errors.include?(:day) %>
-        <%= render 'shared/input_error_msg', { object: sell, attribute: :day } %>
-      <% end %>
-    </div>
-
-    <div class="flex flex-col gap-1 w-6/12 items-start">
       <%= form.label :date_of_sell, 'Fecha de venta:', class: 'font-bold mb-1' %>
       <%= form.date_field :date_of_sell, class: "input-tailwindcss font-semibold #{ error_input_border(sell.errors.include?(:date_of_sell)) }" %>
       <% if sell.errors.include?(:date_of_sell) %>
