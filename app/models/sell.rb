@@ -6,10 +6,6 @@ class Sell < ApplicationRecord
 
   after_create :decrease_in_stock_article
 
-  def total_revenue
-    quantity * article.price
-  end
-
   private
 
   def availability_in_stock
