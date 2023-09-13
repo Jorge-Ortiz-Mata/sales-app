@@ -70,6 +70,9 @@ group :development do
   # Improves the design of the data shown in the rails console
   gem "hirb"
 
+  # It's a library for generating fake data such as names, addresses, and phone numbers.
+  gem "faker"
+
   # Add speed badges [https://github.com/MiniProfiler/rack-mini-profiler]
   # gem "rack-mini-profiler"
 

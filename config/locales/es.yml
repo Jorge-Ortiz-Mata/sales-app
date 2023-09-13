@@ -26,22 +26,21 @@ en:
     formats:
       long: '%A, %B %d, %Y'
       short: '%b %d, %Y'
-  # activemodel:
-  #   attributes:
-  #     article_form:
-  #       name: El nombre
-  #       description: La descripción
-  #       price: El precio
-  #       in_stock: El almacén
-  #       categories: Las categorias
 
-    # errors:
-    #   models:
-    #     article_form:
-    #       empty_values: 'están en blanco'
-    #   messages:
-    #     blank: 'no debe estar en blanco'
-    #     taken: 'ya ha sido registrado'
+  activemodel:
+    attributes:
+      filter_form:
+        category: La categoría
+        min_price: El precio mínimo
+        max_price: El precio máximo
+
+    errors:
+      models:
+        filter_form:
+          price_is_less_than_min_price: 'no debe ser menor al precio mínimo'
+      messages:
+        blank: 'no debe estar en blanco'
+        taken: 'ya ha sido registrado'
 
   activerecord:
     attributes:

@@ -1,5 +1,8 @@
 class Article < ApplicationRecord
   scope :available_in_stock, -> { where('in_stock > 0') }
+  scope :with_min_price, ->(articles, min_price) { articles.where('price > ?', min_price) }
+  scope :with_max_price, ->(articles, max_price) { articles.where('price < ?', max_price) }
+
   validates :name, :description, :price, :in_stock, presence: true
   validates :name, uniqueness: true
   validates :price, comparison: { greater_than_or_equal_to: 0 }

@@ -3,6 +3,7 @@ class ArticlesController < ApplicationController
 
   def index
     @articles = Article.all.order(:created_at)
+    @filter_form = FilterForm.new
   end
 
   def show; end
@@ -55,18 +56,23 @@ class ArticlesController < ApplicationController
     redirect_to article_path(@article), notice: 'Las categorias han sido actualizadas correctamente'
   end
 
-  def search
+  def search_by_name
     return unless params[:name].present?
 
-    category = Category.find_by(name: params[:name])
+    article = Article.find_by(name: params[:name])
 
     respond_to do |format|
-      if category
-        format.turbo_stream { render turbo_stream: turbo_stream.replace('articles', partial: 'articles/articles', locals: { articles: category.articles }) }
+      if article
+        format.turbo_stream { render turbo_stream: turbo_stream.replace('articles', partial: 'articles/articles', locals: { articles: [article], filter_form: FilterForm.new }) }
       else
-        format.turbo_stream
+        format.turbo_stream { render turbo_stream: turbo_stream.replace('articles', partial: 'articles/articles', locals: { articles: [], filter_form: FilterForm.new }) }
       end
     end
+  end
+
+  def filter
+    single_filter if params[:attribute].present?
+    filter_with_form if params[:filter_form].present?
   end
 
   private
@@ -79,7 +85,34 @@ class ArticlesController < ApplicationController
     params.require(:article).permit(:name, :description, :price, :in_stock, :avatar, :promotional_video, images: [])
   end
 
+  def filter_form_params
+    params.require(:filter_form).permit(:category, :min_price, :max_price)
+  end
+
   def category_ids
     params[:categories][:ids].reject { |c| c.empty? }
+  end
+
+  def single_filter
+    articles = Article.all.order(params[:attribute])
+    @filter_form = FilterForm.new
+
+    respond_to do |format|
+      format.turbo_stream { render turbo_stream: turbo_stream.replace('articles', partial: 'articles/articles', locals: { articles: articles, filter_form: FilterForm.new }) }
+    end
+  end
+
+  def filter_with_form
+    filter_form = FilterForm.new(filter_form_params)
+
+    respond_to do |format|
+      if filter_form.save
+        articles = filter_form.search_process
+
+        format.turbo_stream { render turbo_stream: turbo_stream.replace('articles', partial: 'articles/articles', locals: { articles: articles, filter_form: filter_form }) }
+      else
+        format.turbo_stream { render turbo_stream: turbo_stream.replace('filter_form', partial: 'articles/filter_form', locals: { filter_form: filter_form }) }
+      end
+    end
   end
 end

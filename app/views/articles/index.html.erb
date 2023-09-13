@@ -13,6 +13,6 @@
   <% end %>
 
   <div class="flex flex-col overflow-y-auto p-5 gap-5">
-    <%= render 'articles', { articles: @articles } %>
+    <%= render 'articles', { articles: @articles, filter_form: @filter_form } %>
   </div>
 </section>
