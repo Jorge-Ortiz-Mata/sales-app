@@ -12,14 +12,14 @@ class Sell < ApplicationRecord
 
   def self.latest_sells
     data = []
-    seven_days_from_today = [Date.today]
+    thirty_days_from_today = [Date.today]
 
     for i in 1..30
       prev_day = Date.today - i.day
-      seven_days_from_today << prev_day
+      thirty_days_from_today << prev_day
     end
 
-    seven_days_from_today.each do |day|
+    thirty_days_from_today.each do |day|
       revenue_day = Sell.where(date_of_sell: day).sum(:total_revenue)
       data << [day, revenue_day]
     end
