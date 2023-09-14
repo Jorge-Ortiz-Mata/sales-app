@@ -13,7 +13,7 @@
   <div class="flex w-full gap-2">
     <div class="flex flex-col items-start w-4/12">
       <%= f.label :cateogry, 'Categoria:', class: 'font-semibold text-sidebarTextColor w-1/2' %>
-      <%= f.select(:category, Category.all.order(:name).map { |option| [option.name, option.id] }, { include_blank: true }, { class: "input-tailwindcss #{ error_input_border(filter_form.errors.include?(:category)) }" }) %>
+      <%= f.select(:category, Category.all.order(:name).map { |option| [option.name, option.id] }, { include_blank: 'Mostrar todos los articulos' }, { class: "input-tailwindcss #{ error_input_border(filter_form.errors.include?(:category)) }" }) %>
       <% if filter_form.errors.include?(:category) %>
         <%= render 'shared/input_error_msg', { object: filter_form, attribute: :category } %>
       <% end %>

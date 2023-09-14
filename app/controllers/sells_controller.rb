@@ -3,6 +3,7 @@ class SellsController < ApplicationController
 
   def index
     @sells = Sell.order(date_of_sell: :desc)
+    @sells_filter = SellsFilter.new
   end
 
   def show; end
@@ -43,6 +44,20 @@ class SellsController < ApplicationController
     end
   end
 
+  def filter
+    @sells_filter = SellsFilter.new sells_filter_params
+
+    respond_to do |format|
+      if @sells_filter.save
+        sells_filtered = @sells_filter.search
+
+        format.turbo_stream { render turbo_stream: turbo_stream.replace('sells', partial: 'sells/sells', locals: { sells: sells_filtered, sells_filter: @sells_filter }) }
+      else
+        format.turbo_stream { render turbo_stream: turbo_stream.replace('filter_form', partial: 'sells/filter_form', locals: { sells_filter: @sells_filter }) }
+      end
+    end
+  end
+
   private
 
   def set_sell
@@ -51,5 +66,9 @@ class SellsController < ApplicationController
 
   def sell_params
     params.require(:sell).permit(:article_id, :quantity, :date_of_sell, :comment)
+  end
+
+  def sells_filter_params
+    params.require(:sells_filter).permit(:article_id, :date_min, :date_max, :quantity)
   end
 end

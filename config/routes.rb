@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
-  resources :sells
+  resources :sells do
+    post '/filter', to: 'sells#filter', on: :collection
+  end
 
   resources :categories
 

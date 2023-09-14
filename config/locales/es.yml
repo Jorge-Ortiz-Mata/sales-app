@@ -33,11 +33,21 @@ en:
         category: La categoría
         min_price: El precio mínimo
         max_price: El precio máximo
+      sells_filter:
+        article_id: El articulo
+        date_min: La fecha inicial
+        date_max: La fecha final
+        quantity: La cantidad
 
     errors:
       models:
         filter_form:
           price_is_less_than_min_price: 'no debe ser menor al precio mínimo'
+        sells_filter:
+          does_not_exist: 'no esta registrado en el inventario de los articulos'
+          less_than_date_min: 'es menor a la fecha inicial colocada'
+          positive_numbers: 'no puede ser un numero negativo'
+          more_than_today: 'es mayor a la fecha actual'
       messages:
         blank: 'no debe estar en blanco'
         taken: 'ya ha sido registrado'

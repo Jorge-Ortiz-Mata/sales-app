@@ -1,4 +1,7 @@
 class Sell < ApplicationRecord
+  scope :filter_with_date_min, ->(sells, date_min) { sells.where('date_of_sell >= ?', date_min) }
+  scope :filter_with_date_max, ->(sells, date_max) { sells.where('date_of_sell <= ?', date_max) }
+
   belongs_to :article, counter_cache: true
 
   validates :quantity, :date_of_sell, :article, presence: true
