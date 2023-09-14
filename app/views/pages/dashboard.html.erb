@@ -1,19 +1,21 @@
 <div class="flex flex-col h-full w-full">
   <%= render 'shared/navbar' do %>
-    <h1 class="font-bold text-2xl text-sidebarTextColor">Dashboard</h1>
+    <%= link_to root_path, class: 'flex items-center' do %>
+      <h1 class="font-bold text-2xl text-sidebarTextColor">Dashboard</h1>
+    <% end %>
   <% end %>
 
   <div class="flex flex-col w-full p-5 gap-5">
     <div class="flex items-center justify-center gap-12">
-      <%= render 'pages/dashboard/card', { title: 'Ganancias', text: "$ #{number_with_delimiter(@revenue, :delimiter => ',')} MXN" } %>
-      <%= render 'pages/dashboard/card', { title: 'Ventas totales', text: @sells.count } %>
-      <%= render 'pages/dashboard/card', { title: 'Número de articulos', text: @articles.count } %>
+      <%#= render 'pages/dashboard/card', { title: 'Ganancias', text: "$ #{number_with_delimiter(@revenue, :delimiter => ',')} MXN" } %>
+      <%#= render 'pages/dashboard/card', { title: 'Ventas totales', text: @sells.count } %>
+      <%#= render 'pages/dashboard/card', { title: 'Número de articulos', text: @articles.count } %>
     </div>
 
     <div class="flex w-full p-5 rounded bg-white shadow border gap-5">
-      <%= render 'pages/dashboard/chart', { title: 'Ventas en los últimos 30 días' } do %>
-        <%= line_chart Sell.latest_sells, colors: ["#1B9C85"], xtitle: "Días", ytitle: "Ganancias", curve: false, prefix: "$", thousands: ",", round: 2, zeros: true, loading: "Cargando..." %>
-      <% end %>
+      <%#= render 'pages/dashboard/chart', { title: 'Ventas en los últimos 30 días' } do %>
+        <%#= line_chart Sell.latest_sells, colors: ["#1B9C85"], xtitle: "Días", ytitle: "Ganancias", curve: false, prefix: "$", thousands: ",", round: 2, zeros: true, loading: "Cargando..." %>
+      <%# end %>
     </div>
 
     <div class="flex w-full gap-5">
@@ -25,13 +27,13 @@
           <div class="w-1/6 text-sidebarTextColor font-bold text-center">Ventas</div>
         </div>
         <div class="flex flex-col w-full gap-1">
-          <% @articles.order(sells_count: :desc).limit(5).each do |article| %>
+          <%# @articles.order(sells_count: :desc).limit(5).each do |article| %>
             <div class="flex items-center w-full border-b py-1">
-              <div class="w-3/6 text-sidebarTextColor font-semibold text-sm"><%= article.name %></div>
-              <div class="w-2/6 text-sidebarTextColor font-semibold text-sm">$ <%= number_with_delimiter(article.price.round(2), :delimiter => ',') %> MXN</div>
-              <div class="w-1/6 text-sidebarTextColor font-semibold text-sm text-center"><%= article.sells.count %></div>
+              <div class="w-3/6 text-sidebarTextColor font-semibold text-sm"><%#= article.name %></div>
+              <div class="w-2/6 text-sidebarTextColor font-semibold text-sm">$ <%#= number_with_delimiter(article.price.round(2), :delimiter => ',') %> MXN</div>
+              <div class="w-1/6 text-sidebarTextColor font-semibold text-sm text-center"><%#= article.sells.count %></div>
             </div>
-          <% end %>
+          <%# end %>
         </div>
       </div>
 
@@ -43,13 +45,13 @@
           <div class="w-1/6 text-sidebarTextColor font-bold text-center">Cantidad</div>
         </div>
         <div class="flex flex-col w-full gap-1">
-          <% @sells.order(date_of_sell: :desc).limit(5).each do |sell| %>
+          <%# @sells.order(date_of_sell: :desc).limit(5).each do |sell| %>
             <div class="flex items-center w-full border-b py-1">
-              <div class="w-1/6 text-sidebarTextColor font-semibold text-sm"><%= sell.id %></div>
-              <div class="w-4/6 text-sidebarTextColor font-semibold text-sm"><%= I18n.l(sell.date_of_sell.to_time, format: :long) %></div>
-              <div class="w-1/6 text-sidebarTextColor font-semibold text-sm text-center"><%= sell.quantity %></div>
+              <div class="w-1/6 text-sidebarTextColor font-semibold text-sm"><%#= sell.id %></div>
+              <div class="w-4/6 text-sidebarTextColor font-semibold text-sm"><%#= I18n.l(sell.date_of_sell.to_time, format: :long) %></div>
+              <div class="w-1/6 text-sidebarTextColor font-semibold text-sm text-center"><%#= sell.quantity %></div>
             </div>
-          <% end %>
+          <%# end %>
         </div>
       </div>
     </div>

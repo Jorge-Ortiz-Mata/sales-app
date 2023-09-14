@@ -13,6 +13,6 @@ if Rails.env.development?
   puts 'Seeding Articles...'
   require_relative './articles_seed'
 
-  puts 'Seeding Sells...'
-  require_relative './sells_seed'
+  # puts 'Seeding Sells...'
+  # require_relative './sells_seed'
 end

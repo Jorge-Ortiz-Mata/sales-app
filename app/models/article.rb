@@ -15,8 +15,10 @@ class Article < ApplicationRecord
   has_many_attached :images
 
   has_rich_text :description
-  has_many :sells, dependent: :destroy
   has_and_belongs_to_many :categories
+
+  has_many :article_sells
+  has_many :sells, through: :article_sells
 
   def name_with_in_stock
     "#{name} (#{in_stock} pz disp)"

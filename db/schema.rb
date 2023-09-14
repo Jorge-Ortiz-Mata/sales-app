@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_09_13_230459) do
+ActiveRecord::Schema[7.0].define(version: 2023_09_14_215315) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -52,13 +52,23 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_13_230459) do
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
   end
 
+  create_table "article_sells", force: :cascade do |t|
+    t.bigint "article_id", null: false
+    t.bigint "sell_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "quantity"
+    t.decimal "revenue", default: "0.0"
+    t.index ["article_id"], name: "index_article_sells_on_article_id"
+    t.index ["sell_id"], name: "index_article_sells_on_sell_id"
+  end
+
   create_table "articles", force: :cascade do |t|
     t.string "name"
     t.decimal "price"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "in_stock"
-    t.integer "sells_count", default: 0
   end
 
   create_table "articles_categories", id: false, force: :cascade do |t|
@@ -75,17 +85,14 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_13_230459) do
   end
 
   create_table "sells", force: :cascade do |t|
-    t.bigint "article_id", null: false
-    t.integer "quantity"
     t.date "date_of_sell"
-    t.string "comment"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.decimal "total_revenue", default: "0.0"
-    t.index ["article_id"], name: "index_sells_on_article_id"
+    t.string "description"
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
-  add_foreign_key "sells", "articles"
+  add_foreign_key "article_sells", "articles"
+  add_foreign_key "article_sells", "sells"
 end

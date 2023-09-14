@@ -65,11 +65,8 @@ en:
       category:
         name: El nombre
       sell:
-        quantity: Total de piezas a vender
-        day: El día
         date_of_sell: La fecha de la venta
-        comment: El comentario
-        article: El articulo
+        description: La descripción
 
     errors:
       models:
