@@ -42,6 +42,12 @@ gem 'active_storage_validations', '~> 1.0', '>= 1.0.4'
 # Use Active Model has_secure_password [https://guides.rubyonrails.org/active_model_basics.html#securepassword]
 # gem "bcrypt", "~> 3.1.7"
 
+# Create beautiful JavaScript charts with one line of Ruby
+gem "chartkick"
+
+# The simplest way to group by: day week hour of the day and more (complete list below)
+gem "groupdate"
+
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem "tzinfo-data", platforms: %i[ mingw mswin x64_mingw jruby ]
 
@@ -56,6 +62,9 @@ gem "google-cloud-storage"
 # Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
 gem "image_processing", "~> 1.2"
 
+# factory_bot is a fixtures replacement with a straightforward definition syntax.
+gem 'factory_bot_rails'
+
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
   gem "debug", platforms: %i[ mri mingw x64_mingw ]
@@ -64,9 +73,6 @@ group :development, :test do
 
   # It brings the RSpec testing framework to Ruby on Rails as a drop-in alternative to its default testing framework.
   gem 'rspec-rails', '~> 6.0.0'
-
-  # factory_bot is a fixtures replacement with a straightforward definition syntax.
-  gem 'factory_bot_rails'
 
   # Shoulda Matchers provides RSpec- and Minitest-compatible one-liners to test Rails functionality.
   gem 'shoulda-matchers', '~> 5.0'

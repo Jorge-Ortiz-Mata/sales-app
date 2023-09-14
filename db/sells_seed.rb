@@ -14,7 +14,7 @@ for i in 1...100 do
     Sell.create(
       article: article,
       quantity: rand(1..article.in_stock),
-      date_of_sell: time_rand(Time.local(2020, 1, 1))
+      date_of_sell: time_rand(Time.local(2023, 8, 8))
     )
   end
 end

@@ -19,7 +19,7 @@ https://dribbble.com/shots/21086272-Sales-Dashboard
 In order to launch the PostgreSQL Docker Container, in your terminal, run the following command:
 
 ```bash
-docker run -p 5432:5432 --rm -e POSTGRES_PASSWORD=postgres -v pgdata:/var/lib/postgresql/data postgres
+docker run -p 5432:5432 --rm --name postgresql-container -e POSTGRES_PASSWORD=postgres -v pgdata:/var/lib/postgresql/data postgres
 ```
 
 ## Launch the Rails Docker Image - Production environment.
