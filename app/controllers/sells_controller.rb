@@ -2,7 +2,7 @@ class SellsController < ApplicationController
   before_action :set_sell, only: %i[ show edit update destroy ]
 
   def index
-    @sells = Sell.all
+    @sells = Sell.order(date_of_sell: :desc)
   end
 
   def show; end

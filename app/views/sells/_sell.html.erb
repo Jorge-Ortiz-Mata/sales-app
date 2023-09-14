@@ -26,12 +26,12 @@
   <div class="flex items-center gap-10">
     <div class="flex gap-2 items-center">
       <span class="font-regular text-sidebarTextColor">Precio unitario:</span>
-      $<span class="font-semibold"><%= number_with_delimiter(sell.article.price, :delimiter => ',') %></span> MXN
+      $<span class="font-semibold"><%= number_with_delimiter(sell.article.price.round(2), :delimiter => ',') %></span> MXN
     </div>
 
     <div class="flex gap-2 items-center">
       <span class="font-regular text-sidebarTextColor">Total:</span>
-      $<span class="font-semibold"><%= number_with_delimiter(sell.total_revenue, :delimiter => ',') %></span> MXN
+      $<span class="font-semibold"><%= number_with_delimiter(sell.total_revenue.round(2), :delimiter => ',') %></span> MXN
     </div>
 
     <div class="flex gap-2 items-center">

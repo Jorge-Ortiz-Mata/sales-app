@@ -34,7 +34,7 @@
     <div class="flex items-center justify-center gap-5 w-full">
       <div class="flex gap-1">
         <h4 class="font-medium mb-1">Precio:</h4>
-        $ <%= number_with_delimiter(article.price, :delimiter => ',') %> MXN
+        $ <%= number_with_delimiter(article.price.round(2), :delimiter => ',') %> MXN
       </div>
 
       <div class="flex gap-1">
