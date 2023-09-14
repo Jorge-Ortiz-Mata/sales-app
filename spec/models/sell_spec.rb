@@ -20,6 +20,33 @@ RSpec.describe Sell, type: :model do
     end
   end
 
+  describe 'scopes' do
+    before do
+      article_one.in_stock = 200
+      article_one.save
+      sell_one.article_id = article_one.id
+      sell_two.article_id = article_one.id
+      sell_two.date_of_sell = '2023-07-07'.to_date
+
+      sell_one.save
+      sell_two.save
+
+      @sells = Sell.all
+    end
+
+    it 'should filter the sells by a date minimum' do
+      expect(@sells.count).to be_eql(2)
+      expect(Sell.filter_with_date_min(@sells, '2023-09-01'.to_date).count).to eql(1)
+      expect(Sell.filter_with_date_min(@sells, '2023-09-10'.to_date).count).to eql(0)
+    end
+
+    it 'should filter the sells by a date maximum' do
+      expect(@sells.count).to be_eql(2)
+      expect(Sell.filter_with_date_max(@sells, '2023-08-08'.to_date).count).to eql(1)
+      expect(Sell.filter_with_date_max(@sells, '2023-06-06'.to_date).count).to eql(0)
+    end
+  end
+
   describe 'validations' do
     it { should validate_presence_of(:quantity) }
     it { should validate_presence_of(:date_of_sell) }

@@ -18,14 +18,14 @@
 
     <div class="flex w-full gap-5">
       <div class="flex flex-col w-1/2 p-5 rounded bg-white shadow border gap-5">
-        <h5 class="font-bold text-lg text-sidebarTextColor">Articulos más vendidos</h5>
+        <h5 class="font-bold text-lg text-sidebarTextColor">Los 5 Articulos con más ventas</h5>
         <div class="flex w-full bg-gray-100 rounded">
           <div class="w-3/6 text-sidebarTextColor font-bold">Nombre</div>
           <div class="w-2/6 text-sidebarTextColor font-bold">Precio unitario</div>
           <div class="w-1/6 text-sidebarTextColor font-bold text-center">Ventas</div>
         </div>
         <div class="flex flex-col w-full gap-1">
-          <% @articles.order(sells_count: :desc).limit(10).each do |article| %>
+          <% @articles.order(sells_count: :desc).limit(5).each do |article| %>
             <div class="flex items-center w-full border-b py-1">
               <div class="w-3/6 text-sidebarTextColor font-semibold text-sm"><%= article.name %></div>
               <div class="w-2/6 text-sidebarTextColor font-semibold text-sm">$ <%= number_with_delimiter(article.price.round(2), :delimiter => ',') %> MXN</div>
@@ -36,14 +36,14 @@
       </div>
 
       <div class="flex flex-col w-1/2 p-5 rounded bg-white shadow border gap-5">
-        <h5 class="font-bold text-lg text-sidebarTextColor">Últimas ventas</h5>
+        <h5 class="font-bold text-lg text-sidebarTextColor">Las 5 ventas más recientes</h5>
         <div class="flex w-full bg-gray-100 rounded">
           <div class="w-1/6 text-sidebarTextColor font-bold">ID</div>
           <div class="w-4/6 text-sidebarTextColor font-bold">Fecha</div>
           <div class="w-1/6 text-sidebarTextColor font-bold text-center">Cantidad</div>
         </div>
         <div class="flex flex-col w-full gap-1">
-          <% @sells.order(date_of_sell: :desc).limit(10).each do |sell| %>
+          <% @sells.order(date_of_sell: :desc).limit(5).each do |sell| %>
             <div class="flex items-center w-full border-b py-1">
               <div class="w-1/6 text-sidebarTextColor font-semibold text-sm"><%= sell.id %></div>
               <div class="w-4/6 text-sidebarTextColor font-semibold text-sm"><%= I18n.l(sell.date_of_sell.to_time, format: :long) %></div>
