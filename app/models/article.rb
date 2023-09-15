@@ -1,4 +1,5 @@
 class Article < ApplicationRecord
+  scope :search_with_name, ->(name) { where("name LIKE '%#{name}%'") }
   scope :with_min_price, ->(articles, min_price) { articles.where('price > ?', min_price) }
   scope :with_max_price, ->(articles, max_price) { articles.where('price < ?', max_price) }
 
@@ -13,8 +14,8 @@ class Article < ApplicationRecord
   has_many_attached :images
 
   has_rich_text :description
-  has_and_belongs_to_many :categories
 
   has_many :article_sells
   has_many :sells, through: :article_sells
+  has_and_belongs_to_many :categories
 end

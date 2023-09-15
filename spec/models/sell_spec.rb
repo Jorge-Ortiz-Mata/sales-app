@@ -2,17 +2,16 @@ require 'rails_helper'
 
 RSpec.describe Sell, type: :model do
   let(:sell_default) { build(:sell, :with_attributes) }
-  let(:sell_one) { build(:sell, :with_attributes, :with_article) }
-  let(:sell_two) { build(:sell, :with_attributes, :with_article, :with_more_quantity) }
-  let(:sell_three) { build(:sell, :with_attributes, article: article_one) }
-  let(:article_one) { build(:article, :with_attributes, :with_stock) }
-  let(:article_two) { build(:article, :with_attributes, :with_stock, :with_second_price) }
-  let(:article_three) { build(:article, :with_attributes, :with_stock, :with_third_price) }
-  let(:invalid_sell) { build(:sell, :with_attributes) }
+  let(:invalid_sell) { build(:sell) }
+  let(:article_one) { build(:article, :with_attributes) }
+  let(:sell_one) { build(:sell, :with_attributes, date_of_sell: '2023-09-09') }
+  let(:sell_two) { build(:sell, :with_attributes, date_of_sell: '2023-08-08') }
+  let(:article_sell_one) { build(:article_sell, :with_attributes) }
+  let(:article_sell_two) { build(:article_sell, :with_attributes, quantity: 10) }
 
   describe 'instances' do
     it 'should be a valid instance' do
-      expect(sell_one).to be_valid
+      expect(sell_default).to be_valid
     end
 
     it 'should be an invalid instance' do
@@ -23,13 +22,8 @@ RSpec.describe Sell, type: :model do
   describe 'scopes' do
     before do
       article_one.save
-      sell_one.article_id = article_one.id
-      sell_two.article_id = article_one.id
-      sell_two.date_of_sell = '2023-07-07'.to_date
-
       sell_one.save
       sell_two.save
-
       @sells = Sell.all
     end
 
@@ -47,83 +41,56 @@ RSpec.describe Sell, type: :model do
   end
 
   describe 'validations' do
-    it { should validate_presence_of(:quantity) }
     it { should validate_presence_of(:date_of_sell) }
-    it { should validate_presence_of(:article) }
+  end
+
+  describe 'custom validations' do
+    it 'should return error if date of sell is greater than today' do
+      sell_one.date_of_sell = Date.today + 2.day
+
+      expect(sell_one).to be_invalid
+    end
+  end
+
+  describe 'associations' do
+    it { should have_many(:article_sells) }
+    it { should have_many(:articles).through(:article_sells) }
   end
 
   describe 'callbacks' do
-    describe 'before create, the total revenue' do
-      it 'should set automatically with the article one' do
-        article_one.save
-        sell_default.article_id = article_one.id
+    it 'should delete all the articles_sells associations if the sell is deleted' do
+      article_one.save
+      sell_one.save
 
-        expect(sell_default).to be_valid
-        sell_default.save
-        expect(sell_default.total_revenue).to be_present
-        expect(sell_default.total_revenue).to be_eql(1198.98)
-      end
+      sell_one.article_sells.create(article: article_one, quantity: 5)
+      sell_one.article_sells.create(article: article_one, quantity: 15)
 
-      it 'should set automatically with the article two' do
-        article_two.save
-        sell_default.article_id = article_two.id
+      expect(ArticleSell.count).to be_eql(2)
 
-        expect(sell_default).to be_valid
-        sell_default.save
-        expect(sell_default.total_revenue).to be_present
-        expect(sell_default.total_revenue).to be_eql(10_572.93)
-      end
+      sell_one.destroy
 
-      it 'should set automatically with the article three' do
-        article_three.save
-        sell_default.article_id = article_three.id
-
-        expect(sell_default).to be_valid
-        sell_default.save
-        expect(sell_default.total_revenue).to be_present
-        expect(sell_default.total_revenue).to be_eql(3_820.98)
-      end
+      expect(ArticleSell.count).to be_eql(0)
     end
+  end
 
-    describe 'before update, the total revenue' do
-      it 'should updated automatically the sell with article one' do
-        article_one.save
-        sell_default.article_id = article_one.id
-        sell_default.save
+  describe 'class methods' do
+    it 'should return the latest sells with the total revenue by day' do
+      article_one.save
+      sell_one.date_of_sell = Date.today
+      sell_one.save
 
-        expect(sell_default.total_revenue).to be_eql(1198.98)
+      article_sell_one.sell = sell_one
+      article_sell_one.article = article_one
+      article_sell_one.save
 
-        sell_default.update(quantity: 8)
+      article_sell_two.sell = sell_one
+      article_sell_two.article = article_one
+      article_sell_two.save
 
-        expect(sell_default.total_revenue).to_not be_eql(1198.98)
-        expect(sell_default.total_revenue).to be_eql(3_197.28)
-      end
 
-      it 'should updated automatically the sell with article two' do
-        article_two.save
-        sell_default.article_id = article_two.id
-        sell_default.save
-
-        expect(sell_default.total_revenue).to be_eql(10_572.93)
-
-        sell_default.update(quantity: 8)
-
-        expect(sell_default.total_revenue).to_not be_eql(10_572.93)
-        expect(sell_default.total_revenue).to be_eql(28_194.48)
-      end
-
-      it 'should updated automatically the sell with article three' do
-        article_three.save
-        sell_default.article_id = article_three.id
-        sell_default.save
-
-        expect(sell_default.total_revenue).to_not be_eql(1198.98)
-
-        sell_default.update(quantity: 8)
-
-        expect(sell_default.total_revenue).to_not be_eql(3_820.98)
-        expect(sell_default.total_revenue).to be_eql(10_189.28)
-      end
+      expect(Sell.revenue_by_day.length).to be_eql(30)
+      expect(Sell.revenue_by_day[0].length).to be_eql(2)
+      expect(Sell.revenue_by_day[0].last).to be_eql(5_994.9)
     end
   end
 end

@@ -11,15 +11,7 @@
   </div>
 
   <div class="flex w-full gap-2">
-    <div class="flex flex-col items-start w-2/6">
-      <%= f.label :article_id, 'Articulo:', class: 'font-semibold text-sidebarTextColor' %>
-      <%= f.select(:article_id, Article.all.order(:name).map { |option| [option.name, option.id] }, { include_blank: 'Mostrar todas las ventas' }, { class: "input-tailwindcss #{ error_input_border(sells_filter.errors.include?(:article_id)) }", id: 'select_name'}) %>
-      <% if sells_filter.errors.include?(:article_id) %>
-        <%= render 'shared/input_error_msg', { object: sells_filter, attribute: :article_id } %>
-      <% end %>
-    </div>
-
-    <div class="flex flex-col items-start w-2/6">
+    <div class="flex flex-col items-start w-3/6 gap-2">
       <%= f.label :date_min, 'Fecha inicial:', class: 'font-semibold text-sidebarTextColor' %>
       <%= f.date_field :date_min, class: "input-tailwindcss #{ error_input_border(sells_filter.errors.include?(:date_min)) }" %>
       <% if sells_filter.errors.include?(:date_min) %>
@@ -27,7 +19,7 @@
       <% end %>
     </div>
 
-    <div class="flex flex-col items-start w-2/6">
+    <div class="flex flex-col items-start w-3/6 gap-2">
       <%= f.label :date_max, 'Fecha final:', class: 'font-semibold text-sidebarTextColor' %>
       <%= f.date_field :date_max, class: "input-tailwindcss #{ error_input_border(sells_filter.errors.include?(:date_max)) }" %>
       <% if sells_filter.errors.include?(:date_max) %>

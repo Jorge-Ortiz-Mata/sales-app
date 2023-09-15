@@ -1,6 +1,4 @@
 class ArticleSell < ApplicationRecord
-  scope :calculate_articles_quantity, ->(id) { where(article_id: id).sum(:quantity) }
-
   belongs_to :article
   belongs_to :sell
 

@@ -1,9 +1,9 @@
 require 'rails_helper'
 
 RSpec.describe Article, type: :model do
-  let(:article_one) { build(:article, :with_attributes, :with_stock) }
-  let(:article_two) { build(:article, :with_attributes, :without_stock, name: 'Iphone 14', price: 799.99) }
-  let(:article_three) { build(:article, :with_attributes, :with_stock, name: 'Iphone 15', price: 599.99) }
+  let(:article_one) { build(:article, :with_attributes) }
+  let(:article_two) { build(:article, :with_attributes, name: 'Iphone 14', price: 799.99) }
+  let(:article_three) { build(:article, :with_attributes, name: 'Iphone 15', price: 599.99) }
   let(:category_one) { build(:category, :with_attributes) }
   let(:invalid_article) { build(:article) }
 
@@ -25,6 +25,12 @@ RSpec.describe Article, type: :model do
       @articles = Article.all
     end
 
+    it 'should return the articles with a similar name' do
+      expect(@articles.count).to be_eql(3)
+      expect(Article.search_with_name('Iph').count).to be_eql(2)
+      expect(Article.search_with_name('Pl').count).to be_eql(1)
+    end
+
     it 'should return the articles with a min price specified' do
       expect(@articles.count).to be_eql(3)
       expect(Article.with_min_price(@articles, 500.00).count).to be_eql(2)
@@ -40,7 +46,6 @@ RSpec.describe Article, type: :model do
 
   describe 'validations' do
     it { should validate_presence_of(:name) }
-    it { should validate_presence_of(:description) }
     it { should validate_presence_of(:price) }
     it { should validate_uniqueness_of(:name) }
   end
@@ -56,7 +61,8 @@ RSpec.describe Article, type: :model do
   end
 
   describe 'associations' do
-    it { should have_many(:sells) }
+    it { should have_many(:article_sells) }
+    it { should have_many(:sells).through(:article_sells) }
     it { should have_and_belong_to_many(:categories) }
   end
 

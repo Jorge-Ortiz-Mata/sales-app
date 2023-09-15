@@ -69,6 +69,6 @@ class SellsController < ApplicationController
   end
 
   def sells_filter_params
-    params.require(:sells_filter).permit(:article_id, :date_min, :date_max, :quantity)
+    params.require(:sells_filter).permit(:date_min, :date_max)
   end
 end

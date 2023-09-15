@@ -11,7 +11,7 @@
   </div>
 
   <div class="flex w-full gap-2">
-    <div class="flex flex-col items-start w-4/12">
+    <div class="flex flex-col items-start w-4/12 gap-2">
       <%= f.label :cateogry, 'Categoria:', class: 'font-semibold text-sidebarTextColor w-1/2' %>
       <%= f.select(:category, Category.all.order(:name).map { |option| [option.name, option.id] }, { include_blank: 'Mostrar todos los articulos' }, { class: "input-tailwindcss #{ error_input_border(filter_form.errors.include?(:category)) }" }) %>
       <% if filter_form.errors.include?(:category) %>
@@ -19,7 +19,7 @@
       <% end %>
     </div>
 
-    <div class="flex flex-col items-start w-4/12">
+    <div class="flex flex-col items-start w-4/12 gap-2">
       <%= f.label :min_price, 'Precio mínimo:', class: 'font-semibold text-sidebarTextColor w-1/2' %>
       <%= f.number_field :min_price, step: :any, min: 0, class: "input-tailwindcss #{ error_input_border(filter_form.errors.include?(:min_price)) }" %>
       <% if filter_form.errors.include?(:min_price) %>
@@ -27,7 +27,7 @@
       <% end %>
     </div>
 
-    <div class="flex flex-col items-start w-4/12">
+    <div class="flex flex-col items-start w-4/12 gap-2">
       <%= f.label :max_price, 'Precio máximo:', class: 'font-semibold text-sidebarTextColor w-1/2' %>
       <%= f.number_field :max_price, step: :any, min: 0, class: "input-tailwindcss #{ error_input_border(filter_form.errors.include?(:max_price)) }" %>
       <% if filter_form.errors.include?(:max_price) %>
