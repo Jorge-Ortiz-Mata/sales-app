@@ -58,7 +58,6 @@ en:
         name: El nombre
         description: La descripción
         price: El precio
-        in_stock: La cantidad en almacén
         categories: Las categorias
         avatar: Imagen principal
         images: Imagenes

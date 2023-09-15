@@ -82,7 +82,7 @@ class ArticlesController < ApplicationController
   end
 
   def article_params
-    params.require(:article).permit(:name, :description, :price, :in_stock, :avatar, :promotional_video, images: [])
+    params.require(:article).permit(:name, :description, :price, :avatar, :promotional_video, images: [])
   end
 
   def filter_form_params

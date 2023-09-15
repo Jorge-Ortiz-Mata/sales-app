@@ -6,14 +6,6 @@ FactoryBot.define do
       price { 399.66 }
     end
 
-    trait :with_stock do
-      in_stock { 15 }
-    end
-
-    trait :without_stock do
-      in_stock { 0 }
-    end
-
     trait :with_second_price do
       price { 3524.31 }
     end

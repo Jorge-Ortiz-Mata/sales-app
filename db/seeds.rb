@@ -7,11 +7,11 @@
 #   Character.create(name: "Luke", movie: movies.first)
 
 if Rails.env.development?
-  puts 'Seeding Categories...'
-  require_relative './categories_seed'
+  # puts 'Seeding Categories...'
+  # require_relative './categories_seed'
 
-  puts 'Seeding Articles...'
-  require_relative './articles_seed'
+  # puts 'Seeding Articles...'
+  # require_relative './articles_seed'
 
   # puts 'Seeding Sells...'
   # require_relative './sells_seed'

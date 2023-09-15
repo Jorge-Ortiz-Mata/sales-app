@@ -11,20 +11,23 @@ class Sell < ApplicationRecord
   before_destroy :delete_articles_associations
 
   def self.latest_sells
-    # data = []
-    # thirty_days_from_today = [Date.today]
+    data = []
+    thirty_days_from_today = [Date.today]
 
-    # for i in 1..30
-    #   prev_day = Date.today - i.day
-    #   thirty_days_from_today << prev_day
-    # end
+    Array.new(30).each_with_index do |_, i|
+      thirty_days_from_today << Date.today - i.day
+    end
 
-    # thirty_days_from_today.each do |day|
-    #   revenue_day = Sell.where(date_of_sell: day).sum(:total_revenue)
-    #   data << [day, revenue_day]
-    # end
+    thirty_days_from_today.each do |day|
+      sells = Sell.where(date_of_sell: day)
+      total_revenue = 0
 
-    [Date.today, 10]
+      sells.each { |sell| total_revenue += sell.article_sells.sum(:revenue) }
+
+      data << [day, total_revenue]
+    end
+
+    data
   end
 
   private

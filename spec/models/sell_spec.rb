@@ -22,7 +22,6 @@ RSpec.describe Sell, type: :model do
 
   describe 'scopes' do
     before do
-      article_one.in_stock = 200
       article_one.save
       sell_one.article_id = article_one.id
       sell_two.article_id = article_one.id
@@ -53,22 +52,7 @@ RSpec.describe Sell, type: :model do
     it { should validate_presence_of(:article) }
   end
 
-  describe 'custom validations' do
-    it 'should validate the quantity against the article.in_stock attribute' do
-      expect(sell_two).to_not be_valid
-      expect(sell_two.errors).to be_present
-      expect(sell_two.errors.first.message).to be_eql('es mayor a los articulos en stock')
-    end
-  end
-
   describe 'callbacks' do
-    it 'should decrease the article.in_stock value depending on the quantity of sells' do
-      article_one.save
-      expect(article_one.in_stock).to be_eql(15)
-      sell_three.save
-      expect(article_one.in_stock).to be_eql(12)
-    end
-
     describe 'before create, the total revenue' do
       it 'should set automatically with the article one' do
         article_one.save

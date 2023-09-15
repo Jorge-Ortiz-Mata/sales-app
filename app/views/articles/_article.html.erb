@@ -1,82 +1,78 @@
 <%= turbo_frame_tag 'add_categories_modal' %>
 
-<div class="flex flex-col gap-5 rounded shadow border p-5 bg-white">
+<div class="flex flex-col gap-10 rounded shadow border p-5 bg-white">
   <div class="flex items-center justify-between w-full">
     <%= render 'shared/breadcumb', { path: articles_path, path_text: 'Articulos', text: article.name } %>
 
-    <%= link_to add_categories_article_path(article), class: 'btn-warning', data: { turbo_frame: 'add_categories_modal' } do %>
-      Asignar categorias
-    <% end %>
+    <div class="flex items-center gap-2">
+      <%= link_to add_categories_article_path(article), class: 'btn-warning', data: { turbo_frame: 'add_categories_modal' } do %>
+        Asignar categorias
+      <% end %>
+      <%= link_to edit_article_path(@article), class: "btn-primary" do %>
+        <i class="fa-solid fa-pen-to-square"></i> Editar
+      <% end %>
+      <%= button_to article_path(article), method: :delete, form: { data: { turbo_confirm: 'Estas seguro de eliminar este articulo?' } }, class: "btn-danger" do %>
+        <i class="fa-solid fa-trash"></i> Eliminar
+      <% end %>
+    </div>
   </div>
 
-  <div class="flex flex-col gap-10 w-full">
-    <div class="flex flex-col items-center gap-10 w-full">
+  <div class="flex items-center w-full gap-2">
+    <div class="flex flex-col w-full gap-5">
+      <div class="flex gap-2 text-sidebarTextColor">
+        Nombre:
+        <span class="font-semibold"><%= article.name %></span>
+      </div>
+      <div class="flex gap-2 text-sidebarTextColor">
+        Precio:
+        <span class="font-semibold">$ <%= number_with_delimiter(article.price.round(2), :delimiter => ',') %> MXN</span>
+      </div>
+      <div class="flex gap-2 text-sidebarTextColor">
+        <span>Categorias:</span>
+        <div class="flex items-center gap-2">
+          <% if article.categories.any? %>
+            <% article.categories.each do |category| %>
+              <span class="text-xs text-white py-1 px-3 rounded bg-yellow-600"><%= category.name %></span>
+            <% end %>
+          <% else %>
+            Este articulo aún no cuenta con ninguna categoría asignada.
+          <% end %>
+        </div>
+      </div>
+      <div class="flex flex-col text-sidebarTextColor gap-2">
+        <span>Descripción:</span>
+        <span class="font-semibold text-sm">
+          <%= article.description.present? ? article.description : 'Sin descripción' %>
+        </span>
+      </div>
+
+      <div class="flex flex-col text-sidebarTextColor gap-2">
+        <span>Más imagenes:</span>
+        <% if article.images.any? %>
+          <div class="flex items-center mt-5 gap-10">
+            <% article.images.each do |image| %>
+              <%= image_tag(image, class: 'border shadow-lg rounded-full w-20 h-20 object-cover hover:scale-110 duration-300 hover:scale-150') %>
+            <% end %>
+          </div>
+        <% else %>
+          <p class="font-semibold">No se han añadido más imagenes</p>
+        <% end %>
+      </div>
+    </div>
+    <div class="flex items-center justify-center w-4/12">
       <% if article.avatar.attached? %>
         <%= image_tag(article.avatar, class: 'w-60 h-60 rounded-full shadow-lg shadow-slate-400 border object-contain') %>
       <% else %>
         <div class="w-60 h-60 shadow shadow-slate-400 rounded-full border bg-gradient-to-br from-cyan-300 to-green-300"></div>
       <% end %>
-
-      <div class="flex flex-col items-center justify-center w-full gap-5">
-        <h3 class="text-2xl font-semibold"><%= article.name %></h3>
-
-        <div class="flex items-center gap-5">
-          <%= link_to edit_article_path(@article), class: "text-xl font-semibold underline gap-2 flex items-center text-primary hover:text-cyan-800 duration-300" do %>
-            <i class="fa-solid fa-pen-to-square"></i>
-          <% end %>
-          <%= button_to article_path(article), method: :delete, form: { data: { turbo_confirm: 'Estas seguro de eliminar este articulo?' } }, class: "text-xl font-semibold underline gap-2 flex items-center text-danger hover:text-red-800 duration-300" do %>
-            <i class="fa-solid fa-trash"></i>
-          <% end %>
-        </div>
-      </div>
     </div>
-
-    <div class="flex items-center justify-center gap-5 w-full">
-      <div class="flex gap-1">
-        <h4 class="font-medium mb-1">Precio:</h4>
-        $ <%= number_with_delimiter(article.price.round(2), :delimiter => ',') %> MXN
-      </div>
-
-      <div class="flex gap-1">
-        <h4 class="font-medium mb-1">Cantidad:</h4>
-        <%= article.in_stock %> piezas
-      </div>
-    </div>
-
-    <% if article.promotional_video.attached? %>
-      <div class="flex flex-col items-center justify-center gap-2">
-        <h4 class="font-medium">Video Promocional</h4>
-        <video src=<%= url_for(article.promotional_video) %> class="w-[600px]" controls></video>
-      </div>
-    <% end %>
-
-    <div class="flex flex-col items-center w-full">
-      <h4 class="font-medium mb-1">Categorias:</h4>
-      <div class="flex gap-2">
-        <% if article.categories.any? %>
-          <% article.categories.each do |category| %>
-            <span class="text-xs text-white py-1 px-3 rounded-xl bg-yellow-600"><%= category.name %></span>
-          <% end %>
-        <% else %>
-          Este articulo aún no cuenta con ninguna categoría asignada.
-        <% end %>
-      </div>
-    </div>
-
-    <div class="flex flex-col items-center gap-1">
-      <h4 class="font-medium mb-1">Descripción:</h4>
-      <span class="text-center"><%= article.description %></span>
-    </div>
-
-    <% if article.images.any? %>
-      <div class="flex flex-col gap-5 w-full">
-        <h4 class="font-medium mb-1 text-center">Mas imagenes:</h4>
-        <div class="flex flex-col items-center gap-10 justify-center">
-          <% article.images.each do |image| %>
-            <%= image_tag(image, class: 'border shadow-lg rounded-full w-60 h-60 object-cover hover:scale-110 duration-300 ') %>
-          <% end %>
-        </div>
-      </div>
-    <% end %>
   </div>
 </div>
+
+<%# if article.promotional_video.attached? %>
+  <%# <div class="flex flex-col items-center justify-center gap-2">
+    <h4 class="font-medium">Video Promocional</h4> %>
+    <%# <video src== url_for(article.promotional_video) class="w-[600px]" controls></video> %>
+  <%# </div> %>
+<%# end %>
+

@@ -25,11 +25,6 @@ RSpec.describe Article, type: :model do
       @articles = Article.all
     end
 
-    it 'should return the articles with more than 0 in stock' do
-      expect(@articles.count).to be_eql(3)
-      expect(Article.available_in_stock.count).to be_eql(2)
-    end
-
     it 'should return the articles with a min price specified' do
       expect(@articles.count).to be_eql(3)
       expect(Article.with_min_price(@articles, 500.00).count).to be_eql(2)
@@ -47,7 +42,6 @@ RSpec.describe Article, type: :model do
     it { should validate_presence_of(:name) }
     it { should validate_presence_of(:description) }
     it { should validate_presence_of(:price) }
-    it { should validate_presence_of(:in_stock) }
     it { should validate_uniqueness_of(:name) }
   end
 
@@ -64,12 +58,6 @@ RSpec.describe Article, type: :model do
   describe 'associations' do
     it { should have_many(:sells) }
     it { should have_and_belong_to_many(:categories) }
-  end
-
-  describe 'public methods' do
-    it 'should return the name with the in stock attributes' do
-      expect(article_one.name_with_in_stock).to be_eql('Play Station 5 (15 pz disp)')
-    end
   end
 
   describe 'set categories' do
