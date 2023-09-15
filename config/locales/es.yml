@@ -67,14 +67,19 @@ en:
       sell:
         date_of_sell: La fecha de la venta
         description: La descripción
+      article_sell:
+        quantity: La cantidad
+        article_id: El articulo
 
     errors:
       models:
-        sell:
-          invalid_day: 'no coincide con los dias mostrados en la lista'
-          insufficient_articles: 'es mayor a los articulos en stock'
         article:
           content_type_invalid: 'es un formato invalido. Formatos permitidos: %{authorized_types}'
+        sell:
+          greater_than_today: es mayor a la fecha actual
+        article_sell:
+          insufficient_articles: 'es mayor que el numero de articulos en stock'
+          article_does_not_exist: 'no esta registrado en el inventario'
 
       messages:
         blank: 'no debe estar en blanco'

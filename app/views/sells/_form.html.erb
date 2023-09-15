@@ -1,50 +1,21 @@
-<%= form_with(model: sell, class: "flex flex-col w-full gap-5") do |form| %>
-  <div class="flex items-start gap-2">
-    <div class="flex flex-col gap-1 w-6/12 items-start">
-      <%= form.label :article_id, 'Seleccionar articulo:', class: 'font-bold mb-1' %>
-      <%= form.select(:article_id, articles.order(:name).map { |option| [option.name_with_in_stock, option.id] },
-          { include_blank: true },
-          { class: "input-tailwindcss font-semibold #{ error_input_border(sell.errors.include?(:article)) }", id: 'select_name'
-        }) %>
-      <% if sell.errors.include?(:article) %>
-        <%= render 'shared/input_error_msg', { object: sell, attribute: :article } %>
-      <% end %>
-    </div>
-
-    <div class="flex flex-col gap-1 w-6/12 items-start">
-      <%= form.label :quantity, 'Total de piezas a vender:', class: 'font-bold mb-1' %>
-      <%= form.number_field :quantity, class: "input-tailwindcss font-semibold #{ error_input_border(sell.errors.include?(:quantity)) }" %>
-      <% if sell.errors.include?(:quantity) %>
-        <%= render 'shared/input_error_msg', { object: sell, attribute: :quantity } %>
-      <% end %>
-    </div>
-  </div>
-
-  <div class="flex items-start gap-2">
-    <div class="flex flex-col gap-1 w-6/12 items-start">
-      <%= form.label :date_of_sell, 'Fecha de venta:', class: 'font-bold mb-1' %>
-      <%= form.date_field :date_of_sell, class: "input-tailwindcss font-semibold #{ error_input_border(sell.errors.include?(:date_of_sell)) }" %>
-      <% if sell.errors.include?(:date_of_sell) %>
-        <%= render 'shared/input_error_msg', { object: sell, attribute: :date_of_sell } %>
-      <% end %>
-    </div>
-  </div>
-
-  <div class="flex flex-col gap-1 items-start">
-    <%= form.label :comment, 'Comentario (opcional):', class: 'font-bold mb-1' %>
-    <%= form.text_field :comment, class: "input-tailwindcss font-semibold #{ error_input_border(sell.errors.include?(:comment)) }" %>
-    <% if sell.errors.include?(:comment) %>
-      <%= render 'shared/input_error_msg', { object: sell, attribute: :comment } %>
+<%= form_with(model: sell, id: id, class: "flex flex-col w-full gap-5") do |form| %>
+  <div class="flex flex-col gap-1 w-full items-start">
+    <%= form.label :date_of_sell, 'Fecha de venta:', class: 'font-bold mb-1' %>
+    <%= form.date_field :date_of_sell, class: "input-tailwindcss font-semibold #{ error_input_border(sell.errors.include?(:date_of_sell)) }" %>
+    <% if sell.errors.include?(:date_of_sell) %>
+      <%= render 'shared/input_error_msg', { object: sell, attribute: :date_of_sell } %>
     <% end %>
   </div>
 
-  <div class="flex items-center justify-end gap-3">
-    <div class="flex items-center text-sm font-semibold">
-      <%= form.submit btn_title, class: "rounded py-2 px-4 bg-green-500 text-white font-semibold cursor-pointer" %>
-    </div>
-
-    <%= link_to cancel_path, class: "flex text-sm font-semibold rounded bg-danger px-4 py-2 text-white items-center gap-1" do %>
-      <span>Regresar</span>
+  <div class="flex flex-col gap-1 w-full items-start">
+    <%= form.label :description, 'Descripción de la venta:', class: 'font-bold mb-1' %>
+    <%= form.text_field :description, class: "input-tailwindcss font-semibold #{ error_input_border(sell.errors.include?(:description)) }" %>
+    <% if sell.errors.include?(:description) %>
+      <%= render 'shared/input_error_msg', { object: sell, attribute: :description } %>
     <% end %>
+  </div>
+
+  <div class="flex items-center justify-end gap-3 mt-5">
+    <%= form.submit btn_text, class: "rounded py-2 px-4 bg-green-500 text-white font-semibold cursor-pointer", data: { turbo_frame: '_top' } %>
   </div>
 <% end %>

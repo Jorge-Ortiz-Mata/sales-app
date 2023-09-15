@@ -1,9 +1,8 @@
 class SellsFilter
   include ActiveModel::Model
 
-  attr_accessor :article_id, :date_min, :date_max, :quantity
+  attr_accessor :article_id, :date_min, :date_max
 
-  validate :quantity_positive_numbers
   validate :article_exists
   validate :date_min_less_than_date_max
   validate :date_max_equal_today_date
@@ -25,18 +24,10 @@ class SellsFilter
 
     sells = by_date(sells)
 
-    sells = by_quantity(sells) if quantity.present?
-
     sells.order(date_of_sell: :desc)
   end
 
   private
-
-  def quantity_positive_numbers
-    return unless quantity.present?
-
-    errors.add(:quantity, :positive_numbers) if quantity.to_i.negative?
-  end
 
   def article_exists
     return unless article_id.present?
@@ -67,9 +58,5 @@ class SellsFilter
     sells = Sell.filter_with_date_max(sells, date_max.to_date) if date_max.present?
 
     sells
-  end
-
-  def by_quantity(sells)
-    sells.where(quantity: quantity)
   end
 end

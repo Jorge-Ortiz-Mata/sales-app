@@ -34,13 +34,5 @@
         <%= render 'shared/input_error_msg', { object: sells_filter, attribute: :date_max } %>
       <% end %>
     </div>
-
-    <div class="flex flex-col items-start w-2/6">
-      <%= f.label :quantity, 'Cantidad:', class: 'font-semibold text-sidebarTextColor' %>
-      <%= f.number_field :quantity, class: "input-tailwindcss #{ error_input_border(sells_filter.errors.include?(:quantity)) }" %>
-      <% if sells_filter.errors.include?(:quantity) %>
-        <%= render 'shared/input_error_msg', { object: sells_filter, attribute: :quantity } %>
-      <% end %>
-    </div>
   </div>
 <% end %>

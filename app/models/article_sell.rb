@@ -2,28 +2,35 @@ class ArticleSell < ApplicationRecord
   belongs_to :article
   belongs_to :sell
 
-  validates :quantity, presence: true
+  validates :article_id, :quantity, presence: true
+  validates :quantity, comparison: { greater_than_or_equal_to: 0 }
+  validate :article_exists?
+  validate :availability_in_stock, on: :create
 
-  # validate :availability_in_stock, on: :create
-
-  # after_create :decrease_in_stock_article
-  # before_save :set_total_revenue
+  after_create :decrease_in_stock_article
+  before_save :set_revenue
 
   private
 
-  # def availability_in_stock
-  #   return unless article && quantity
+  def article_exists?
+    errors.add(:article_id, :article_does_not_exist) unless Article.find_by(id: article_id).present?
+  end
 
-  #   errors.add(:quantity, :insufficient_articles) if quantity > article.in_stock
-  # end
+  def availability_in_stock
+    return unless Article.find_by(id: article_id).present?
 
-  # def decrease_in_stock_article
-  #   current_stock = article.in_stock
+    errors.add(:quantity, :insufficient_articles) if quantity > Article.find_by(id: article_id).in_stock
+  end
 
-  #   article.update!(in_stock: current_stock - quantity)
-  # end
+  def decrease_in_stock_article
+    current_stock = article.in_stock
 
-  # def set_total_revenue
-  #   self.total_revenue = quantity.to_d * article.price.to_d
-  # end
+    article.update!(in_stock: current_stock - quantity)
+  end
+
+  def set_revenue
+    article = Article.find(article_id)
+
+    self.revenue = quantity.to_d * article.price.to_d
+  end
 end
