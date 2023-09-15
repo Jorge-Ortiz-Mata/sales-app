@@ -19,7 +19,7 @@
         <div class="w-1/12 text-sidebarTextColor font-bold text-end">Opciones</div>
       </div>
       <div class="flex flex-col w-full gap-2 px-5">
-        <% sell.article_sells.each do |article_sell| %>
+        <% sell.article_sells.order(created_at: :asc).each do |article_sell| %>
           <%= render 'article_sells/article_sell', { article_sell: article_sell } %>
         <% end %>
       </div>
