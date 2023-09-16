@@ -1,15 +1,10 @@
 class SellsFilter
   include ActiveModel::Model
 
-  attr_accessor :article_id, :date_min, :date_max, :quantity
+  attr_accessor :date_min, :date_max
 
-  validate :quantity_positive_numbers
-  validate :article_exists
   validate :date_min_less_than_date_max
   validate :date_max_equal_today_date
-
-  define_model_callbacks :save
-  before_save :format_dates
 
   def save
     self.date_min = date_min.to_date
@@ -21,28 +16,12 @@ class SellsFilter
   end
 
   def search
-    sells = set_sells
-
-    sells = by_date(sells)
-
-    sells = by_quantity(sells) if quantity.present?
+    sells = by_date(Sell.all)
 
     sells.order(date_of_sell: :desc)
   end
 
   private
-
-  def quantity_positive_numbers
-    return unless quantity.present?
-
-    errors.add(:quantity, :positive_numbers) if quantity.to_i.negative?
-  end
-
-  def article_exists
-    return unless article_id.present?
-
-    errors.add(:article_id, :does_not_exist) unless Article.find_by(id: article_id).present?
-  end
 
   def date_min_less_than_date_max
     return unless date_min.present? && date_max.present?
@@ -56,20 +35,10 @@ class SellsFilter
     errors.add(:date_max, :more_than_today) if date_max.to_date > Date.today
   end
 
-  def set_sells
-    return Article.find(article_id).sells if article_id.present?
-
-    Sell.all
-  end
-
   def by_date(sells)
     sells = Sell.filter_with_date_min(sells, date_min.to_date) if date_min.present?
     sells = Sell.filter_with_date_max(sells, date_max.to_date) if date_max.present?
 
     sells
-  end
-
-  def by_quantity(sells)
-    sells.where(quantity: quantity)
   end
 end

@@ -2,26 +2,29 @@ class Sell < ApplicationRecord
   scope :filter_with_date_min, ->(sells, date_min) { sells.where('date_of_sell >= ?', date_min) }
   scope :filter_with_date_max, ->(sells, date_max) { sells.where('date_of_sell <= ?', date_max) }
 
-  belongs_to :article, counter_cache: true
+  validates :date_of_sell, presence: true
+  validate :date_of_sell_less_than_today
 
-  validates :quantity, :date_of_sell, :article, presence: true
-  validate :availability_in_stock, on: :create
+  has_many :article_sells
+  has_many :articles, through: :article_sells
 
-  after_create :decrease_in_stock_article
-  before_save :set_total_revenue
+  before_destroy :delete_articles_associations
 
-  def self.latest_sells
+  def self.revenue_by_day
     data = []
-    thirty_days_from_today = [Date.today]
 
-    for i in 1..30
-      prev_day = Date.today - i.day
-      thirty_days_from_today << prev_day
-    end
+    for i in 0...30
+      day_total_revenue = 0
+      from_date = Date.today - i.day
 
-    thirty_days_from_today.each do |day|
-      revenue_day = Sell.where(date_of_sell: day).sum(:total_revenue)
-      data << [day, revenue_day]
+      sells = Sell.where(date_of_sell: from_date)
+
+      sells.each do |sell|
+        sell_revenue = sell.article_sells.sum(:revenue)
+        day_total_revenue += sell_revenue
+      end
+
+      data << [from_date, day_total_revenue]
     end
 
     data
@@ -29,19 +32,13 @@ class Sell < ApplicationRecord
 
   private
 
-  def availability_in_stock
-    return unless article && quantity
+  def date_of_sell_less_than_today
+    return unless date_of_sell.present?
 
-    errors.add(:quantity, :insufficient_articles) if quantity > article.in_stock
+    errors.add(:date_of_sell, :greater_than_today) if date_of_sell.to_date > Date.today
   end
 
-  def decrease_in_stock_article
-    current_stock = article.in_stock
-
-    article.update!(in_stock: current_stock - quantity)
-  end
-
-  def set_total_revenue
-    self.total_revenue = quantity.to_d * article.price.to_d
+  def delete_articles_associations
+    ArticleSell.where(sell_id: id).delete_all
   end
 end

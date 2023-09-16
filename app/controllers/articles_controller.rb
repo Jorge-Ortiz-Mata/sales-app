@@ -59,14 +59,10 @@ class ArticlesController < ApplicationController
   def search_by_name
     return unless params[:name].present?
 
-    article = Article.find_by(name: params[:name])
+    articles = Article.search_with_name(params[:name])
 
     respond_to do |format|
-      if article
-        format.turbo_stream { render turbo_stream: turbo_stream.replace('articles', partial: 'articles/articles', locals: { articles: [article], filter_form: FilterForm.new }) }
-      else
-        format.turbo_stream { render turbo_stream: turbo_stream.replace('articles', partial: 'articles/articles', locals: { articles: [], filter_form: FilterForm.new }) }
-      end
+      format.turbo_stream { render turbo_stream: turbo_stream.replace('articles', partial: 'articles/articles', locals: { articles: articles, filter_form: FilterForm.new }) }
     end
   end
 
@@ -82,7 +78,7 @@ class ArticlesController < ApplicationController
   end
 
   def article_params
-    params.require(:article).permit(:name, :description, :price, :in_stock, :avatar, :promotional_video, images: [])
+    params.require(:article).permit(:name, :description, :price, :avatar, :promotional_video, images: [])
   end
 
   def filter_form_params

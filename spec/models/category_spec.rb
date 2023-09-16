@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe Category, type: :model do
   let(:category_one) { build(:category, :with_attributes) }
-  let(:article_one) { build(:article, :with_attributes, :with_stock) }
+  let(:article_one) { build(:article, :with_attributes) }
   let(:invalid_category) { build(:category) }
 
   describe 'instances' do

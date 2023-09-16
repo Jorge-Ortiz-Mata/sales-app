@@ -58,26 +58,27 @@ en:
         name: El nombre
         description: La descripción
         price: El precio
-        in_stock: La cantidad en almacén
         categories: Las categorias
         avatar: Imagen principal
         images: Imagenes
       category:
         name: El nombre
       sell:
-        quantity: Total de piezas a vender
-        day: El día
         date_of_sell: La fecha de la venta
-        comment: El comentario
-        article: El articulo
+        description: La descripción
+      article_sell:
+        quantity: La cantidad
+        article_id: El articulo
 
     errors:
       models:
-        sell:
-          invalid_day: 'no coincide con los dias mostrados en la lista'
-          insufficient_articles: 'es mayor a los articulos en stock'
         article:
           content_type_invalid: 'es un formato invalido. Formatos permitidos: %{authorized_types}'
+        sell:
+          greater_than_today: es mayor a la fecha actual
+        article_sell:
+          insufficient_articles: 'es mayor que el numero de articulos en stock'
+          article_does_not_exist: 'no esta registrado en el inventario'
 
       messages:
         blank: 'no debe estar en blanco'

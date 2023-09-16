@@ -1,20 +1,20 @@
 # Sells
 
-def time_rand from = 0.0, to = Time.now
+if Article.all.any?
+  first_article_id = Article.first.id
+  last_article_id = Article.last.id
+end
+
+def time_rand(from = 0.0, to = Time.now)
   Time.at(from + rand * (to.to_f - from.to_f))
 end
 
-for i in 1...100 do
-  id = rand(Article.first.id..Article.all.count)
-  day = rand(0...7)
+for i in 1...50 do
+  @sell = Sell.create(date_of_sell: time_rand(Time.local(2023, 8, 15)))
 
-  article = Article.find(id)
+  for i in 1...10 do
+    id = rand(first_article_id..last_article_id)
 
-  if article && article.in_stock > 0
-    Sell.create(
-      article: article,
-      quantity: rand(1..article.in_stock),
-      date_of_sell: time_rand(Time.local(2023, 8, 8))
-    )
+    @sell.article_sells.create(article_id: id, quantity: rand(1...10))
   end
 end

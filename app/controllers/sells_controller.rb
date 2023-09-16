@@ -1,5 +1,5 @@
 class SellsController < ApplicationController
-  before_action :set_sell, only: %i[ show edit update destroy ]
+  before_action :set_sell, only: %i[show edit update destroy]
 
   def index
     @sells = Sell.order(date_of_sell: :desc)
@@ -21,7 +21,7 @@ class SellsController < ApplicationController
       if @sell.save
         format.html { redirect_to sell_url(@sell), notice: 'La venta ha sido creada exitosamente.' }
       else
-        format.html { render :new, status: :unprocessable_entity }
+        format.turbo_stream { render turbo_stream: turbo_stream.replace('new_sell_form', partial: 'sells/form', locals: { sell: @sell, id: 'new_sell_form', btn_text: 'Crear' }) }
       end
     end
   end
@@ -31,7 +31,7 @@ class SellsController < ApplicationController
       if @sell.update(sell_params)
         format.html { redirect_to sell_url(@sell), notice: 'La venta ha sido actualizada exitosamente.' }
       else
-        format.html { render :edit, status: :unprocessable_entity }
+        format.turbo_stream { render turbo_stream: turbo_stream.replace('edit_sell_form', partial: 'sells/form', locals: { sell: @sell, id: 'edit_sell_form', btn_text: 'Actualizar' }) }
       end
     end
   end
@@ -65,10 +65,10 @@ class SellsController < ApplicationController
   end
 
   def sell_params
-    params.require(:sell).permit(:article_id, :quantity, :date_of_sell, :comment)
+    params.require(:sell).permit(:date_of_sell, :description)
   end
 
   def sells_filter_params
-    params.require(:sells_filter).permit(:article_id, :date_min, :date_max, :quantity)
+    params.require(:sells_filter).permit(:date_min, :date_max)
   end
 end
