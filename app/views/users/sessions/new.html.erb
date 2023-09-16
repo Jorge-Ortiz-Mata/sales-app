@@ -1,26 +1,57 @@
-<h2>Log in</h2>
+<main class="flex w-full">
+  <div class="flex w-1/2 h-full sign-in-image"></div>
 
-<%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+  <div class="flex flex-col w-1/2 justify-between">
+    <%= render 'shared/notice' if notice %>
+    <header class="flex items-center gap-2 p-5 justify-end">
+      <i class="fa-solid fa-truck-fast text-4xl"></i>
+      <h1 class="font-bold text-xl">Paquetería Martínez Nashville</h1>
+    </header>
+
+    <section class="flex flex-col items-center justify-center">
+      <div class="shadow rounded-lg border p-10 flex flex-col gap-5">
+        <div class="flex flex-col w-full gap-3">
+          <h2 class="font-semibold text-4xl text-center">Iniciar Sesión</h2>
+          <p class="font-medium text-sidebarTextColor text-center text-sm">Crea tu cuenta de manera gratuita de forma rápida</p>
+        </div>
+
+        <%= form_for(resource, as: resource_name, url: session_path(resource_name), html: {class: 'flex flex-col w-full gap-5 items-center'}) do |f| %>
+          <div class="flex flex-col w-full items-start">
+            <%= f.label :email, 'Correo electrónico', class: 'font-bold' %>
+            <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "input-tailwindcss font-semibold #{ error_input_border(resource.errors.include?(:email)) }" %>
+            <% if resource.errors.include?(:email) %>
+              <%= render 'shared/input_error_msg', { object: resource, attribute: :email } %>
+            <% end %>
+          </div>
+
+          <div class="flex flex-col w-full items-start">
+            <%= f.label :password, 'Contraseña', class: 'font-bold' %>
+            <%= f.password_field :password, autocomplete: "new-password", class: "input-tailwindcss font-semibold #{ error_input_border(resource.errors.include?(:password)) }" %>
+            <% if resource.errors.include?(:password) %>
+              <%= render 'shared/input_error_msg', { object: resource, attribute: :password } %>
+            <% end %>
+          </div>
+
+          <% if devise_mapping.rememberable? %>
+            <div class="flex items-center w-full gap-2">
+              <%= f.check_box :remember_me, class: 'rounded-full text-green-500' %>
+              <%= f.label :remember_me, class: 'font-semibold' %>
+            </div>
+          <% end %>
+
+          <div class="flex flex-col w-full items-center mt-10">
+            <%= f.submit "Iniciar sesión", class: 'text-white py-3 rounded-lg shadow bg-black duration-300 hover:bg-gray-700 cursor-pointer font-semibold w-full text-center' %>
+          </div>
+        <% end %>
+      </div>
+    </section>
+
+    <footer class="flex items-center justify-center gap-2 py-5">
+      <p class="font-medium text-sidebarTextColor">¿Eres nuevo? Crea tu cuenta de manera gratuita</p>
+      <%= link_to 'Registrarme', new_user_registration_path, class: 'font-semibold underline hover:text-cyan-700 duration-300' %>
+      <i class="fa-solid fa-arrow-right-to-bracket"></i>
+    </footer>
+
+    <%#= render "devise/shared/links" %>
   </div>
-
-  <div class="field">
-    <%= f.label :password %><br />
-    <%= f.password_field :password, autocomplete: "current-password" %>
-  </div>
-
-  <% if devise_mapping.rememberable? %>
-    <div class="field">
-      <%= f.check_box :remember_me %>
-      <%= f.label :remember_me %>
-    </div>
-  <% end %>
-
-  <div class="actions">
-    <%= f.submit "Log in" %>
-  </div>
-<% end %>
-
-<%= render "devise/shared/links" %>
+</main>
