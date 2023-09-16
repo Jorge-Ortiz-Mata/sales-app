@@ -44,9 +44,14 @@
     </li>
   </ul>
 
-  <div class="flex flex-col">
-    <h6 class="font-bold">José López</h6>
-    <p class="font-medium text-sm">jose.lopez@gmail.com</p>
-  </div>
+  <% if current_user %>
+    <div class="flex flex-col">
+      <h6 class="font-bold">--</h6>
+      <p class="font-medium text-sm"><%= current_user.email %></p>
+      <%= button_to destroy_user_session_path, method: :delete do  %>
+        Cerrar sesión
+      <% end %>
+    </div>
+  <% end %>
 </div>
 
