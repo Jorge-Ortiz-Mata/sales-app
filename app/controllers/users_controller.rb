@@ -18,8 +18,7 @@ class UsersController < AuthenticatedController
 
     if @user.save
       UserMailer.with(user: @user).send_email_confirmation.deliver_later
-      flash[:notice] = 'An email has been sent to your email account. Click on the link to validate your account.'
-      redirect_to login_path
+      redirect_to login_path, notice: 'Verifica tu bandeja de entrada y confirma tu correo electónico'
     else
       render :new, status: :unprocessable_entity
     end
@@ -28,14 +27,12 @@ class UsersController < AuthenticatedController
   def update
     if @user.authenticate(params[:user][:old_password])
       if @user.update user_params
-        flash[:notice] = 'Account updated successfully'
-        redirect_to user_path(@user.token_id)
+        redirect_to user_path(@user.token_id), notice: 'Tu cuenta ha sido actualizada exitosamente'
       else
         render :edit, status: :unprocessable_entity
       end
     else
-      flash[:notice] = 'Your current password is invalid'
-      redirect_to edit_user_path(@user.token_id), status: :unprocessable_entity
+      redirect_to edit_user_path(@user.token_id), status: :unprocessable_entity, notice: 'La contraseña anterior es incorrecta'
     end
   end
 
@@ -43,20 +40,19 @@ class UsersController < AuthenticatedController
     session[:user_id] = nil
     @user.destroy
 
-    flash[:notice] = 'Your account has been deleted successfully'
-    redirect_to login_path
+    redirect_to login_path, notice: 'Tu cuenta ha sido desactivada exitosamente'
   end
 
   def confirm_account
     if @user.present?
       if @user.confirmed?
-        flash[:notice] = 'You have already confirmed your email account'
+        flash[:notice] = 'Tu cuenta ya ha sido confirmada anteriormente'
       else
         @user.update!(active: true)
-        flash[:notice] = 'Your account has been successfully confirmed'
+        flash[:notice] = 'Tu cuenta ha sido confirmada exitosamente'
       end
     else
-      flash[:notice] = 'You can not confirm this account because it is not linked to any user.'
+      flash[:notice] = 'No se encontró ningún usuario con este link de confirmación'
     end
     redirect_to login_path
   end
@@ -71,14 +67,12 @@ class UsersController < AuthenticatedController
     @user = User.find_by(token_id: params[:token_id])
     return @user if @user.present?
 
-    flash[:notice] = 'There is not user with this token'
-    redirect_to root_path
+    redirect_to root_path, notice: 'No existe ningún usuario con este registro'
   end
 
   def authorize_user
     return if current_user.eql? @user
 
-    flash[:notice] = "You are not authorized to perform this action"
-    redirect_to root_path
+    redirect_to root_path, notice: 'No estas autorizado para realizar este procedimiento'
   end
 end

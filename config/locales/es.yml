@@ -38,6 +38,9 @@ en:
         date_min: La fecha inicial
         date_max: La fecha final
         quantity: La cantidad
+      session_form:
+        email: El correo electrónico
+        password: La contraseña
 
     errors:
       models:
@@ -48,9 +51,14 @@ en:
           less_than_date_min: 'es menor a la fecha inicial colocada'
           positive_numbers: 'no puede ser un numero negativo'
           more_than_today: 'es mayor a la fecha actual'
+        session_form:
+          user_nil: 'no está asociado a ningun usuario de la aplicación'
+          not_confirmed: 'no ha sido confirmado vía email'
+          incorrect_credentials: 'no coincide con la contraseña registrada'
       messages:
         blank: 'no debe estar en blanco'
         taken: 'ya ha sido registrado'
+        too_short: 'debe ser mínimo de %{count} caracteres'
 
   activerecord:
     attributes:

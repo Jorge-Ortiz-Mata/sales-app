@@ -13,7 +13,7 @@ class AuthenticatedController < ApplicationController
   private
 
   def authenticate_user
-    redirect_to login_path, notice: 'Please, sign in to use this application' unless logged_in?
+    redirect_to login_path unless logged_in?
   end
 
   def deny_access
