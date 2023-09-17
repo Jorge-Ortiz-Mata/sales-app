@@ -7,7 +7,6 @@ class SessionForm
   validates :password, length: { minimum: 8 }
   validate :user_exists?
   validate :user_authentication
-  validate :email_confirmation
 
   def save
     return false if invalid?
@@ -29,13 +28,5 @@ class SessionForm
     return unless user.present?
 
     errors.add(:password, :incorrect_credentials) unless user&.authenticate(password)
-  end
-
-  def email_confirmation
-    user = User.find_by(email: email)
-
-    return unless user.present?
-
-    errors.add(:email, :not_confirmed) unless user.active
   end
 end

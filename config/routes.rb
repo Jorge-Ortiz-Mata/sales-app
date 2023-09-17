@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   resources :users, only: %i[create] do
     resources :profiles
   end
-  get '/signup', to: 'users#new'
+  # get '/signup', to: 'users#new'
   get '/users/:token_id', to: 'users#show', as: 'user'
   get '/users/edit/:token_id', to: 'users#edit', as: 'edit_user'
   patch '/users/edit/:token_id', to: 'users#update', as: 'update_user'
@@ -11,7 +11,7 @@ Rails.application.routes.draw do
   get '/login', to: 'sessions#new'
   post '/login', to: 'sessions#create'
   delete '/logout', to: 'sessions#logout'
-  get '/email/confirmation/:token_id', to: 'users#confirm_account', as: 'confirm_user_account'
+  # get '/email/confirmation/:token_id', to: 'users#confirm_account', as: 'confirm_user_account'
 
   resources :sells do
     post '/filter', to: 'sells#filter', on: :collection

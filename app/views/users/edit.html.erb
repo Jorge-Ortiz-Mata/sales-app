@@ -23,37 +23,37 @@
     <div class="flex flex-col w-full p-5 bg-white border rounded shadow gap-10">
       <h2 class="font-semibold text-sidebarTextColor text-xl">Actualizar cuenta</h2>
 
-      <%= form_with(model: @user, url: update_user_path(current_user.token_id), method: :patch, class: 'flex flex-col gap-5') do |f| %>
+      <%= form_with(model: @update_account, url: update_user_path(current_user.token_id), method: :patch, class: 'flex flex-col gap-5') do |f| %>
         <div class="flex flex-col w-full items-start">
           <%= f.label :email, 'Correo electrónico:', class: 'font-bold' %>
-          <%= f.email_field :email, class: "input-tailwindcss font-semibold #{ error_input_border(@user.errors.include?(:email)) }" %>
-          <% if @user.errors.include?(:email) %>
-            <%= render 'shared/input_error_msg', { object: @user, attribute: :email } %>
+          <%= f.email_field :email, class: "input-tailwindcss font-semibold #{ error_input_border(@update_account.errors.include?(:email)) }" %>
+          <% if @update_account.errors.include?(:email) %>
+            <%= render 'shared/input_error_msg', { object: @update_account, attribute: :email } %>
           <% end %>
         </div>
 
         <div class="flex flex-col w-full items-start">
           <%= f.label :password, 'Nueva contraseña:', class: 'font-bold' %>
-          <%= f.password_field :password, class: "input-tailwindcss font-semibold #{ error_input_border(@user.errors.include?(:password)) }" %>
+          <%= f.password_field :password, class: "input-tailwindcss font-semibold #{ error_input_border(@update_account.errors.include?(:password)) }" %>
           <span class="text-sm text-sidebarTextColor font-medium italic">La contraseña debe tener al menos 8 caracteres</span>
-          <% if @user.errors.include?(:password) %>
-            <%= render 'shared/input_error_msg', { object: @user, attribute: :password } %>
+          <% if @update_account.errors.include?(:password) %>
+            <%= render 'shared/input_error_msg', { object: @update_account, attribute: :password } %>
           <% end %>
         </div>
 
         <div>
           <%= f.label :password_confirmation, 'Confirmación de nueva contraseña:', class: 'font-bold' %>
-          <%= f.password_field :password_confirmation, class: "input-tailwindcss font-semibold #{ error_input_border(@user.errors.include?(:password_confirmation)) }" %>
-          <% if @user.errors.include?(:password_confirmation) %>
-            <%= render 'shared/input_error_msg', { object: @user, attribute: :password_confirmation } %>
+          <%= f.password_field :password_confirmation, class: "input-tailwindcss font-semibold #{ error_input_border(@update_account.errors.include?(:password_confirmation)) }" %>
+          <% if @update_account.errors.include?(:password_confirmation) %>
+            <%= render 'shared/input_error_msg', { object: @update_account, attribute: :password_confirmation } %>
           <% end %>
         </div>
 
         <div>
           <%= f.label :old_password, 'Porfavor, ingresa tu contraseña anterior para guardar los cambios', class: 'font-bold' %>
-          <%= f.password_field :old_password, class: "input-tailwindcss font-semibold #{ error_input_border(@user.errors.include?(:old_password)) }" %>
-          <% if @user.errors.include?(:old_password) %>
-            <%= render 'shared/input_error_msg', { object: @user, attribute: :old_password } %>
+          <%= f.password_field :old_password, class: "input-tailwindcss font-semibold #{ error_input_border(@update_account.errors.include?(:old_password)) }" %>
+          <% if @update_account.errors.include?(:old_password) %>
+            <%= render 'shared/input_error_msg', { object: @update_account, attribute: :old_password } %>
           <% end %>
         </div>
 

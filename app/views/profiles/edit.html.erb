@@ -10,17 +10,17 @@
       <div class="flex flex-col w-full gap-5">
         <div class="flex flex-col">
           <span class="font-regular text-sidebarTextColor">Nombre:</span>
-          <span class="font-bold text-sidebarTextColor"><%= @profile.first_name.present? ? @profile.first_name : '--' %></span>
+          <span class="font-bold text-sidebarTextColor"><%= print_profile(current_user)[:first_name] %></span>
         </div>
 
         <div class="flex flex-col">
           <span class="font-regular text-sidebarTextColor">Apellidos:</span>
-          <span class="font-bold text-sidebarTextColor"><%= @profile.last_name.present? ? @profile.last_name : '--' %></span>
+          <span class="font-bold text-sidebarTextColor"><%= print_profile(current_user)[:last_name] %></span>
         </div>
 
         <div class="flex flex-col">
           <span class="font-regular text-sidebarTextColor">Número de teléfono</span>
-          <span class="font-bold text-sidebarTextColor"><%= @profile.phone_number.present? ? @profile.phone_number : '--' %></span>
+          <span class="font-bold text-sidebarTextColor"><%= print_profile(current_user)[:phone_number] %></span>
         </div>
       </div>
     </div>

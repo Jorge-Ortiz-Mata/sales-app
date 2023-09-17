@@ -1,15 +1,13 @@
 class UsersController < AuthenticatedController
-  skip_before_action :authenticate_user, only: %i[new create confirm_account]
-  before_action :deny_access, only: %i[new create]
+  skip_before_action :authenticate_user, only: %i[create confirm_account]
+  before_action :deny_access, only: %i[create]
   before_action :set_user, only: %i[edit update show destroy confirm_account]
   before_action :authorize_user, only: %i[edit update destroy]
-  layout 'unauthenticated', only: %i[new create]
+  layout 'unauthenticated', only: %i[create]
 
-  def new
-    @user = User.new
+  def edit
+    @update_account = UpdateAccount.new(current_user.id, current_user.email, current_user.password, current_user.password_confirmation, '')
   end
-
-  def edit; end
 
   def show; end
 
@@ -17,22 +15,20 @@ class UsersController < AuthenticatedController
     @user = User.new user_params
 
     if @user.save
-      UserMailer.with(user: @user).send_email_confirmation.deliver_later
-      redirect_to login_path, notice: 'Verifica tu bandeja de entrada y confirma tu correo electónico'
+      # UserMailer.with(user: @user).send_email_confirmation.deliver_later
+      redirect_to login_path, notice: 'El usuario ha sido añadido exitosamente'
     else
       render :new, status: :unprocessable_entity
     end
   end
 
   def update
-    if @user.authenticate(params[:user][:old_password])
-      if @user.update user_params
-        redirect_to user_path(@user.token_id), notice: 'Tu cuenta ha sido actualizada exitosamente'
-      else
-        render :edit, status: :unprocessable_entity
-      end
+    @update_account = UpdateAccount.new(current_user.id, account_params[:email], account_params[:password], account_params[:password_confirmation], account_params[:old_password])
+
+    if @update_account.save
+      redirect_to user_path(current_user.token_id), notice: 'Tu cuenta ha sido actualizada exitosamente'
     else
-      redirect_to edit_user_path(@user.token_id), status: :unprocessable_entity, notice: 'La contraseña anterior es incorrecta'
+      render :edit, status: :unprocessable_entity
     end
   end
 
@@ -43,24 +39,14 @@ class UsersController < AuthenticatedController
     redirect_to login_path, notice: 'Tu cuenta ha sido desactivada exitosamente'
   end
 
-  def confirm_account
-    if @user.present?
-      if @user.confirmed?
-        flash[:notice] = 'Tu cuenta ya ha sido confirmada anteriormente'
-      else
-        @user.update!(active: true)
-        flash[:notice] = 'Tu cuenta ha sido confirmada exitosamente'
-      end
-    else
-      flash[:notice] = 'No se encontró ningún usuario con este link de confirmación'
-    end
-    redirect_to login_path
-  end
-
   private
 
   def user_params
     params.require(:user).permit(:email, :password, :password_confirmation)
+  end
+
+  def account_params
+    params.require(:update_account).permit(:email, :password, :password_confirmation, :old_password)
   end
 
   def set_user
