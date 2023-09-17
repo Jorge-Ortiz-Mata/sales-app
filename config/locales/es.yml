@@ -69,6 +69,10 @@ en:
       article_sell:
         quantity: La cantidad
         article_id: El articulo
+      user:
+        email: El correo electrónico
+        password: La contraseña
+        password_confirmation: La confirmación de la contraseña
 
     errors:
       models:

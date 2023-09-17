@@ -1,3 +1,10 @@
+GIT
+  remote: https://github.com/Jorge-Ortiz-Mata/yorchauth-gem.git
+  revision: 4e945bb818b702e15a0b1bea675bbbaff277cdda
+  specs:
+    yorchauth (0.1.0)
+      rails (>= 7.0.4.2)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -73,6 +80,7 @@ GEM
       tzinfo (~> 2.0)
     addressable (2.8.5)
       public_suffix (>= 2.0.2, < 6.0)
+    bcrypt (3.1.19)
     bindex (0.8.1)
     bootsnap (1.16.0)
       msgpack (~> 1.2)
@@ -329,6 +337,7 @@ PLATFORMS
 
 DEPENDENCIES
   active_storage_validations (~> 1.0, >= 1.0.4)
+  bcrypt (~> 3.1.7)
   bootsnap
   capybara
   chartkick
@@ -356,6 +365,7 @@ DEPENDENCIES
   tzinfo-data
   web-console
   webdrivers
+  yorchauth!
 
 RUBY VERSION
    ruby 3.0.4p208

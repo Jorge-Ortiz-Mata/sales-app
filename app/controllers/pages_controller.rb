@@ -1,4 +1,4 @@
-class PagesController < ApplicationController
+class PagesController < AuthenticatedController
   def dashboard
     @revenue = ArticleSell.sum(:revenue).round(2)
     @sells = Sell.all

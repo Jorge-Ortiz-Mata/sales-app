@@ -1,4 +1,4 @@
-class CategoriesController < ApplicationController
+class CategoriesController < AuthenticatedController
   before_action :set_category, only: %i[edit update destroy]
 
   def index

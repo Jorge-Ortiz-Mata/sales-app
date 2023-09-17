@@ -1,4 +1,4 @@
-class ArticlesController < ApplicationController
+class ArticlesController < AuthenticatedController
   before_action :set_article, only: %i[show edit update destroy add_categories save_categories]
 
   def index

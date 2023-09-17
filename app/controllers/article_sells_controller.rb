@@ -1,4 +1,4 @@
-class ArticleSellsController < ApplicationController
+class ArticleSellsController < AuthenticatedController
   before_action :set_sell, only: %i[create edit update destroy]
   before_action :set_article_sell, only: %i[edit update destroy]
 

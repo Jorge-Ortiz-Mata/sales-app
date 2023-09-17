@@ -1,0 +1,35 @@
+<%= form_with(model: user, id: 'user_form', url: url) do |form| %>
+  <% if user.errors.any? %>
+    <ul>
+      <% user.errors.each do |error| %>
+        <li><%= error.full_message %></li>
+      <% end %>
+    </ul>
+  <% end %>
+  <div>
+    <%= form.label :email, 'Email:' %>
+    <%= form.email_field :email %>
+  </div>
+
+  <div>
+    <span>Your password should have at least 8 characters</span> <br>
+    <%= form.label :password, 'New password:' %>
+    <%= form.password_field :password %>
+  </div>
+
+  <div>
+    <%= form.label :password_confirmation, 'Password Confirmation:' %>
+    <%= form.password_field :password_confirmation %>
+  </div>
+
+  <% if authorize %>
+    <div>
+      <%= form.label :old_password, 'Please type your old password to change your profile:' %>
+      <%= form.password_field :old_password  %>
+    </div>
+  <% end %>
+
+  <div>
+    <%= form.submit text_btn %>
+  </div>
+<% end %>
