@@ -42,22 +42,27 @@
         <span>Configuración</span>
       <% end %>
     </li>
-
-
-    <li class="flex items-center">
-      <%= link_to user_path(current_user.token_id), class: style_to_sidebar_link(user_path(current_user.token_id)) do %>
-        <i class="fa-solid fa-user"></i>
-        <span>Perfil</span>
-      <% end %>
-    </li>
   </ul>
 
   <% if current_user %>
-    <div class="flex flex-col">
-      <h6 class="font-bold">--</h6>
-      <p class="font-medium text-sm"><%= current_user.email %></p>
-      <%= button_to logout_path, method: :delete do  %>
-        Cerrar sesión
+    <div class="flex flex-col w-full items-end gap-5">
+      <%= link_to user_path(current_user.token_id), class: 'flex items-center w-full' do %>
+        <div class="flex items-center gap-2">
+          <div class="flex flex-col">
+            <h6 class="font-bold text-end"><%= current_user.profile.full_name.blank? ? "--" : current_user.profile.full_name %></h6>
+            <p class="font-medium text-sm"><%= current_user.email %></p>
+          </div>
+
+          <% if current_user.profile.avatar.attached? %>
+            <%= image_tag(current_user.profile.avatar, class: 'w-10 h-10 rounded-full shadow border object-contain') %>
+          <% else %>
+            <div class="w-10 h-10 shadow rounded-full border bg-gradient-to-br from-cyan-300 to-green-300"></div>
+          <% end %>
+        </div>
+      <% end %>
+      <%= button_to logout_path, method: :delete, class: 'btn-danger' do  %>
+        <i class="fa-solid fa-angles-left"></i>
+        <span>Cerrar sesión</span>
       <% end %>
     </div>
   <% end %>

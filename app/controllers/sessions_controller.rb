@@ -1,7 +1,6 @@
 class SessionsController < AuthenticatedController
   skip_before_action :authenticate_user
   before_action :deny_access, only: %i[new create]
-  # before_action :set_user, only: %i[create]
   layout 'unauthenticated', only: %i[new create]
 
   def new

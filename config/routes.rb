@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
   # User Authentication routes.
-  resources :users, only: %i[create]
+  resources :users, only: %i[create] do
+    resources :profiles
+  end
   get '/signup', to: 'users#new'
   get '/users/:token_id', to: 'users#show', as: 'user'
   get '/users/edit/:token_id', to: 'users#edit', as: 'edit_user'

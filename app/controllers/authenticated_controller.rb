@@ -16,9 +16,10 @@ class AuthenticatedController < ApplicationController
     redirect_to login_path unless logged_in?
   end
 
+  # This method redirect to the root path if a user is logged in. This is for the login and signup pages.
   def deny_access
     return if session[:user_id].nil?
 
-    redirect_to root_path, notice: 'You cannot access. Please sign out.'
+    redirect_to root_path
   end
 end
