@@ -10,10 +10,6 @@ class User < ApplicationRecord
 
   after_create :create_profile
 
-  def confirmed?
-    active
-  end
-
   def created_at_formatted
     I18n.l(created_at, format: :long)
   end
