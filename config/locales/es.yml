@@ -38,6 +38,19 @@ en:
         date_min: La fecha inicial
         date_max: La fecha final
         quantity: La cantidad
+      session_form:
+        email: El correo electrónico
+        password: La contraseña
+      update_account:
+        email: El correo electrónico
+        password: La nueva contraseña
+        password_confirmation: La confirmación de la nueva contraseña
+        old_password: La contraseña actual
+      recover_password:
+        email: El correo electrónico
+      password_reset:
+        password: La contraseña
+        password_confirmation: La confirmación de la contraseña
 
     errors:
       models:
@@ -48,9 +61,20 @@ en:
           less_than_date_min: 'es menor a la fecha inicial colocada'
           positive_numbers: 'no puede ser un numero negativo'
           more_than_today: 'es mayor a la fecha actual'
+        session_form:
+          user_nil: 'no está asociado a ningun usuario de la aplicación'
+          # not_confirmed: 'no ha sido confirmado vía email'
+          incorrect_credentials: 'no coincide con la contraseña registrada'
+        update_account:
+          passwords_do_not_match: 'y la nueva contraseña son diferentes'
+        recover_password:
+          does_not_exist: 'no está asociado a ningun usuario'
+        password_reset:
+          are_not_equal: 'es diferente a la confirmación de la contraseña'
       messages:
         blank: 'no debe estar en blanco'
         taken: 'ya ha sido registrado'
+        too_short: 'debe ser mínimo de %{count} caracteres'
 
   activerecord:
     attributes:
@@ -69,6 +93,10 @@ en:
       article_sell:
         quantity: La cantidad
         article_id: El articulo
+      user:
+        email: El correo electrónico
+        password: La contraseña
+        password_confirmation: La confirmación de la contraseña
 
     errors:
       models:

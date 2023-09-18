@@ -16,3 +16,6 @@ if Rails.env.development?
   # puts 'Seeding Sells...'
   # require_relative './sells_seed'
 end
+
+puts 'Seeding Users...'
+require_relative './users_seed'

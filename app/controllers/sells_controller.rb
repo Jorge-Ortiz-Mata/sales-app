@@ -1,4 +1,4 @@
-class SellsController < ApplicationController
+class SellsController < AuthenticatedController
   before_action :set_sell, only: %i[show edit update destroy]
 
   def index

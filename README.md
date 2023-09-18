@@ -1,5 +1,34 @@
 # Sales App.
 
+## ENV environment variables required.
+
+In order to deploy this web application to any web server, you should have to add the following environment variables in the project configuration.
+
+* Development
+
+- GCP_JSON: Store files in Google Cloud Storage
+- SENDGRID_EMAIL_VALID: A valid email for send emails
+- SENDGRID_API_KEY: The API key to send emails
+
+* Production in local computer
+
+- PSQL_URI: Database URL for production
+- GCP_JSON: Store files in Google Cloud Storage
+- SENDGRID_EMAIL_VALID: A valid email for send emails
+- SENDGRID_API_KEY: The API key to send emails
+
+* Production
+
+- RAILS_MASTER_KEY: The rails mater key must be added.
+- PSQL_URI: Database URL for production
+- GCP_JSON: Store files in Google Cloud Storage
+- SENDGRID_EMAIL_VALID: A valid email for send emails
+- SENDGRID_API_KEY: The API key to send emails
+
+Notes:
+
+The GCP value must be added between 'apiKey1234' for development purposes. In production, make sure to delete the single quotes ''.
+
 ## Technologies.
 
 - Ruby 3.0.4
@@ -27,12 +56,6 @@ docker run -p 5432:5432 --rm --name postgresql-container -e POSTGRES_PASSWORD=po
 In order to test the production environment of your Rails application app in your local computer, you will need to build and run the production image.
 Make sure to have a dummy database created somewhere. Localhost is not been taken for the production environment.
 
-Make sure to have the API Keys within your .env file:
-
-- PSQL_USERNAME
-- PSQL_PASSWORD
-- PSQL_URI
-
 * Build the production Docker Image
 
 ```bash
@@ -45,32 +68,11 @@ docker build -t sales-app-production:latest .
 docker run -p 3000:3000 --rm --name sales-app-production --env-file ./.env sales-app-production:latest
 ```
 
-## ElephantSQL
-
-The ElephantSQL service was used to create databases for testing purposes using the API endpoint.
-
-- API Documentation: https://www.elephantsql.com/docs/api.html
-- API Endpoints documentation
-- API Generate API Keys: https://customer.elephantsql.com/apikeys
-
-This is an example of how to get the current instances from this account:
-
-```bash
-curl -u :XXXX-XXXXX-XXXXX-XXXXX https://customer.elephantsql.com/api/instances/
-```
-
 ## Render Deployment
 
 Before to get started, the PSQL database is not available through the API service. The staging and the production databases must be created manually.
+
 For each Pull Request created, the ElephantSQL service will be taken instead.
-
-* Create API Key: https://dashboard.render.com/u/settings#api-keys
-
-Save your API Key in the.env file and in the repository configuration
-
-* Environemt Variables
-
-- RAILS_MASTER_KEY=""
 
 ## Google Cloud Storage.
 
@@ -99,3 +101,5 @@ google:
 ```
 
 - Update the active storage configuration in the config/environments folder.
+
+That's all. Make sure to ignore your credentials in the .gitignore file.
