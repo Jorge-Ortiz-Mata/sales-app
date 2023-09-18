@@ -1,7 +1,7 @@
 class Profile < ApplicationRecord
   belongs_to :user
 
-  has_one_attached :avatar
+  has_one_attached :avatar, dependent: :destroy
 
   validates :first_name, :last_name, :phone_number, presence: true, on: :update
   validates :phone_number, length: { maximum: 10 }, on: :update

@@ -40,6 +40,11 @@
           <div class="flex flex-col w-full items-center mt-10">
             <%= f.submit "Iniciar sesión", class: 'text-white py-3 rounded-lg shadow bg-black duration-300 hover:bg-gray-700 cursor-pointer font-semibold w-full text-center' %>
           </div>
+
+          <div class="flex flex-col w-full gap-2">
+            <p class="text-center text-sm text-sidebarTextColor">No recuerdas tu contraseña? Da click en el siguiente enlace para recuperar tu contraseña</p>
+            <%= link_to 'Recuperar contraseña', recover_password_path, class: 'text-sidebarTextColor underline font-semibold text-sm text-center duration-300 hover:text-cyan-500' %>
+          </div>
         <% end %>
       </div>
     </section>

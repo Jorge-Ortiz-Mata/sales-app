@@ -46,6 +46,11 @@ en:
         password: La nueva contraseña
         password_confirmation: La confirmación de la nueva contraseña
         old_password: La contraseña actual
+      recover_password:
+        email: El correo electrónico
+      password_reset:
+        password: La contraseña
+        password_confirmation: La confirmación de la contraseña
 
     errors:
       models:
@@ -62,6 +67,10 @@ en:
           incorrect_credentials: 'no coincide con la contraseña registrada'
         update_account:
           passwords_do_not_match: 'y la nueva contraseña son diferentes'
+        recover_password:
+          does_not_exist: 'no está asociado a ningun usuario'
+        password_reset:
+          are_not_equal: 'es diferente a la confirmación de la contraseña'
       messages:
         blank: 'no debe estar en blanco'
         taken: 'ya ha sido registrado'

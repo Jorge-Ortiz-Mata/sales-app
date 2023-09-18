@@ -15,6 +15,7 @@ RSpec.describe User, type: :model do
   describe 'associations' do
     it { should have_secure_password }
     it { should have_secure_token(:token_id).ignoring_check_for_db_index }
+    it { should have_secure_token(:recover_password_token).ignoring_check_for_db_index }
     it { should validate_length_of(:token_id) }
     it { should validate_presence_of(:email) }
     it { should validate_uniqueness_of(:email) }

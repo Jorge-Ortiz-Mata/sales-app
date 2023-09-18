@@ -1,0 +1,20 @@
+<main class="flex w-full flex-col justify-center items-center">
+  <section class="flex flex-col p-10 rounded shadow border gap-10 w-1/3">
+    <div class="flex items-center justify-center">
+      <%= image_tag('yorch-black.png', class: 'w-32 h-32') %>
+    </div>
+    <h2 class="font-semibold text-4xl text-center">Instrucciones enviadas</h2>
+
+    <p class="text-sidebarTextColor text-center">
+      Hemos enviado un correo electrónico a
+      <span class="font-bold"><%= @recover_password.email %></span>.
+      Por favor, revise su bandeja de entrada con las instrucciones para
+      que actualice su contraseña.
+    </p>
+
+    <footer class="flex flex-col w-full gap-2">
+      <p class="text-center text-sm text-sidebarTextColor">Ya tienes una cuenta? Da click en el siguiente enlace para iniciar sesión</p>
+      <%= link_to 'Iniciar sesión', login_path, class: 'text-sidebarTextColor underline font-semibold text-sm text-center duration-300 hover:text-cyan-500' %>
+    </footer>
+  </section>
+</main>
