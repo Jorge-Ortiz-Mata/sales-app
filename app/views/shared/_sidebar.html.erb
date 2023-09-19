@@ -40,10 +40,10 @@
 
     <% if current_user.admin? %>
       <li class="flex items-center">
-        <%= link_to settings_path, class: style_to_sidebar_link(settings_path) do %>
+        <%#= link_to settings_path, class: style_to_sidebar_link(settings_path) do %>
           <i class="fa-solid fa-gear"></i>
           <span>Configuración</span>
-        <% end %>
+        <%# end %>
       </li>
     <% end %>
   </ul>
