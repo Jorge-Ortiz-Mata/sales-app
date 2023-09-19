@@ -4,6 +4,5 @@ class ApplicationPolicy
   def initialize(user, record)
     @user = user
     @record = record
-    # @sell = sell
   end
 end
