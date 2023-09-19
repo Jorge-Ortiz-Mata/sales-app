@@ -10,6 +10,7 @@ class UpdateAccount
   validates :password, length: { minimum: 8 }, if: :password_is_present?
   validates :password_confirmation, length: { minimum: 8 }, if: :password_confirmation_is_present?
   validate :same_passwords, if: :both_passwords_are_present?
+  validate :validate_current_password
 
   def initialize(id, email, password, password_confirmation, old_password)
     self.id = id
@@ -49,5 +50,11 @@ class UpdateAccount
     return true if password_confirmation.present?
 
     false
+  end
+
+  def validate_current_password
+    return unless old_password.present?
+
+    errors.add(:old_password, :incorrect_credentials) unless User.find(id).authenticate(old_password)
   end
 end

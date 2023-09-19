@@ -2,10 +2,13 @@ class ArticleSellsController < AuthenticatedController
   before_action :set_sell, only: %i[create edit update destroy]
   before_action :set_article_sell, only: %i[edit update destroy]
 
-  def edit; end
+  def edit
+    authorize @article_sell
+  end
 
   def create
     @article_sell = @sell.article_sells.build(article_sell_params)
+    authorize @article_sell
 
     respond_to do |format|
       if @article_sell.save
@@ -17,6 +20,8 @@ class ArticleSellsController < AuthenticatedController
   end
 
   def update
+    authorize @article_sell
+
     respond_to do |format|
       if @article_sell.update article_sell_params
         format.turbo_stream { render turbo_stream: turbo_stream.replace('article_sells', partial: 'article_sells/article_sells', locals: { sell: @sell }) }
@@ -27,6 +32,7 @@ class ArticleSellsController < AuthenticatedController
   end
 
   def destroy
+    authorize @article_sell
     @article_sell.destroy
 
     respond_to do |format|

@@ -67,6 +67,7 @@ en:
           incorrect_credentials: 'no coincide con la contraseña registrada'
         update_account:
           passwords_do_not_match: 'y la nueva contraseña son diferentes'
+          incorrect_credentials: 'es incorrecta'
         recover_password:
           does_not_exist: 'no está asociado a ningun usuario'
         password_reset:

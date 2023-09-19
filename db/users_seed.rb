@@ -1,7 +1,12 @@
+# default_users = ['juan@gmail.com', 'ana@gmail.com', 'ortiz.mata.jorge@gmail.com']
 default_users = ['ortiz.mata.jorge@gmail.com']
 
 default_users.each do |email|
-  next if User.find_by(email: email).present?
+  user = User.find_by(email: email)
 
-  User.create(email: 'ortiz.mata.jorge@gmail.com', password: '12345678', password_confirmation: '12345678')
+  if user.present?
+    user.update(role: 2)
+  else
+    User.create(email: email, password: '12345678', password_confirmation: '12345678', role: 2)
+  end
 end

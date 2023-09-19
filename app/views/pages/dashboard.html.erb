@@ -5,61 +5,65 @@
     <% end %>
   <% end %>
 
-  <div class="flex flex-col w-full p-5 gap-5">
-    <div class="flex items-center justify-center gap-12">
-      <%= render 'pages/dashboard/card', { title: 'Ganancias', text: "$ #{number_with_delimiter(@revenue, :delimiter => ',')} MXN" } %>
-      <%= render 'pages/dashboard/card', { title: 'Ventas totales', text: @sells.count } %>
-      <%= render 'pages/dashboard/card', { title: 'Número de articulos', text: @articles.count } %>
-    </div>
-
-    <div class="flex w-full p-5 rounded bg-white shadow border gap-5">
-      <%= render 'pages/dashboard/chart', { title: 'Ventas en los últimos 30 días' } do %>
-        <%= line_chart Sell.revenue_by_day, colors: ["#1B9C85"], xtitle: "Días", ytitle: "Ganancias", curve: false, prefix: "$", thousands: ",", round: 2, zeros: true, loading: "Cargando..." %>
-      <% end %>
-    </div>
-
-    <div class="flex w-full gap-5">
-      <div class="flex flex-col w-1/2 p-5 rounded bg-white shadow border gap-5">
-        <h5 class="font-bold text-lg text-sidebarTextColor">Últimos articulos añadidos</h5>
-        <div class="flex w-full bg-gray-100 rounded">
-          <div class="w-6/12 text-sidebarTextColor font-bold">Nombre</div>
-          <div class="w-3/12 text-sidebarTextColor font-bold">Precio unitario</div>
-          <div class="w-3/12 text-sidebarTextColor font-bold text-center">Ventas por pieza</div>
-        </div>
-        <div class="flex flex-col w-full gap-1">
-          <% @articles.order(created_at: :desc).limit(5).each do |article| %>
-            <div class="flex items-center w-full border-b py-1">
-              <div class="w-6/12 text-sidebarTextColor font-semibold text-sm"><%= article.name %></div>
-              <div class="w-3/12 text-sidebarTextColor font-semibold text-sm">$ <%= number_with_delimiter(article.price.round(2), :delimiter => ',') %> MXN</div>
-              <div class="w-3/12 text-sidebarTextColor font-semibold text-sm text-center"><%= article.article_sells.sum(:quantity) %></div>
-            </div>
-          <% end %>
-        </div>
+  <% if current_user.viewer? %>
+    <%= render 'pages/dashboard/viewer' %>
+  <% else %>
+    <div class="flex flex-col w-full p-5 gap-5">
+      <div class="flex items-center justify-center gap-12">
+        <%= render 'pages/dashboard/card', { title: 'Ganancias', text: "$ #{number_with_delimiter(@revenue, :delimiter => ',')} MXN" } %>
+        <%= render 'pages/dashboard/card', { title: 'Ventas totales', text: @sells.count } %>
+        <%= render 'pages/dashboard/card', { title: 'Número de articulos', text: @articles.count } %>
       </div>
 
-      <div class="flex flex-col w-1/2 p-5 rounded bg-white shadow border gap-5">
-        <h5 class="font-bold text-lg text-sidebarTextColor">Ventas más recientes</h5>
-        <div class="flex w-full bg-gray-100 rounded">
-          <div class="w-1/12 text-sidebarTextColor font-bold">ID</div>
-          <div class="w-6/12 text-sidebarTextColor font-bold">Fecha</div>
-          <div class="w-5/12 text-sidebarTextColor font-bold">Descripción</div>
-        </div>
-        <div class="flex flex-col w-full gap-1">
-          <% @sells.order(date_of_sell: :desc).limit(5).each do |sell| %>
-            <div class="flex items-center w-full border-b py-1">
-              <div class="w-1/12 text-sidebarTextColor font-semibold text-sm"><%= sell.id %></div>
-              <div class="w-6/12 text-sidebarTextColor font-semibold text-sm"><%= I18n.l(sell.date_of_sell.to_time, format: :long) %></div>
-              <div class="w-5/12 text-sidebarTextColor font-semibold text-sm">
-                <% if sell.description.present? %>
-                  <%= sell.description.length > 30 ? "#{sell.description[0..30]..}" : sell.description %>
-                <% else %>
-                  --
-                <% end %>
+      <div class="flex w-full p-5 rounded bg-white shadow border gap-5">
+        <%= render 'pages/dashboard/chart', { title: 'Ventas en los últimos 30 días' } do %>
+          <%= line_chart Sell.revenue_by_day, colors: ["#1B9C85"], xtitle: "Días", ytitle: "Ganancias", curve: false, prefix: "$", thousands: ",", round: 2, zeros: true, loading: "Cargando..." %>
+        <% end %>
+      </div>
+
+      <div class="flex w-full gap-5">
+        <div class="flex flex-col w-1/2 p-5 rounded bg-white shadow border gap-5">
+          <h5 class="font-bold text-lg text-sidebarTextColor">Últimos articulos añadidos</h5>
+          <div class="flex w-full bg-gray-100 rounded">
+            <div class="w-6/12 text-sidebarTextColor font-bold">Nombre</div>
+            <div class="w-3/12 text-sidebarTextColor font-bold">Precio unitario</div>
+            <div class="w-3/12 text-sidebarTextColor font-bold text-center">Ventas por pieza</div>
+          </div>
+          <div class="flex flex-col w-full gap-1">
+            <% @articles.order(created_at: :desc).limit(5).each do |article| %>
+              <div class="flex items-center w-full border-b py-1">
+                <div class="w-6/12 text-sidebarTextColor font-semibold text-sm"><%= article.name %></div>
+                <div class="w-3/12 text-sidebarTextColor font-semibold text-sm">$ <%= number_with_delimiter(article.price.round(2), :delimiter => ',') %> MXN</div>
+                <div class="w-3/12 text-sidebarTextColor font-semibold text-sm text-center"><%= article.article_sells.sum(:quantity) %></div>
               </div>
-            </div>
-          <% end %>
+            <% end %>
+          </div>
+        </div>
+
+        <div class="flex flex-col w-1/2 p-5 rounded bg-white shadow border gap-5">
+          <h5 class="font-bold text-lg text-sidebarTextColor">Ventas más recientes</h5>
+          <div class="flex w-full bg-gray-100 rounded">
+            <div class="w-1/12 text-sidebarTextColor font-bold">ID</div>
+            <div class="w-6/12 text-sidebarTextColor font-bold">Fecha</div>
+            <div class="w-5/12 text-sidebarTextColor font-bold">Descripción</div>
+          </div>
+          <div class="flex flex-col w-full gap-1">
+            <% @sells.order(date_of_sell: :desc).limit(5).each do |sell| %>
+              <div class="flex items-center w-full border-b py-1">
+                <div class="w-1/12 text-sidebarTextColor font-semibold text-sm"><%= sell.id %></div>
+                <div class="w-6/12 text-sidebarTextColor font-semibold text-sm"><%= I18n.l(sell.date_of_sell.to_time, format: :long) %></div>
+                <div class="w-5/12 text-sidebarTextColor font-semibold text-sm">
+                  <% if sell.description.present? %>
+                    <%= sell.description.length > 30 ? "#{sell.description[0..30]..}" : sell.description %>
+                  <% else %>
+                    --
+                  <% end %>
+                </div>
+              </div>
+            <% end %>
+          </div>
         </div>
       </div>
     </div>
-  </div>
+  <% end %>
 </div>

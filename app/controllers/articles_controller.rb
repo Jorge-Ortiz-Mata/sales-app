@@ -4,18 +4,25 @@ class ArticlesController < AuthenticatedController
   def index
     @articles = Article.all.order(:created_at)
     @filter_form = FilterForm.new
+    authorize @articles
   end
 
-  def show; end
+  def show
+    authorize @article
+  end
 
   def new
     @article = Article.new
+    authorize @article
   end
 
-  def edit; end
+  def edit
+    authorize @article
+  end
 
   def create
     @article = Article.new(article_params)
+    authorize @article
 
     respond_to do |format|
       if @article.save
@@ -27,6 +34,8 @@ class ArticlesController < AuthenticatedController
   end
 
   def update
+    authorize @article
+
     respond_to do |format|
       if @article.update(article_params)
         format.html { redirect_to article_url(@article), notice: 'El articulo ha sido actualizado exitosamente' }
@@ -37,6 +46,7 @@ class ArticlesController < AuthenticatedController
   end
 
   def destroy
+    authorize @article
     @article.destroy
 
     respond_to do |format|
@@ -44,9 +54,12 @@ class ArticlesController < AuthenticatedController
     end
   end
 
-  def add_categories; end
+  def add_categories
+    authorize @article
+  end
 
   def save_categories
+    authorize @article
     @article.categories.clear
 
     category_ids.each do |id|

@@ -14,7 +14,20 @@
     </div>
   <% end %>
 
-  <div class="flex flex-col overflow-y-auto p-5 gap-5">
-    <%= render 'articles', { articles: @articles, filter_form: @filter_form } %>
+    <% if @articles.any? %>
+      <div class="flex flex-col overflow-y-auto p-5 gap-5">
+        <%= render 'articles', { articles: @articles, filter_form: @filter_form } %>
+      </div>
+    <% else %>
+      <div class="flex flex-col p-5 rounded shadow border w-full h-full items-center justify-center gap-10">
+        <i class="fa-solid fa-warehouse text-[190px] text-sidebarTextColor"></i>
+        <div class="flex flex-col">
+          <h5 class="font-semibold text-lg text-sidebarTextColor text-center">Ningún articulo en existencia.</h5>
+          <p class="text-sidebarTextColor">
+            Actualmente no cuentas con ningún artículo en existencia.
+          </p>
+        </div>
+      </div>
+    <% end %>
   </div>
 </section>

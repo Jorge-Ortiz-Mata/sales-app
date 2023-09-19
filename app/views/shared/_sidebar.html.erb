@@ -8,40 +8,44 @@
   <% end %>
 
   <ul class="flex flex-col w-full">
-    <li class="flex items-center w-full">
-      <%= link_to root_path, class: style_to_sidebar_link(root_path) do %>
-        <i class="fa-solid fa-house"></i>
-        <span>Dashboard</span>
-      <% end %>
-    </li>
+    <% if current_user.editor? || current_user.admin? %>
+      <li class="flex items-center w-full">
+        <%= link_to root_path, class: style_to_sidebar_link(root_path) do %>
+          <i class="fa-solid fa-house"></i>
+          <span>Dashboard</span>
+        <% end %>
+      </li>
 
-    <li class="flex items-center w-full">
-      <%= link_to articles_path, class: style_to_sidebar_link(articles_path) do %>
-        <i class="fa-solid fa-warehouse"></i>
-        <span>Articulos</span>
-      <% end %>
-    </li>
+      <li class="flex items-center w-full">
+        <%= link_to articles_path, class: style_to_sidebar_link(articles_path) do %>
+          <i class="fa-solid fa-warehouse"></i>
+          <span>Articulos</span>
+        <% end %>
+      </li>
 
-    <li class="flex items-center w-full">
-      <%= link_to sells_path, class: style_to_sidebar_link(sells_path) do %>
-        <i class="fa-solid fa-sack-dollar"></i>
-        <span>Ventas</span>
-      <% end %>
-    </li>
+      <li class="flex items-center w-full">
+        <%= link_to sells_path, class: style_to_sidebar_link(sells_path) do %>
+          <i class="fa-solid fa-sack-dollar"></i>
+          <span>Ventas</span>
+        <% end %>
+      </li>
 
-    <li class="flex items-center w-full">
-      <%= link_to categories_path, class: style_to_sidebar_link(categories_path) do %>
-        <i class="fa-solid fa-shapes"></i>
-        <span>Categorias</span>
-      <% end %>
-    </li>
+      <li class="flex items-center w-full">
+        <%= link_to categories_path, class: style_to_sidebar_link(categories_path) do %>
+          <i class="fa-solid fa-shapes"></i>
+          <span>Categorias</span>
+        <% end %>
+      </li>
+    <% end %>
 
-    <li class="flex items-center">
-      <%= link_to settings_path, class: style_to_sidebar_link(settings_path) do %>
-        <i class="fa-solid fa-gear"></i>
-        <span>Configuración</span>
-      <% end %>
-    </li>
+    <% if current_user.admin? %>
+      <li class="flex items-center">
+        <%= link_to settings_path, class: style_to_sidebar_link(settings_path) do %>
+          <i class="fa-solid fa-gear"></i>
+          <span>Configuración</span>
+        <% end %>
+      </li>
+    <% end %>
   </ul>
 
   <% if current_user %>
