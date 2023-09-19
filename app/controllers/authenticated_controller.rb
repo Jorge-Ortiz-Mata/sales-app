@@ -1,7 +1,6 @@
 class AuthenticatedController < ApplicationController
   before_action :authenticate_user
   helper_method :logged_in?, :current_user
-  # include Pundit
 
   def current_user
     @current_user ||= User.find(session[:user_id]) if session[:user_id]
