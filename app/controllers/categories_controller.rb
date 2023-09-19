@@ -3,16 +3,20 @@ class CategoriesController < AuthenticatedController
 
   def index
     @categories = Category.all.order(:created_at)
+    authorize @categories
   end
 
   def new
     @category = Category.new
+    authorize @category
   end
 
   def edit; end
 
   def create
     @category = Category.new category_params
+    authorize @category
+
 
     respond_to do |format|
       if @category.save
@@ -24,6 +28,8 @@ class CategoriesController < AuthenticatedController
   end
 
   def update
+    authorize @category
+
     respond_to do |format|
       if @category.update category_params
         format.turbo_stream { render turbo_stream: turbo_stream.replace("category_#{@category.id}", partial: 'categories/category', locals: { category: @category })}
@@ -34,6 +40,8 @@ class CategoriesController < AuthenticatedController
   end
 
   def destroy
+    authorize @category
+
     @category.destroy
 
     respond_to do |format|

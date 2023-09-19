@@ -11,6 +11,8 @@ class User < ApplicationRecord
 
   after_create :create_profile
 
+  enum role: %i[viewer editor admin]
+
   def created_at_formatted
     I18n.l(created_at, format: :long)
   end

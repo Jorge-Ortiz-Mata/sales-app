@@ -1,6 +1,7 @@
 class AuthenticatedController < ApplicationController
   before_action :authenticate_user
   helper_method :logged_in?, :current_user
+  # include Pundit
 
   def current_user
     @current_user ||= User.find(session[:user_id]) if session[:user_id]
@@ -23,3 +24,14 @@ class AuthenticatedController < ApplicationController
     redirect_to root_path
   end
 end
+
+
+
+  # rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
+
+  # private
+
+  # def user_not_authorized
+  #   flash[:notice] = 'No tienes los permisos necesarios para realizar esta acción'
+  #   redirect_to(request.referrer || root_path)
+  # end

@@ -4,18 +4,25 @@ class SellsController < AuthenticatedController
   def index
     @sells = Sell.order(date_of_sell: :desc)
     @sells_filter = SellsFilter.new
+    authorize @sells
   end
 
-  def show; end
+  def show
+    authorize @sell
+  end
 
   def new
     @sell = Sell.new
+    authorize @sell
   end
 
-  def edit; end
+  def edit
+    authorize @sell
+  end
 
   def create
     @sell = Sell.new(sell_params)
+    authorize @sell
 
     respond_to do |format|
       if @sell.save
@@ -27,6 +34,8 @@ class SellsController < AuthenticatedController
   end
 
   def update
+    authorize @sell
+
     respond_to do |format|
       if @sell.update(sell_params)
         format.html { redirect_to sell_url(@sell), notice: 'La venta ha sido actualizada exitosamente.' }
@@ -37,6 +46,8 @@ class SellsController < AuthenticatedController
   end
 
   def destroy
+    authorize @sell
+
     @sell.destroy
 
     respond_to do |format|

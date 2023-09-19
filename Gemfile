@@ -33,6 +33,9 @@ gem "font-awesome-sass", "~> 6.4.2"
 # Validations for Active Storage (presence).
 gem 'active_storage_validations', '~> 1.0', '>= 1.0.4'
 
+# Object oriented authorization for Rails applications
+gem 'pundit', '~> 1.1'
+
 # Use Redis adapter to run Action Cable in production
 # gem "redis", "~> 4.0"
 
