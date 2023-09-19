@@ -4,7 +4,7 @@
   <div class="flex items-center justify-between w-full">
     <%= render 'shared/breadcumb', { path: articles_path, path_text: 'Articulos', text: article.name } %>
 
-    <div class="flex items-center gap-2">
+    <div class="flex items-center justify-end gap-2">
       <%= link_to add_categories_article_path(article), class: 'btn-warning', data: { turbo_frame: 'add_categories_modal' } do %>
         Asignar categorias
       <% end %>

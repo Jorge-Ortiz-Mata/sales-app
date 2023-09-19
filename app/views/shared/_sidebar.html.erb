@@ -36,8 +36,9 @@
           <span>Categorias</span>
         <% end %>
       </li>
+    <% end %>
 
-    <% elsif current_user.admin? %>
+    <% if current_user.admin? %>
       <li class="flex items-center">
         <%= link_to settings_path, class: style_to_sidebar_link(settings_path) do %>
           <i class="fa-solid fa-gear"></i>
