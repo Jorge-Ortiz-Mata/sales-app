@@ -21,4 +21,7 @@
   .btn-warning {
     @apply flex text-sm font-bold rounded bg-warning hover:bg-yellow-700 px-4 py-2 text-white items-center gap-2 duration-300;
   }
+  .table-header {
+    @apply flex w-full bg-slate-100 p-2 border rounded shadow;
+  }
 }

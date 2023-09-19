@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  namespace :admin do
+    resources :users
+  end
   # User Authentication routes.
   resources :users, only: %i[create] do
     resources :profiles

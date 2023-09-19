@@ -51,6 +51,12 @@ en:
       password_reset:
         password: La contraseña
         password_confirmation: La confirmación de la contraseña
+      admin_user:
+        email: El correo electrónico
+        password: La contraseña
+        first_name: El nombre
+        last_name: Los apellidos
+        phone_number: El número de teléfono
 
     errors:
       models:
@@ -72,10 +78,13 @@ en:
           does_not_exist: 'no está asociado a ningun usuario'
         password_reset:
           are_not_equal: 'es diferente a la confirmación de la contraseña'
+        admin_user:
+          email_exists: 'ya está registrado por otro usuario'
       messages:
         blank: 'no debe estar en blanco'
         taken: 'ya ha sido registrado'
         too_short: 'debe ser mínimo de %{count} caracteres'
+        too_long: 'debe tener como máximo %{count} caracteres'
 
   activerecord:
     attributes:
@@ -94,10 +103,15 @@ en:
       article_sell:
         quantity: La cantidad
         article_id: El articulo
+      profile:
+        first_name: El nombre
+        last_name: Los apellidos
+        phone_number: El número de teléfono
       user:
         email: El correo electrónico
         password: La contraseña
         password_confirmation: La confirmación de la contraseña
+        role: Rol
 
     errors:
       models:
@@ -114,3 +128,4 @@ en:
         taken: 'ya ha sido registrado'
         greater_than: 'debe ser mayor a %{count}'
         greater_than_or_equal_to: 'debe ser mayor o igual a %{count}'
+        too_long: 'debe tener como máximo %{count} caracteres'
