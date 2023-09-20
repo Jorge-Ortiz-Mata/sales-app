@@ -17,13 +17,6 @@ class User < ApplicationRecord
     I18n.l(created_at, format: :long)
   end
 
-  def humanize_role
-    return 'Administrador' if admin?
-    return 'Editor' if editor?
-
-    'Vista'
-  end
-
   private
 
   def create_profile

@@ -1,0 +1,65 @@
+<%= form_with(model: admin_user, url: admin_user_path(user.token_id), method: :patch, class: 'flex flex-col w-full bg-slate-50 my-5 p-5 gap-1 rounded border', id: "edit_form_#{user.id}") do |f| %>
+  <div class="flex items-start w-full gap-2">
+    <div class="flex flex-col w-1/2 items-start">
+      <%= f.label :email, 'Correo electrónico:', class: 'font-bold mb-1' %>
+      <%= f.email_field :email, class: "input-tailwindcss font-semibold #{ error_input_border(admin_user.errors.include?(:email)) }" %>
+      <% if admin_user.errors.include?(:email) %>
+        <%= render 'shared/input_error_msg', { object: admin_user, attribute: :email } %>
+      <% end %>
+    </div>
+
+    <div class="flex flex-col w-1/2 items-start">
+      <%= f.label :password, 'Contraseña:', class: 'font-bold mb-1' %>
+      <%= f.password_field :password, class: "input-tailwindcss font-semibold #{ error_input_border(admin_user.errors.include?(:password)) }" %>
+      <% if admin_user.errors.include?(:password) %>
+        <%= render 'shared/input_error_msg', { object: admin_user, attribute: :password } %>
+      <% end %>
+    </div>
+  </div>
+
+  <div class="flex items-start w-full gap-2">
+    <div class="flex flex-col w-1/2 items-start">
+      <%= f.label :first_name, 'Nombre(s):', class: 'font-bold mb-1' %>
+      <%= f.text_field :first_name, class: "input-tailwindcss font-semibold #{ error_input_border(admin_user.errors.include?(:first_name)) }" %>
+      <% if admin_user.errors.include?(:first_name) %>
+        <%= render 'shared/input_error_msg', { object: admin_user, attribute: :first_name } %>
+      <% end %>
+    </div>
+    <div class="flex flex-col w-1/2 items-start">
+      <%= f.label :last_name, 'Apellido(s):', class: 'font-bold mb-1' %>
+      <%= f.text_field :last_name, class: "input-tailwindcss font-semibold #{ error_input_border(admin_user.errors.include?(:last_name)) }" %>
+      <% if admin_user.errors.include?(:last_name) %>
+        <%= render 'shared/input_error_msg', { object: admin_user, attribute: :last_name } %>
+      <% end %>
+    </div>
+  </div>
+
+  <div class="flex items-start w-full gap-2">
+    <div class="flex flex-col w-1/2 items-start">
+      <%= f.label :role, 'Rol:', class: 'font-bold mb-1' %>
+      <%= f.select(:role, User.roles.keys.map { |n| [humanize_role(n), n] }, { include_blank: true },{ class: "input-tailwindcss font-semibold #{ error_input_border(admin_user.errors.include?(:role)) }" }) %>
+      <% if admin_user.errors.include?(:role) %>
+        <%= render 'shared/input_error_msg', { object: admin_user, attribute: :role } %>
+      <% end %>
+    </div>
+
+    <div class="flex flex-col w-1/2 items-start">
+      <%= f.label :phone_number, 'Teléfono:', class: 'font-bold mb-1' %>
+      <%= f.text_field :phone_number, class: "input-tailwindcss font-semibold #{ error_input_border(admin_user.errors.include?(:phone_number)) }" %>
+      <% if admin_user.errors.include?(:phone_number) %>
+        <%= render 'shared/input_error_msg', { object: admin_user, attribute: :phone_number } %>
+      <% end %>
+    </div>
+  </div>
+
+  <div class="flex items-center justify-end gap-3 mt-5">
+    <div class="flex items-center text-sm font-semibold">
+      <%= f.submit 'Actualizar usuario', class: "rounded py-2 px-4 bg-green-500 text-white font-semibold cursor-pointer" %>
+    </div>
+
+    <%= link_to :back, class: "flex text-sm font-semibold rounded bg-danger px-4 py-2 text-white items-center gap-1" do %>
+      <span>Regresar</span>
+    <% end %>
+  </div>
+<% end %>
+<hr>
