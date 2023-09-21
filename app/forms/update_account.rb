@@ -1,7 +1,7 @@
 class UpdateAccount
   include ActiveModel::Model
 
-  attr_accessor :id, :email, :password, :password_confirmation, :old_password
+  attr_accessor :id, :email, :password, :password_confirmation, :old_password, :token_id
 
   validates :email, :old_password, presence: true
   validates :password, presence: true, if: :password_confirmation_is_present?
@@ -11,14 +11,7 @@ class UpdateAccount
   validates :password_confirmation, length: { minimum: 8 }, if: :password_confirmation_is_present?
   validate :same_passwords, if: :both_passwords_are_present?
   validate :validate_current_password
-
-  def initialize(id, email, password, password_confirmation, old_password)
-    self.id = id
-    self.email = email
-    self.password = password
-    self.password_confirmation = password_confirmation
-    self.old_password = old_password
-  end
+  validate :not_repeated_email
 
   def save
     return false if invalid?
@@ -56,5 +49,15 @@ class UpdateAccount
     return unless old_password.present?
 
     errors.add(:old_password, :incorrect_credentials) unless User.find(id).authenticate(old_password)
+  end
+
+  def not_repeated_email
+    user = User.find_by(email: email)
+
+    return unless user.present?
+
+    return if user.token_id.eql? token_id
+
+    errors.add(:email, 'ya ha sido registrado')
   end
 end

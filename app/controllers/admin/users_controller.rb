@@ -1,23 +1,40 @@
 module Admin
   class UsersController < AuthenticatedController
     before_action :authorize_user
+    before_action :set_user, only: %i[edit update]
 
     def index
       @users = User.joins(:profile).order(:first_name)
     end
 
     def new
-      @user = AdminUser.new
+      @user = CreateUser.new
+    end
+
+    def edit
+      @admin_user = Admin::UpdateAccount.new({ email: @user.email, role: @user.role, token_id: @user.token_id })
     end
 
     def create
-      @user = AdminUser.new user_params
+      @user = CreateUser.new user_params
 
       respond_to do |format|
         if @user.save
           format.html { redirect_to admin_users_path, notice: 'El usuario ha sido creado exitosamente' }
         else
           format.turbo_stream { render turbo_stream: turbo_stream.replace('admin_user_form', partial: 'admin/users/form', locals: { user: @user }) }
+        end
+      end
+    end
+
+    def update
+      @admin_user = Admin::UpdateAccount.new admin_update_account
+
+      respond_to do |format|
+        if @admin_user.save
+          format.html { redirect_to admin_users_path, notice: 'El usuario ha sido actualizado exitosamente' }
+        else
+          format.turbo_stream { render turbo_stream: turbo_stream.replace('edit_admin_user_account', partial: 'admin/users/forms/edit_account', locals: { user: @admin_user }) }
         end
       end
     end
@@ -29,7 +46,7 @@ module Admin
     private
 
     def set_user
-      @user = User.find_by(token_id: params[:token_id])
+      @user = User.find_by(token_id: params[:id])
     end
 
     def authorize_user
@@ -38,6 +55,10 @@ module Admin
 
     def user_params
       params.require(:admin_user).permit(:email, :password, :first_name, :last_name, :phone_number, :role)
+    end
+
+    def admin_update_account
+      params.require(:admin_update_account).permit(:email, :password, :role, :token_id)
     end
   end
 end

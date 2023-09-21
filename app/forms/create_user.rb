@@ -1,4 +1,4 @@
-class AdminUser
+class CreateUser
   include ActiveModel::Model
 
   attr_accessor :email, :password, :first_name, :last_name, :phone_number, :role
