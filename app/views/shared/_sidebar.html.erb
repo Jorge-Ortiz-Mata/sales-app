@@ -40,9 +40,9 @@
 
     <% if current_user.admin? %>
       <li class="flex items-center">
-        <%= link_to settings_path, class: style_to_sidebar_link(settings_path) do %>
+        <%= link_to admin_users_path, class: style_to_sidebar_link(admin_users_path) do %>
           <i class="fa-solid fa-gear"></i>
-          <span>Configuración</span>
+          <span>Administrador</span>
         <% end %>
       </li>
     <% end %>
@@ -52,8 +52,8 @@
     <div class="flex flex-col w-full items-end gap-5">
       <%= link_to user_path(current_user.token_id), class: 'flex items-center w-full justify-end gap-2' do %>
         <div class="flex flex-col">
-          <h6 class="font-bold text-end"><%= current_user.profile.full_name %></h6>
-          <p class="font-medium text-sm"><%= current_user.email %></p>
+          <h6 class="font-bold text-sm text-end"><%= current_user.profile.full_name %></h6>
+          <p class="font-medium text-sm text-end"><%= current_user.email %></p>
         </div>
 
         <% if current_user.profile.avatar.attached? %>

@@ -3,6 +3,7 @@ class ArticleSell < ApplicationRecord
   belongs_to :sell
 
   validates :article_id, :quantity, presence: true
+  validates :quantity, numericality: { only_integer: true, message: 'debe tener solo números' }
   validates :quantity, comparison: { greater_than_or_equal_to: 0 }
   validate :article_exists?
 

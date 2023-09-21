@@ -1,0 +1,21 @@
+<div class="flex flex-col p-5">
+  <div class="flex flex-col w-full bg-white rounded shadow border p-5 gap-5">
+    <h3 class="font-semibold text-sidebarTextColor text-xl">Todos los usuarios</h3>
+
+    <div class="flex flex-col w-full">
+      <div class="table-header">
+        <div class="font-semibold text-sidebarTextColor w-3/12">Nombre</div>
+        <div class="font-semibold text-sidebarTextColor w-2/12">Teléfono</div>
+        <div class="font-semibold text-sidebarTextColor w-3/12">Correo</div>
+        <div class="font-semibold text-sidebarTextColor w-2/12">Fecha de alta</div>
+        <div class="font-semibold text-sidebarTextColor w-1/12">Rol</div>
+        <div class="font-semibold text-sidebarTextColor w-1/12 text-center">Opciones</div>
+      </div>
+      <div class="flex flex-col w-full">
+        <% @users.each do |user| %>
+          <%= render user %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

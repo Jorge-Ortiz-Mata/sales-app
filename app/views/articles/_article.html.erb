@@ -11,7 +11,7 @@
       <%= link_to edit_article_path(@article), class: "btn-primary" do %>
         <i class="fa-solid fa-pen-to-square"></i> Editar
       <% end %>
-      <%= button_to article_path(article), method: :delete, form: { data: { turbo_confirm: 'Estas seguro de eliminar este articulo?' } }, class: "btn-danger" do %>
+      <%= button_to article_path(article), method: :delete, form: { data: { turbo_confirm: 'Estas seguro de eliminar este articulo? Todas las ventas asociadas a este articulo desaparecerán.' } }, class: "btn-danger" do %>
         <i class="fa-solid fa-trash"></i> Eliminar
       <% end %>
     </div>

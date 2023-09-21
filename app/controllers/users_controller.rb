@@ -6,7 +6,14 @@ class UsersController < AuthenticatedController
   layout 'unauthenticated', only: %i[create]
 
   def edit
-    @update_account = UpdateAccount.new(current_user.id, current_user.email, current_user.password, current_user.password_confirmation, '')
+    @update_account = UpdateAccount.new({
+                                          id: current_user.id,
+                                          email: current_user.email,
+                                          password: current_user.password,
+                                          password_confirmation: '',
+                                          old_password: '',
+                                          token_id: current_user.token_id
+                                        })
   end
 
   def show; end
@@ -23,7 +30,14 @@ class UsersController < AuthenticatedController
   end
 
   def update
-    @update_account = UpdateAccount.new(current_user.id, account_params[:email], account_params[:password], account_params[:password_confirmation], account_params[:old_password])
+    @update_account = UpdateAccount.new({
+                                          id: current_user.id,
+                                          email: account_params[:email],
+                                          password: account_params[:password],
+                                          password_confirmation: account_params[:password_confirmation],
+                                          old_password: account_params[:old_password],
+                                          token_id: current_user.token_id
+                                        })
 
     if @update_account.save
       redirect_to user_path(current_user.token_id), notice: 'Tu cuenta ha sido actualizada exitosamente'
