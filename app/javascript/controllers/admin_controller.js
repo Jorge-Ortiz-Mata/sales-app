@@ -6,7 +6,6 @@ export default class extends Controller {
     const profileForm = document.getElementById('edit_admin_user_profile');
     const accountForm = document.getElementById('edit_admin_user_account');
 
-
     profileForm.classList.remove('hidden');
     accountForm.classList.add('hidden');
   }

@@ -18,4 +18,12 @@ class Article < ApplicationRecord
   has_many :article_sells
   has_many :sells, through: :article_sells
   has_and_belongs_to_many :categories
+
+  before_destroy :delete_articles_associations
+
+  private
+
+  def delete_articles_associations
+    ArticleSell.where(article_id: id).delete_all
+  end
 end
