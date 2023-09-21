@@ -58,6 +58,10 @@ en:
         last_name: Los apellidos
         phone_number: El número de teléfono
         role: El role
+      admin/update_account:
+        email: El correo electrónico
+        password: La contraseña
+        role: El rol
 
     errors:
       models:
@@ -81,6 +85,10 @@ en:
           are_not_equal: 'es diferente a la confirmación de la contraseña'
         admin_user:
           email_exists: 'ya está registrado por otro usuario'
+        admin/update_account:
+          email_exists: 'ya está registrado por otro usuario'
+          invalid_role: 'es inválido. Debe ser cualquiera de estos tres: Vista, Administrador o Editor'
+
       messages:
         blank: 'no debe estar en blanco'
         taken: 'ya ha sido registrado'

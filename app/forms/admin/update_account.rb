@@ -33,13 +33,13 @@ module Admin
 
       return if user.token_id.eql? token_id
 
-      errors.add(:email, 'ha sido tomado')
+      errors.add(:email, :email_exists)
     end
 
     def role_validation
       return if User.roles.include?(role)
 
-      errors.add(:role, 'es invalido')
+      errors.add(:role, :invalid_role)
     end
   end
 end
