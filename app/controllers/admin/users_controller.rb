@@ -13,6 +13,7 @@ module Admin
 
     def edit
       @admin_user = Admin::UpdateAccount.new({ email: @user.email, role: @user.role, token_id: @user.token_id })
+      @admin_user_profile = Admin::UpdateProfile.new({ first_name: @profile.first_name, last_name: @profile.last_name, phone_number: @profile.phone_number, token_id: @user.token_id })
     end
 
     def create
@@ -28,13 +29,25 @@ module Admin
     end
 
     def update
-      @admin_user = Admin::UpdateAccount.new admin_update_account
+      @admin_user = Admin::UpdateAccount.new admin_update_account_params
 
       respond_to do |format|
         if @admin_user.save
           format.html { redirect_to admin_users_path, notice: 'El usuario ha sido actualizado exitosamente' }
         else
-          format.turbo_stream { render turbo_stream: turbo_stream.replace('edit_admin_user_account', partial: 'admin/users/forms/edit_account', locals: { user: @admin_user }) }
+          format.turbo_stream { render turbo_stream: turbo_stream.replace('edit_admin_user_account', partial: 'admin/users/forms/edit_account', locals: { user: @admin_user, state: '' }) }
+        end
+      end
+    end
+
+    def update_profile
+      @admin_user_profile = Admin::UpdateProfile.new admin_update_profile_params
+
+      respond_to do |format|
+        if @admin_user_profile.save
+          format.html { redirect_to admin_users_path, notice: 'El usuario ha sido actualizado exitosamente' }
+        else
+          format.turbo_stream { render turbo_stream: turbo_stream.replace('edit_admin_user_profile', partial: 'admin/users/forms/edit_profile', locals: { user: @admin_user_profile, state: '' }) }
         end
       end
     end
@@ -47,6 +60,7 @@ module Admin
 
     def set_user
       @user = User.find_by(token_id: params[:id])
+      @profile = @user.profile
     end
 
     def authorize_user
@@ -57,8 +71,12 @@ module Admin
       params.require(:admin_user).permit(:email, :password, :first_name, :last_name, :phone_number, :role)
     end
 
-    def admin_update_account
+    def admin_update_account_params
       params.require(:admin_update_account).permit(:email, :password, :role, :token_id)
+    end
+
+    def admin_update_profile_params
+      params.require(:admin_update_profile).permit(:first_name, :last_name, :phone_number, :token_id)
     end
   end
 end

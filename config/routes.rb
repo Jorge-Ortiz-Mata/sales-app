@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
   namespace :admin do
-    resources :users
+    resources :users do
+      patch '/update/profile', to: 'users#update_profile', on: :member
+    end
   end
   # User Authentication routes.
   resources :users, only: %i[create] do

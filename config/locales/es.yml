@@ -62,6 +62,10 @@ en:
         email: El correo electrónico
         password: La contraseña
         role: El rol
+      admin/update_profile:
+        first_name: El nombre
+        last_name: Los apellidos
+        phone_number: El número de teléfono
 
     errors:
       models:

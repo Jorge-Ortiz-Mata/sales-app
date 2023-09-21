@@ -13,5 +13,6 @@ class UserPolicy < ApplicationPolicy
   alias create? index?
   alias edit? index?
   alias update? index?
+  alias update_profile? index?
   alias destroy? index?
 end
