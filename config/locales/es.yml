@@ -51,7 +51,7 @@ en:
       password_reset:
         password: La contraseña
         password_confirmation: La confirmación de la contraseña
-      admin_user:
+      admin/create_user:
         email: El correo electrónico
         password: La contraseña
         first_name: El nombre
@@ -87,7 +87,7 @@ en:
           does_not_exist: 'no está asociado a ningun usuario'
         password_reset:
           are_not_equal: 'es diferente a la confirmación de la contraseña'
-        admin_user:
+        admin/create_user:
           email_exists: 'ya está registrado por otro usuario'
         admin/update_account:
           email_exists: 'ya está registrado por otro usuario'
