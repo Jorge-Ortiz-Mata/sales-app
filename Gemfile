@@ -109,3 +109,9 @@ group :test do
 end
 
 gem "tailwindcss-rails", "~> 2.0"
+
+# A PDF generation plugin for Ruby on Rails
+gem 'wicked_pdf'
+
+# Because wicked_pdf is a wrapper for wkhtmltopdf, you'll need to install that, too.
+gem 'wkhtmltopdf-binary'
