@@ -24,6 +24,7 @@ Rails.application.routes.draw do
   # get '/email/confirmation/:token_id', to: 'users#confirm_account', as: 'confirm_user_account'
 
   resources :sells do
+    get '/export/pdf', to: 'sells#export_pdf', on: :member
     post '/filter', to: 'sells#filter', on: :collection
     resources :article_sells
   end

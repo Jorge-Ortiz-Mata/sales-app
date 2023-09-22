@@ -1,5 +1,5 @@
 class SellsController < AuthenticatedController
-  before_action :set_sell, only: %i[show edit update destroy]
+  before_action :set_sell, only: %i[show edit update destroy export_pdf]
 
   def index
     @sells = Sell.order(date_of_sell: :desc)
@@ -65,6 +65,14 @@ class SellsController < AuthenticatedController
         format.turbo_stream { render turbo_stream: turbo_stream.replace('sells', partial: 'sells/sells', locals: { sells: sells_filtered, sells_filter: @sells_filter }) }
       else
         format.turbo_stream { render turbo_stream: turbo_stream.replace('filter_form', partial: 'sells/filter_form', locals: { sells_filter: @sells_filter }) }
+      end
+    end
+  end
+
+  def export_pdf
+    respond_to do |format|
+      format.pdf do
+        render pdf: "file_name", template: "sells/export_pdf", formats: [:html]
       end
     end
   end
