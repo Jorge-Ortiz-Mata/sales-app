@@ -1,20 +1,27 @@
 class CustomersController < AuthenticatedController
-  before_action :set_customer, only: %i[show edit update destroy]
+  before_action :set_customer, only: %i[edit update destroy]
 
   def index
-    @customers = Customer.all
+    @customers = Customer.all.order(:created_at)
+    authorize @customers
   end
 
-  def show; end
+  # def show
+  #   authorize @customer
+  # end
 
   def new
     @customer = Customer.new
+    authorize @customer
   end
 
-  def edit; end
+  def edit
+    authorize @customer
+  end
 
   def create
     @customer = Customer.new(customer_params)
+    authorize @customer
 
     respond_to do |format|
       if @customer.save
@@ -26,6 +33,8 @@ class CustomersController < AuthenticatedController
   end
 
   def update
+    authorize @customer
+
     respond_to do |format|
       if @customer.update(customer_params)
         format.html { redirect_to customer_url(@customer), notice: 'Customer was successfully updated.' }
@@ -36,6 +45,7 @@ class CustomersController < AuthenticatedController
   end
 
   def destroy
+    authorize @customer
     @customer.destroy
 
     respond_to do |format|

@@ -70,6 +70,8 @@ class SellsController < AuthenticatedController
   end
 
   def export_pdf
+    authorize @sell
+
     respond_to do |format|
       format.pdf do
         render pdf: "file_name", template: "sells/export_pdf", formats: [:html]

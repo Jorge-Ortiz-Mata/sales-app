@@ -1,14 +1,28 @@
-<div class="w-full">
-  <% if notice.present? %>
-    <p class="py-2 px-3 bg-green-50 mb-5 text-green-500 font-medium rounded-lg inline-block" id="notice"><%= notice %></p>
+<section class="flex flex-col h-full w-full">
+  <%= render 'shared/navbar' do %>
+    <%= link_to customers_path, class: 'flex items-center' do %>
+      <h1 class="font-bold text-2xl text-sidebarTextColor">Clientes</h1>
+    <% end %>
+
+    <%= link_to new_customer_path, class: "flex text-sm font-bold rounded bg-success px-4 py-2 text-white items-center gap-2", data: { turbo_frame: 'new_sell' } do %>
+      <span>Añadir cliente</span>
+      <i class="fa-solid fa-plus text-base"></i>
+    <% end %>
   <% end %>
 
-  <div class="flex justify-between items-center">
-    <h1 class="font-bold text-4xl">Customers</h1>
-    <%= link_to 'New customer', new_customer_path, class: "rounded-lg py-3 px-5 bg-blue-600 text-white block font-medium" %>
-  </div>
-
-  <div id="customers" class="min-w-full">
-    <%= render @customers %>
-  </div>
-</div>
+  <% if @customers.any? %>
+      <div class="flex flex-col overflow-y-auto p-5 gap-5">
+        <%= render 'customers', { customers: @customers } %>
+      </div>
+    <% else %>
+      <div class="flex flex-col p-5 rounded shadow border w-full h-full items-center justify-center gap-10">
+        <i class="fa-solid fa-users text-[190px] text-sidebarTextColor"></i>
+        <div class="flex flex-col">
+          <h5 class="font-semibold text-lg text-sidebarTextColor text-center">Ningún cliente registrado.</h5>
+          <p class="text-sidebarTextColor">
+            Actualmente no hay ningún cliente registrado.
+          </p>
+        </div>
+      </div>
+    <% end %>
+</section>

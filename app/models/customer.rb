@@ -1,5 +1,3 @@
 class Customer < ApplicationRecord
-  validates :full_name
-  validates :phone_number
-  validates :address
+  validates :full_name, :phone_number, :address, presence: true
 end

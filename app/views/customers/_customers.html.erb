@@ -1,0 +1,25 @@
+<div class="rounded border shadow p-5 flex flex-col w-full bg-white gap-10" id="articles">
+  <% if customers.any? %>
+    <div class="flex flex-col w-full gap-2">
+      <div class="flex w-full bg-gray-100 rounded p-1">
+        <div class="flex items-center w-1/12 font-bold text-sidebarTextColor">ID</div>
+        <div class="flex items-center w-4/12 font-bold text-sidebarTextColor">Nombre</div>
+        <div class="flex items-center w-2/12 font-bold text-sidebarTextColor">Número de teléfono</div>
+        <div class="flex items-center w-5/12 font-bold text-sidebarTextColor">Dirección</div>
+      </div>
+
+      <div class="flex flex-col w-full">
+        <% customers.each do |customer| %>
+          <div class="flex items-center w-full hover:bg-gray-100 py-2 px-1 duration-300 border-b">
+            <div class="font-semibold text-sm text-sidebarTextColor w-1/12"><%= customer.id %></div>
+            <div class="font-semibold text-sm text-sidebarTextColor w-4/12"><%= customer.full_name %></div>
+            <div class="font-semibold text-sm text-sidebarTextColor w-2/12"><%= customer.phone_number %></div>
+            <div class="font-semibold text-sm text-sidebarTextColor w-5/12"><%= customer.address %></div>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  <% else %>
+    <p class="font-semibold">No se encontraron clientes registrados.</p>
+  <% end %>
+</div>

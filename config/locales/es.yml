@@ -125,6 +125,10 @@ en:
         password: La contraseña
         password_confirmation: La confirmación de la contraseña
         role: Rol
+      customer:
+        full_name: El nombre completo
+        phone_number: El número de teléfono
+        address: La dirección
 
     errors:
       models:

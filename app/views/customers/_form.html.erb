@@ -1,32 +1,38 @@
-<%= form_with(model: customer, class: "contents") do |form| %>
-  <% if customer.errors.any? %>
-    <div id="error_explanation" class="bg-red-50 text-red-500 px-3 py-2 font-medium rounded-lg mt-3">
-      <h2><%= pluralize(customer.errors.count, "error") %> prohibited this customer from being saved:</h2>
+<%= form_with(model: customer, class: "flex flex-col w-full gap-10") do |form| %>
 
-      <ul>
-        <% customer.errors.each do |error| %>
-          <li><%= error.full_message %></li>
-        <% end %>
-      </ul>
+  <div class="flex justify-between gap-1 w-full">
+    <div class="flex flex-col gap-1 w-6/12 items-start">
+      <%= form.label :full_name, 'Nombre completo:', class: 'font-bold mb-1' %>
+      <%= form.text_field :full_name, class: "input-tailwindcss font-semibold #{ error_input_border(customer.errors.include?(:full_name)) }" %>
+      <% if customer.errors.include?(:full_name) %>
+        <%= render 'shared/input_error_msg', { object: customer, attribute: :full_name } %>
+      <% end %>
     </div>
-  <% end %>
 
-  <div class="my-5">
-    <%= form.label :full_name %>
-    <%= form.text_field :full_name, class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full" %>
+    <div class="flex flex-col gap-1 w-6/12 items-start">
+      <%= form.label :phone_number, 'Número de télefono:', class: 'font-bold mb-1' %>
+      <%= form.text_field :phone_number, class: "input-tailwindcss font-semibold #{ error_input_border(customer.errors.include?(:phone_number)) }" %>
+      <% if customer.errors.include?(:phone_number) %>
+        <%= render 'shared/input_error_msg', { object: customer, attribute: :phone_number } %>
+      <% end %>
+    </div>
   </div>
 
-  <div class="my-5">
-    <%= form.label :phone_number %>
-    <%= form.text_field :phone_number, class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full" %>
+  <div class="flex flex-col gap-1 w-full items-start">
+    <%= form.label :address, 'Dirección:', class: 'font-bold mb-1' %>
+    <%= form.text_field :address, class: "input-tailwindcss font-semibold #{ error_input_border(customer.errors.include?(:address)) }" %>
+    <% if customer.errors.include?(:address) %>
+      <%= render 'shared/input_error_msg', { object: customer, attribute: :address } %>
+    <% end %>
   </div>
 
-  <div class="my-5">
-    <%= form.label :address %>
-    <%= form.text_field :address, class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full" %>
-  </div>
+  <div class="flex items-center justify-end gap-3">
+    <div class="flex items-center text-sm font-semibold">
+      <%= form.submit btn_title, class: "rounded py-2 px-4 bg-green-500 text-white font-semibold cursor-pointer" %>
+    </div>
 
-  <div class="inline">
-    <%= form.submit class: "rounded-lg py-3 px-5 bg-blue-600 text-white inline-block font-medium cursor-pointer" %>
+    <%= link_to cancel_path, class: "flex text-sm font-semibold rounded bg-danger px-4 py-2 text-white items-center gap-1" do %>
+      <span>Regresar</span>
+    <% end %>
   </div>
 <% end %>
