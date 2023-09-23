@@ -1,4 +1,4 @@
-<div class="flex flex-col justify-between gap-10 h-full px-5 py-10 fixed w-2/12 shadow border">
+<div class="hidden lg:flex flex-col justify-between gap-10 h-full px-5 py-10 fixed lg:w-3/12 xl:w-2/12 shadow border">
   <%= link_to root_path, class: 'flex items-center gap-5' do %>
     <%= image_tag('yorch-black.png', class: 'w-10 h-10') %>
     <div class="flex flex-col gap-0">
@@ -37,7 +37,7 @@
         <% end %>
       </li>
 
-      <li>
+      <li class="flex items-center w-full">
         <%= link_to customers_path, class: style_to_sidebar_link(customers_path) do %>
           <i class="fa-solid fa-users"></i>
           <span>Clientes</span>
@@ -46,7 +46,7 @@
     <% end %>
 
     <% if current_user.admin? %>
-      <li class="flex items-center">
+      <li class="flex items-center w-full">
         <%= link_to admin_users_path, class: style_to_sidebar_link(admin_users_path) do %>
           <i class="fa-solid fa-gear"></i>
           <span>Administrador</span>
