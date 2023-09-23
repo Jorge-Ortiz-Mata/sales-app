@@ -53,6 +53,20 @@ class CustomersController < AuthenticatedController
     end
   end
 
+  def filter
+    keyword = filter_params[:keyword]
+
+    if keyword.present?
+      customers = Customer.filter_by_name(keyword)
+    else
+      customers = Customer.all
+    end
+
+    respond_to do |format|
+      format.turbo_stream { render turbo_stream: turbo_stream.replace('customers', partial: 'customers/customers', locals: { customers: customers }) }
+    end
+  end
+
   private
 
   def set_customer
@@ -61,5 +75,9 @@ class CustomersController < AuthenticatedController
 
   def customer_params
     params.require(:customer).permit(:full_name, :phone_number, :address)
+  end
+
+  def filter_params
+    params.require(:filter).permit(:keyword)
   end
 end

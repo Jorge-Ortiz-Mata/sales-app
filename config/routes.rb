@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
   # CUSTOMER routes
-  resources :customers, except: %i[show]
+  resources :customers, except: %i[show] do
+    post 'filter', to: 'customers#filter', on: :collection
+  end
 
   # ADMIN routes
   namespace :admin do
