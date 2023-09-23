@@ -2,7 +2,7 @@ class CustomersController < AuthenticatedController
   before_action :set_customer, only: %i[edit update destroy]
 
   def index
-    @customers = Customer.all.order(:created_at)
+    @customers = Customer.all.order(:full_name)
     authorize @customers
   end
 
@@ -20,12 +20,12 @@ class CustomersController < AuthenticatedController
   end
 
   def create
-    @customer = Customer.new(customer_params)
+    @customer = Customer.new customer_params
     authorize @customer
 
     respond_to do |format|
       if @customer.save
-        format.html { redirect_to customer_url(@customer), notice: 'Customer was successfully created.' }
+        format.html { redirect_to customers_path, notice: 'El cliente ha sido añadido exitosamente' }
       else
         format.html { render :new, status: :unprocessable_entity }
       end
@@ -36,10 +36,10 @@ class CustomersController < AuthenticatedController
     authorize @customer
 
     respond_to do |format|
-      if @customer.update(customer_params)
-        format.html { redirect_to customer_url(@customer), notice: 'Customer was successfully updated.' }
+      if @customer.update customer_params
+        format.html { redirect_to customer_url(@customer), notice: 'El cliente ha sido actualizado exitosamente' }
       else
-        format.html { render :edit, status: :unprocessable_entity }
+        format.turbo_stream { render turbo_stream: turbo_stream.replace('customer_form', partial: 'customers/form', locals: { customer: @customer, btn_title: 'Actualizar cliente', cancel_path: customers_path }) }
       end
     end
   end
@@ -49,7 +49,7 @@ class CustomersController < AuthenticatedController
     @customer.destroy
 
     respond_to do |format|
-      format.html { redirect_to customers_url, notice: 'Customer was successfully destroyed.' }
+      format.html { redirect_to customers_url, notice: 'El cliente ha sido eliminado exitosamente' }
     end
   end
 

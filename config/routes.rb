@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   # CUSTOMER routes
-  resources :customers
+  resources :customers, except: %i[show]
 
   # ADMIN routes
   namespace :admin do
