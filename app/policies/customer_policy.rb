@@ -1,4 +1,4 @@
-class SellPolicy < ApplicationPolicy
+class CustomerPolicy < ApplicationPolicy
   # class Scope < Scope
   #   def resolve
   #     scope
@@ -15,5 +15,4 @@ class SellPolicy < ApplicationPolicy
   alias create? index?
   alias update? index?
   alias destroy? index?
-  alias export_pdf? index?
 end

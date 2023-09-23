@@ -36,6 +36,13 @@
           <span>Categorias</span>
         <% end %>
       </li>
+
+      <li>
+        <%= link_to customers_path, class: style_to_sidebar_link(customers_path) do %>
+          <i class="fa-solid fa-users"></i>
+          <span>Clientes</span>
+        <% end %>
+      </li>
     <% end %>
 
     <% if current_user.admin? %>

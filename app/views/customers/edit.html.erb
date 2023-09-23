@@ -1,0 +1,5 @@
+<%= turbo_frame_tag 'edit_customer' do %>
+  <%= render 'shared/modal', { title: "Editar cliente:  #{@customer.full_name}" } do %>
+    <%= render "form", { customer: @customer, btn_title: 'Actualizar cliente', cancel_path: customers_path } %>
+  <% end %>
+<% end %>

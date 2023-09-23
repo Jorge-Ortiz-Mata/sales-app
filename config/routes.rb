@@ -1,10 +1,17 @@
 Rails.application.routes.draw do
+  # CUSTOMER routes
+  resources :customers, except: %i[show] do
+    post 'filter', to: 'customers#filter', on: :collection
+  end
+
+  # ADMIN routes
   namespace :admin do
     resources :users do
       patch '/update/profile', to: 'users#update_profile', on: :member
     end
   end
-  # User Authentication routes.
+
+  # USER routes.
   resources :users, only: %i[create] do
     resources :profiles
   end
@@ -23,14 +30,17 @@ Rails.application.routes.draw do
   post '/password/update', to: 'sessions#update_password', as: 'update_password'
   # get '/email/confirmation/:token_id', to: 'users#confirm_account', as: 'confirm_user_account'
 
+  # SELLS routes
   resources :sells do
     get '/export/pdf', to: 'sells#export_pdf', on: :member
     post '/filter', to: 'sells#filter', on: :collection
     resources :article_sells
   end
 
+  # CATEGORIES routes
   resources :categories
 
+  # ARTICLES routes
   resources :articles do
     get '/add_categories', to: 'articles#add_categories', on: :member
     post '/save_categories', to: 'articles#save_categories', on: :member
