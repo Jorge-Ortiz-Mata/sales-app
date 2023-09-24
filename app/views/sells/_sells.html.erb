@@ -1,27 +1,29 @@
-<div class="flex flex-col overflow-y-auto p-5 gap-10 m-5 bg-white border rounded shadow" id="sells">
+<div class="flex flex-col overflow-y-auto px-2 py-5 sm:px-5 gap-10 bg-white border rounded shadow" id="sells">
   <%= render 'filter_form', { sells_filter: sells_filter } %>
 
   <% if sells.any? %>
-    <div class="flex flex-col w-full gap-2">
+    <%= render 'sells/responsive/sells', { sells: sells } %>
+
+    <div class="hidden md:flex flex-col w-full gap-2">
       <div class="flex w-full bg-gray-100 rounded">
-        <div class="w-1/12 p-1 font-bold text-sidebarTextColor">ID</div>
-        <div class="w-4/12 p-1 font-bold text-sidebarTextColor">Fecha de la venta</div>
-        <div class="w-5/12 p-1 font-bold text-sidebarTextColor">Descripción</div>
-        <div class="w-2/12 p-1 font-bold text-sidebarTextColor">No. de artículos</div>
+        <div class="w-1/12 p-1 text-xs md:text-sm font-bold text-sidebarTextColor">ID</div>
+        <div class="w-4/12 p-1 text-xs md:text-sm font-bold text-sidebarTextColor">Fecha de la venta</div>
+        <div class="w-5/12 p-1 text-xs md:text-sm font-bold text-sidebarTextColor">Descripción</div>
+        <div class="w-2/12 p-1 text-xs md:text-sm font-bold text-sidebarTextColor text-center">No. de artículos</div>
       </div>
 
       <div class="flex flex-col w-full">
         <% sells.each do |sell| %>
           <%= link_to sell_path(sell), class: 'flex items-center w-full hover:bg-gray-100 p-1 duration-300 border-b' do %>
-            <div class="font-semibold text-sm text-sidebarTextColor p-1 w-1/12"><%= sell.id %></div>
-            <div class="font-semibold text-sm text-sidebarTextColor p-1 w-4/12"><%= I18n.l(sell.date_of_sell.to_time, format: :long) %></div>
-            <div class="font-semibold text-sm text-sidebarTextColor p-1 w-5/12"><%= sell.description.present? ? sell.description : '--' %></div>
-            <div class="font-semibold text-sm text-sidebarTextColor p-1 w-2/12"><%= sell.articles.count %></div>
+            <div class="font-semibold text-xs lg:text-sm text-sidebarTextColor p-1 w-1/12"><%= sell.id %></div>
+            <div class="font-semibold text-xs lg:text-sm text-sidebarTextColor p-1 w-4/12"><%= I18n.l(sell.date_of_sell.to_time, format: :long) %></div>
+            <div class="font-semibold text-xs lg:text-sm text-sidebarTextColor p-1 w-5/12"><%= sell.description.present? ? sell.description : '--' %></div>
+            <div class="font-semibold text-xs lg:text-sm text-sidebarTextColor p-1 w-2/12 text-center"><%= sell.articles.count %></div>
           <% end %>
         <% end %>
       </div>
     </div>
   <% else %>
-    <p class="font-semibold">No hay ninguna venta por el momento.</p>
+    <p class="font-semibold text-sm sm:text-base">No hay ninguna venta por el momento.</p>
   <% end %>
 </div>

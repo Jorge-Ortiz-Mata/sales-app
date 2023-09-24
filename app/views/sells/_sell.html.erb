@@ -3,6 +3,9 @@
     <%= render 'shared/breadcumb', { path: sells_path, path_text: 'Ventas', text: "Venta No. #{sell.id}" } %>
 
     <div class="flex items-center gap-5">
+      <%= link_to export_pdf_sell_path(@sell, format: :pdf), method: :post, class: 'text-lg font-semibold gap-2 flex lg:hidden items-center text-success hover:text-cyan-800 duration-300', target: "_blank" do %>
+        <i class="fa-solid fa-file"></i>
+      <% end %>
       <%= link_to edit_sell_path(@sell), data: { turbo_frame: 'edit_sell' },class: "text-lg font-semibold gap-2 flex items-center text-primary hover:text-cyan-800 duration-300" do %>
         <i class="fa-solid fa-pen-to-square"></i>
       <% end %>
@@ -12,20 +15,20 @@
     </div>
   </div>
 
-  <div class="flex flex-col w-full gap-1">
-    <div class="flex gap-2 items-center">
-      <span class="font-regular text-sidebarTextColor">ID de la venta:</span>
-      <span class="font-semibold"><%= sell.id %></span>
+  <div class="flex flex-col w-full gap-5 sm:gap-1">
+    <div class="flex flex-col sm:flex-row gap-2 items-start sm:items-center">
+      <span class="font-regular text-sm sm:text-base text-sidebarTextColor">ID de la venta:</span>
+      <span class="font-semibold text-sm lg:text-base"><%= sell.id %></span>
     </div>
 
-    <div class="flex gap-2 items-center">
-      <span class="font-regular text-sidebarTextColor">Fecha de la venta:</span>
-      <span class="font-semibold"><%= I18n.l(sell.date_of_sell.to_time, format: :long) %></span>
+    <div class="flex flex-col sm:flex-row gap-2 items-start sm:items-center">
+      <span class="font-regular text-sm sm:text-base text-sidebarTextColor">Fecha:</span>
+      <span class="font-semibold text-sm lg:text-base"><%= I18n.l(sell.date_of_sell.to_time, format: :long) %></span>
     </div>
 
-    <div class="flex gap-2 items-center">
-      <span class="font-regular text-sidebarTextColor">Descripción del venta:</span>
-      <span class="font-semibold"><%= sell.description.present? ? sell.description : '--' %></span>
+    <div class="flex flex-col gap-2 items-start">
+      <span class="font-regular text-sm sm:text-base text-sidebarTextColor">Descripción:</span>
+      <span class="font-semibold text-sm lg:text-base"><%= sell.description.present? ? sell.description : '--' %></span>
     </div>
   </div>
 </div>
