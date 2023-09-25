@@ -1,21 +1,33 @@
-<div class="flex flex-col p-5">
-  <div class="flex flex-col w-full bg-white rounded shadow border p-5 gap-5">
-    <h3 class="font-semibold text-sidebarTextColor text-xl">Todos los usuarios</h3>
+<div class="flex lg:hidden flex-col w-full">
+  <div class="table-header gap-2">
+    <div class="font-semibold text-sidebarTextColor w-6/12">Nombre</div>
+    <div class="font-semibold text-sidebarTextColor w-4/12">Teléfono</div>
+    <div class="font-semibold text-sidebarTextColor w-2/12">Rol</div>
+  </div>
+  <div class="flex flex-col w-full">
+    <% @users.each do |user| %>
+      <div class="flex items-center w-full hover:bg-gray-100 p-2 duration-300 border-b gap-2">
+        <div class="font-semibold text-xs xl:text-sm text-sidebarTextColor w-6/12"><%= user.profile.full_name %></div>
+        <div class="font-semibold text-xs xl:text-sm text-sidebarTextColor w-4/12"><%= user.profile.phone_number %></div>
+        <div class="font-semibold text-xs xl:text-sm text-sidebarTextColor w-2/12"><%= humanize_role(user.role) %></div>
+      </div>
+    <% end %>
+  </div>
+</div>
 
-    <div class="flex flex-col w-full">
-      <div class="table-header">
-        <div class="font-semibold text-sidebarTextColor w-3/12">Nombre</div>
-        <div class="font-semibold text-sidebarTextColor w-2/12">Teléfono</div>
-        <div class="font-semibold text-sidebarTextColor w-3/12">Correo</div>
-        <div class="font-semibold text-sidebarTextColor w-2/12">Fecha de alta</div>
-        <div class="font-semibold text-sidebarTextColor w-1/12">Rol</div>
-        <div class="font-semibold text-sidebarTextColor w-1/12 text-center">Opciones</div>
-      </div>
-      <div class="flex flex-col w-full">
-        <% @users.each do |user| %>
-          <%= render user %>
-        <% end %>
-      </div>
-    </div>
+
+<div class="hidden lg:flex flex-col w-full">
+  <div class="table-header">
+    <div class="font-semibold text-sm xl:text-base text-sidebarTextColor w-3/12">Nombre</div>
+    <div class="font-semibold text-sm xl:text-base text-sidebarTextColor w-2/12">Teléfono</div>
+    <div class="font-semibold text-sm xl:text-base text-sidebarTextColor w-3/12">Correo</div>
+    <div class="font-semibold text-sm xl:text-base text-sidebarTextColor w-2/12">Fecha de alta</div>
+    <div class="font-semibold text-sm xl:text-base text-sidebarTextColor w-1/12">Rol</div>
+    <div class="font-semibold text-sm xl:text-base text-sidebarTextColor w-1/12 text-center">Opciones</div>
+  </div>
+  <div class="flex flex-col w-full">
+    <% @users.each do |user| %>
+      <%= render user %>
+    <% end %>
   </div>
 </div>

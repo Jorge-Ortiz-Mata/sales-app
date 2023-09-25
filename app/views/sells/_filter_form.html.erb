@@ -1,3 +1,10 @@
+<div class="lg:hidden flex w-full justify-end">
+  <%= link_to new_sell_path, class: "flex text-sm font-bold rounded bg-success px-4 py-2 text-white items-center gap-2", data: { turbo_frame: 'new_sell' } do %>
+    <span>Añadir venta</span>
+    <i class="fa-solid fa-plus text-base"></i>
+  <% end %>
+</div>
+
 <%= form_with(model: sells_filter, url: filter_sells_path, class: 'flex flex-col w-full gap-2', id: "filter_form") do |f| %>
   <div class="flex items-center justify-between">
     <h5 class="font-bold">Filtrar por:</h5>
@@ -10,8 +17,8 @@
     </div>
   </div>
 
-  <div class="flex w-full gap-2">
-    <div class="flex flex-col items-start w-3/6 gap-2">
+  <div class="flex flex-col sm:flex-row w-full gap-2">
+    <div class="flex flex-col items-start w-full sm:w-3/6 gap-2">
       <%= f.label :date_min, 'Fecha inicial:', class: 'font-semibold text-sidebarTextColor' %>
       <%= f.date_field :date_min, class: "input-tailwindcss #{ error_input_border(sells_filter.errors.include?(:date_min)) }" %>
       <% if sells_filter.errors.include?(:date_min) %>
@@ -19,7 +26,7 @@
       <% end %>
     </div>
 
-    <div class="flex flex-col items-start w-3/6 gap-2">
+    <div class="flex flex-col items-start w-full sm:w-3/6 gap-2">
       <%= f.label :date_max, 'Fecha final:', class: 'font-semibold text-sidebarTextColor' %>
       <%= f.date_field :date_max, class: "input-tailwindcss #{ error_input_border(sells_filter.errors.include?(:date_max)) }" %>
       <% if sells_filter.errors.include?(:date_max) %>

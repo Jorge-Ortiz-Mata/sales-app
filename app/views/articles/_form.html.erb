@@ -1,6 +1,6 @@
 <%= form_with(model: article, class: "flex flex-col w-full gap-10") do |form| %>
-  <div class="flex justify-between gap-1 w-full">
-    <div class="flex flex-col gap-1 w-6/12 items-start">
+  <div class="flex flex-col md:flex-row justify-between gap-1 w-full">
+    <div class="flex flex-col gap-1 w-full md:w-6/12 items-start">
       <%= form.label :name, 'Nombre del articulo:', class: 'font-bold mb-1' %>
       <%= form.text_field :name, class: "input-tailwindcss font-semibold #{ error_input_border(article.errors.include?(:name)) }" %>
       <% if article.errors.include?(:name) %>
@@ -8,7 +8,7 @@
       <% end %>
     </div>
 
-    <div class="flex flex-col gap-1 w-6/12 items-start">
+    <div class="flex flex-col gap-1 w-full md:w-6/12 items-start">
       <%= form.label :price, 'Precio (MXN):', class: 'font-bold mb-1' %>
       <%= form.number_field :price, step: :any, class: "input-tailwindcss font-semibold #{ error_input_border(article.errors.include?(:price)) }" %>
       <% if article.errors.include?(:price) %>
@@ -17,7 +17,7 @@
     </div>
   </div>
 
-  <div class="flex flex-col gap-1 w-full items-start">
+  <div class="flex flex-col md:gap-1 w-full items-start">
     <%= form.label :description, 'Descripción del artículo (opcional):', class: 'font-bold mb-1' %>
     <%= form.rich_text_area :description, class: "input-tailwindcss #{ error_input_border(article.errors.include?(:description)) } h-40 overflow-y-auto" %>
     <% if article.errors.include?(:description) %>
@@ -25,13 +25,13 @@
     <% end %>
   </div>
 
-  <div class="flex items-center w-full gap-2">
+  <div class="flex flex-col xl:flex-row items-center w-full gap-5 xl:gap-2">
     <div class="flex flex-col gap-1 w-full items-start" data-controller="article">
-      <%= form.label :avatar, 'Imagen principal del articulo (opcional):', class: 'font-bold mb-1' %>
+      <%= form.label :avatar, 'Imagen principal del articulo (opcional):', class: 'text-sm sm:text-base font-bold mb-1' %>
       <%= form.file_field :avatar, class: "hidden", accept: "image/png,image/gif,image/jpeg,image/jpg",  multiple: false %>
       <div data-action="click->article#addAvatar" class="flex items-center cursor-pointer border rounded-lg shadow w-full">
-        <span class="bg-slate-400 py-1.5 px-3 font-semibold text-white w-1/2 text-sm rounded-l-lg">Seleccionar imagen</span>
-        <span class="py-1.5 px-3 bg-slate-700 text-white font-semibold w-full text-sm rounded-r-lg" id="avatar_name">Ningún archivo seleccionado</span>
+        <span class="bg-slate-400 py-1.5 px-3 font-semibold text-white w-9/12 sm:w-6/12 text-xs sm:text-sm rounded-l-lg ">Seleccionar imagen</span>
+        <span class="py-1.5 px-3 bg-slate-700 text-white font-semibold w-full text-xs sm:text-sm rounded-r-lg " id="avatar_name">Ningún archivo seleccionado</span>
       </div>
       <% if article.errors.include?(:avatar) %>
         <%= render 'shared/input_error_msg', { object: article, attribute: :avatar } %>
@@ -39,11 +39,11 @@
     </div>
 
     <div class="flex flex-col gap-1 w-full items-start" data-controller="article">
-      <%= form.label :images, 'Añadir más imagenes (opcional):', class: 'font-bold mb-1' %>
+      <%= form.label :images, 'Añadir más imagenes (opcional):', class: 'text-sm sm:text-base font-bold mb-1' %>
       <%= form.file_field :images, class: 'hidden', accept: "image/png,image/gif,image/jpeg,image/jpg", multiple: true %>
       <div data-action="click->article#addImages" class="flex items-center cursor-pointer border rounded-lg shadow w-full">
-        <span class="bg-slate-400 py-1.5 px-3 font-semibold text-white w-1/2 text-sm rounded-l-lg">Seleccionar imagenes</span>
-        <span class="py-1.5 px-3 bg-slate-700 text-white font-semibold w-full text-sm rounded-r-lg" id="images_name">Ningún archivo seleccionado</span>
+        <span class="bg-slate-400 py-1.5 px-3 font-semibold text-white w-9/12 sm:w-6/12 text-xs sm:text-sm rounded-l-lg ">Seleccionar imagenes</span>
+        <span class="py-1.5 px-3 bg-slate-700 text-white font-semibold w-full text-xs sm:text-sm rounded-r-lg " id="images_name">Ningún archivo seleccionado</span>
       </div>
     </div>
   </div>

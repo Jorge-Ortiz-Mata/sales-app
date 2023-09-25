@@ -1,15 +1,13 @@
 <%= turbo_frame_tag "category_#{category.id}", class: 'flex w-full hover:bg-gray-100 duration-300 border-b py-1' do %>
-  <div class="font-semibold text-sm text-sidebarTextColor p-1 w-1/12"><%= category.id %></div>
-  <div class="font-semibold text-sm text-sidebarTextColor p-1 w-5/12"><%= category.name %></div>
-  <div class="font-semibold text-sm text-sidebarTextColor p-1 w-4/12"><%= I18n.l(category.created_at.to_time, format: :long) %></div>
+  <div class="font-semibold text-xs md:text-sm text-sidebarTextColor p-1 w-1/12"><%= category.id %></div>
+  <div class="font-semibold text-xs md:text-sm text-sidebarTextColor p-1 w-5/12"><%= category.name %></div>
+  <div class="font-semibold text-xs md:text-sm text-sidebarTextColor p-1 w-4/12"><%= I18n.l(category.created_at.to_time, format: :long) %></div>
 
-  <div class="flex items-center w-1/12">
+  <div class="flex items-center justify-center w-2/12 gap-5">
     <%= link_to edit_category_path(category) do %>
       <i class="fa-solid fa-pen-to-square font-semibold text-primary"></i>
     <% end %>
-  </div>
 
-  <div class="flex items-center w-1/12">
     <%= button_to category_path(category), method: :delete, form: { data: { turbo_confirm: 'Estas seguro de eliminar esta categoría?' } } do %>
       <i class="fa-solid fa-trash font-semibold text-danger"></i>
     <% end %>

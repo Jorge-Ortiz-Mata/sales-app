@@ -4,19 +4,19 @@
   </div>
 
   <div class="flex flex-col w-full gap-5 bg-white p-5 shadow rounded border">
-    <div class="flex w-full items-center justify-between">
-      <h5 class="font-bold text-lg text-sidebarTextColor">Articulos añadidos</h5>
-      <p class="font-medium text-sidebarTextColor">Total: <span class="font-bold underline">$ <%= number_with_delimiter(sell.article_sells.sum(:revenue).round(2), :delimiter => ',') %> MXN</span></p>
+    <div class="flex flex-row w-full items-end sm:items-center justify-between">
+      <h5 class="font-bold text-base sm:text-lg text-sidebarTextColor">Articulos añadidos</h5>
+      <p class="text-xs sm:text-base font-medium text-sidebarTextColor">Total: <span class="font-bold underline">$ <%= number_with_delimiter(sell.article_sells.sum(:revenue).round(2), :delimiter => ',') %> MXN</span></p>
     </div>
-    <div class="flex flex-col gap-2">
+    <%= render 'article_sells/responsive/article_sells', { sell: sell } %>
+    <div class="hidden md:flex flex-col gap-2">
       <div class="flex w-full bg-gray-100 rounded px-5">
-        <div class="w-1/12 text-sidebarTextColor font-bold">ID</div>
-        <div class="w-1/12 text-sidebarTextColor font-bold">Imagen</div>
-        <div class="w-4/12 text-sidebarTextColor font-bold">Articulo</div>
-        <div class="w-1/12 text-sidebarTextColor font-bold text-center">Cantidad</div>
-        <div class="w-2/12 text-sidebarTextColor font-bold text-end">Precio</div>
-        <div class="w-2/12 text-sidebarTextColor font-bold text-end">Ganancias</div>
-        <div class="w-1/12 text-sidebarTextColor font-bold text-end">Opciones</div>
+        <div class="w-1/12 text-sidebarTextColor text-sm lg:text-base font-bold">ID</div>
+        <div class="w-5/12 text-sidebarTextColor text-sm lg:text-base font-bold">Articulo</div>
+        <div class="w-1/12 text-sidebarTextColor text-sm lg:text-base font-bold text-center">Cantidad</div>
+        <div class="w-2/12 text-sidebarTextColor text-sm lg:text-base font-bold text-end">Precio</div>
+        <div class="w-2/12 text-sidebarTextColor text-sm lg:text-base font-bold text-end">Ganancias</div>
+        <div class="w-1/12 text-sidebarTextColor text-sm lg:text-base font-bold text-end">Opciones</div>
       </div>
       <div class="flex flex-col w-full gap-2 px-5">
         <% sell.article_sells.order(created_at: :asc).each do |article_sell| %>
