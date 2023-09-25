@@ -1,4 +1,6 @@
-<div class="rounded border shadow p-5 flex flex-col w-full bg-white gap-10" id="customers">
+<%= render 'customers/responsive/customers', { customers: customers } %>
+
+<div class="hidden md:flex flex-col w-full gap-10" id="customers">
   <% if customers.any? %>
     <div class="flex flex-col w-full gap-2">
       <div class="flex w-full bg-gray-100 rounded p-1">
@@ -27,6 +29,6 @@
       </div>
     </div>
   <% else %>
-    <p class="font-semibold">No se encontraron clientes registrados.</p>
+    <p class="font-semibold text-sm sm:text-base">No se encontraron clientes registrados.</p>
   <% end %>
 </div>

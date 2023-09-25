@@ -6,29 +6,42 @@
       <h1 class="font-bold text-2xl text-sidebarTextColor">Clientes</h1>
     <% end %>
 
-    <div class="flex items-center gap-5">
+    <div class="hidden lg:flex items-center gap-5">
       <%= render 'filter_form' %>
 
-      <%= link_to new_customer_path, class: "flex text-sm font-bold rounded bg-success px-4 py-2 text-white justify-center gap-2 text-center", data: { turbo_frame: 'new_sell' } do %>
+      <%= link_to new_customer_path, class: "hidden lg:flex text-sm font-bold rounded bg-success px-4 py-2 text-white justify-center gap-2 text-center", data: { turbo_frame: 'new_sell' } do %>
         <span>Añadir cliente</span>
         <i class="fa-solid fa-plus text-base"></i>
       <% end %>
     </div>
   <% end %>
 
-  <% if @customers.any? %>
-    <div class="flex flex-col overflow-y-auto p-5 gap-5">
-      <%= render 'customers', { customers: @customers } %>
-    </div>
-  <% else %>
-    <div class="flex flex-col p-5 rounded shadow border w-full h-full items-center justify-center gap-10">
-      <i class="fa-solid fa-users text-[190px] text-sidebarTextColor"></i>
-      <div class="flex flex-col">
-        <h5 class="font-semibold text-lg text-sidebarTextColor text-center">Ningún cliente registrado.</h5>
-        <p class="text-sidebarTextColor">
-          Actualmente no hay ningún cliente registrado.
-        </p>
+  <div class="flex flex-col w-full px-2 py-5 sm:px-5 gap-5">
+    <div class="flex flex-col bg-white w-full border rounded shadow px-2 py-5 sm:px-5 gap-5">
+      <% if @customers.any? %>
+
+        <div class="flex lg:hidden flex-col sm:flex-row-reverse items-end sm:justify-between gap-5">
+          <div class="flex items-center sm:justify-end justify-center">
+            <%= link_to new_customer_path, class: "flex text-sm font-bold rounded bg-success px-4 py-2 text-white justify-center gap-2 text-center", data: { turbo_frame: 'new_sell' } do %>
+              <span>Añadir cliente</span>
+              <i class="fa-solid fa-plus text-base"></i>
+            <% end %>
+          </div>
+          <%= render 'filter_form' %>
+        </div>
+
+        <%= render 'customers', { customers: @customers } %>
       </div>
-    </div>
-  <% end %>
+      <% else %>
+        <div class="flex flex-col px-2 py-5 sm:px-5 rounded shadow border w-full h-full items-center justify-center gap-10">
+          <i class="fa-solid fa-users text-[190px] text-sidebarTextColor"></i>
+          <div class="flex flex-col">
+            <h5 class="font-semibold text-lg text-sidebarTextColor text-center">Ningún cliente registrado.</h5>
+            <p class="text-sidebarTextColor">
+              Actualmente no hay ningún cliente registrado.
+            </p>
+        </div>
+      <% end %>
+      </div>
+  </div>
 </section>

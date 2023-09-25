@@ -1,7 +1,7 @@
 <%= form_with(scope: :filter, url: filter_customers_path, method: :post, class: 'flex items-center') do |f| %>
   <div class="flex items-center relative gap-2">
-    <%= f.label :keyword, 'Buscar cliente:', class: 'font-semibold' %>
-    <%= f.text_field :keyword, class: "w-[300px] input-tailwindcss", placeholder: 'e.g. María Perez' %>
+    <%= f.label :keyword, 'Buscar cliente:', class: 'font-semibold text-sm sm:text-base' %>
+    <%= f.text_field :keyword, class: "w-[200px] input-tailwindcss text-sm sm:text-base", placeholder: 'e.g. María Perez' %>
     <button class="absolute right-2">
       <i class="fa-solid fa-magnifying-glass text-sidebarTextColor"></i>
     </button>
