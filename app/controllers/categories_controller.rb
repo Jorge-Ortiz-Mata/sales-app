@@ -20,7 +20,7 @@ class CategoriesController < AuthenticatedController
 
     respond_to do |format|
       if @category.save
-        format.turbo_stream { render turbo_stream: turbo_stream.replace('categories', partial: 'categories/categories', locals: { categories: Category.all })}
+        format.turbo_stream { render turbo_stream: turbo_stream.replace('categories', partial: 'categories/categories', locals: { categories: Category.all.order(:created_at) })}
       else
         format.turbo_stream { render turbo_stream: turbo_stream.replace('new_category_form', partial: 'categories/form', locals: { category: @category, text_btn: 'Guardar', form_id: 'new_category_form' })}
       end
@@ -45,7 +45,7 @@ class CategoriesController < AuthenticatedController
     @category.destroy
 
     respond_to do |format|
-      format.turbo_stream { render turbo_stream: turbo_stream.replace('categories', partial: 'categories/categories', locals: { categories: Category.all })}
+      format.turbo_stream { render turbo_stream: turbo_stream.replace('categories', partial: 'categories/categories', locals: { categories: Category.all.order(:created_at) })}
     end
   end
 
