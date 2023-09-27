@@ -3,7 +3,7 @@
     <h1 class="font-bold text-2xl text-sidebarTextColor">Editar perfil</h1>
   <% end %>
 
-  <section class="flex w-full p-5 gap-5">
+  <section class="flex flex-col lg:flex-row w-full px-2 py-5 sm:px-5 gap-5">
     <div class="flex flex-col w-full p-5 bg-white border rounded shadow gap-10">
       <h2 class="font-semibold text-sidebarTextColor text-xl">Información general</h2>
 
@@ -57,8 +57,8 @@
           <%= f.label :avatar, 'Imagen de perfil:', class: 'font-bold mb-1' %>
           <%= f.file_field :avatar, class: "hidden", accept: "image/png,image/gif,image/jpeg,image/jpg",  multiple: false %>
           <div data-action="click->profiles#addAvatar" class="flex items-center cursor-pointer border rounded-lg shadow w-full">
-            <span class="bg-slate-400 py-1.5 px-3 font-semibold text-white w-1/2 text-sm rounded-l-lg">Seleccionar imagen</span>
-            <span class="py-1.5 px-3 bg-slate-700 text-white font-semibold w-full text-sm rounded-r-lg" id="avatar_name">Ningún archivo seleccionado</span>
+            <span class="bg-slate-400 py-1.5 px-3 font-semibold text-white w-1/2 text-xs sm:text-sm rounded-l-lg">Seleccionar</span>
+            <span class="py-1.5 px-3 bg-slate-700 text-white font-semibold w-full text-xs sm:text-sm rounded-r-lg" id="avatar_name">Ningún archivo seleccionado</span>
           </div>
           <% if @profile.errors.include?(:avatar) %>
             <%= render 'shared/input_error_msg', { object: @profile, attribute: :avatar } %>
