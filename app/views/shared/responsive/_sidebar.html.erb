@@ -3,15 +3,17 @@
 
   <div class="hidden fixed flex flex-col justify-between bg-white top-0 right-0 h-full w-full z-10" id="responsive_navbar">
     <div class="flex items-center justify-between bg-slate-100 py-5 px-5 sm:px-10 gap-10">
-      <div class="flex items-center gap-5">
-        <%= image_tag('yorch-black.png', class: 'w-12 h-12') %>
-        <div class="flex flex-col">
-          <h2 class="text-xl font-bold text-sidebarTextColor">Sales App</h2>
-          <p class="text-sm text-sidebarTextColor font-medium">
-            Yorch Dev's
-          </p>
+      <%= link_to root_path, class: 'flex items-center' do %>
+        <div class="flex items-center gap-5">
+          <%= image_tag('yorch-black.png', class: 'w-12 h-12') %>
+          <div class="flex flex-col">
+            <h2 class="text-xl font-bold text-sidebarTextColor">Sales App</h2>
+            <p class="text-sm text-sidebarTextColor font-medium">
+              Yorch Dev's
+            </p>
+          </div>
         </div>
-      </div>
+      <% end %>
       <div class="flex items-center">
         <i class="fa-regular fa-circle-xmark text-sidebarTextColor text-2xl" data-action="click->navbar#toggleModal"></i>
       </div>
