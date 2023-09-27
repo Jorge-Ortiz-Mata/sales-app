@@ -13,9 +13,7 @@
           <% end %>
         </div>
 
-        <div class="w-1/12 p-1 font-bold text-sidebarTextColor">Imagen</div>
-
-        <div class="flex items-center w-5/12">
+        <div class="flex items-center w-6/12">
           <%= button_to filter_articles_path, params: { attribute: 'name' }, class: 'flex items-center w-full gap-1 p-1 font-bold text-sidebarTextColor' do %>
             <i class="fa-solid fa-arrow-down-short-wide"></i>
             <span>Nombre</span>
@@ -36,14 +34,14 @@
         <% articles.each do |article| %>
           <%= link_to article_path(article), class: 'flex items-center w-full hover:bg-gray-100 p-1 duration-300 border-b' do %>
             <div class="font-semibold text-sm text-sidebarTextColor p-1 w-1/12"><%= article.id %></div>
-            <div class="font-semibold text-sm text-sidebarTextColor p-1 w-1/12">
+            <div class="font-semibold text-sm text-sidebarTextColor p-1 w-6/12 flex items-center gap-2">
               <% if article.avatar.attached? %>
                 <%= image_tag(article.avatar, class: 'w-10 h-10 rounded-full shadow shadow-slate-400 border object-contain') %>
               <% else %>
                 <div class="w-10 h-10 shadow shadow-slate-400 rounded-full border bg-gradient-to-br from-cyan-300 to-green-300"></div>
               <% end %>
+              <span><%= article.name %></span>
             </div>
-            <div class="font-semibold text-sm text-sidebarTextColor p-1 w-5/12"><%= article.name %></div>
             <div class="font-semibold text-sm text-sidebarTextColor p-1 w-3/12 gap-1 grid">
               <% article.categories.order(:created_at).each do |category| %>
                 <span class="text-xs border border-gray-700 px-1.5 py-0.5 rounded ml-0 mr-auto"><%= category.name %></span>
