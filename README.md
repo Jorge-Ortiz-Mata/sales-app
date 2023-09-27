@@ -1,5 +1,25 @@
 # Sales App.
 
+## Use it as a template.
+
+* 1. Local Development
+
+- Create a new repository using this template
+- Change sales-app for the name of your project
+- Remove the credentials.yml file and the master key if they exist
+- Generate the Master Key: `EDITOR="code --wait" bin/rails credentials:edit`
+- Create the .env file and add the Sendgrid API Keys
+- Launch the PSQL docker container.
+- Create and migrate database: `rails db:prepare`
+- Compile assets: `rails assets:precompile`
+
+* 2. Google CLoud
+
+- Create the Google Cloud Project
+- Create the service account
+- Create the Google Cloud Bucket and generate the JSON file
+- Store the JSON file in your .env
+
 ## ENV environment variables required.
 
 In order to deploy this web application to any web server, you should have to add the following environment variables in the project configuration.
@@ -48,7 +68,7 @@ https://dribbble.com/shots/21086272-Sales-Dashboard
 In order to launch the PostgreSQL Docker Container, in your terminal, run the following command:
 
 ```bash
-docker run -p 5432:5432 --rm --name postgresql-container -e POSTGRES_PASSWORD=postgres -v pgdata:/var/lib/postgresql/data postgres
+docker run -p 5432:5432 --rm --name psql-container-sales-app -e POSTGRES_PASSWORD=postgres -v sales-app:/var/lib/postgresql/data postgres
 ```
 
 ## Launch the Rails Docker Image - Production environment.
